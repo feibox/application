@@ -1,0 +1,17 @@
+
+  /** Task of AI notification */
+  @SuppressWarnings( { "nls", "unqualified-field-access", "boxing" })
+  public class NotifyAITask implements Runnable {
+    private final CtrlEvent _evt;
+
+    List<String> mList = new ArrayList<String>()
+
+    public void run() {
+      try {
+        getAI().notifyEvent(_evt, _evt.class, null);
+      } catch (Throwable t) {
+        t.printStackTrace();
+      }
+    }
+  }
+}
