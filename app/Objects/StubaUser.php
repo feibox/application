@@ -7,25 +7,67 @@ use GuzzleHttp\Exception\TransferException;
 
 class StubaUser
 {
+    /**
+     * @var integer
+     */
     private $id;
+    /**
+     * @var string
+     */
     private $username;
+    /**
+     * @var null|integer
+     */
     private $rank;
-    private $full_name; // full string
-    private $first_name; //string
-    private $middle_name; //string
-    private $last_name; //string
-    private $title_prefix; // null or string
-    private $title_suffix; // null or string
-    private $study_level; // 1 or 2
+    /**
+     * @var null|string
+     */
+    private $full_name;
+    /**
+     * @var null|string
+     */
+    private $first_name;
+    /**
+     * @var null|string
+     */
+    private $middle_name;
+    /**
+     * @var null|string
+     */
+    private $last_name;
+    /**
+     * @var null|string
+     */
+    private $title_prefix;
+    /**
+     * @var null|string
+     */
+    private $title_suffix;
+    /**
+     * @var null|integer
+     */
+    private $study_level;
+    /**
+     * @var null|string
+     */
     private $study_information;
-
+    /**
+     * @var bool
+     */
     private $initialized;
 
+    /**
+     * StubaUser constructor.
+     */
     public function __construct()
     {
         $this->initialized = false;
     }
 
+    /**
+     * @param $username
+     * @return $this
+     */
     public function initialize($username)
     {
         $this->username = $username;
@@ -39,6 +81,9 @@ class StubaUser
         }
     }
 
+    /**
+     * @return null|string
+     */
     private function getData()
     {
         $client = new Client();
@@ -62,6 +107,10 @@ class StubaUser
         return null;
     }
 
+    /**
+     * @param $data
+     * @throws \Exception
+     */
     private function parseData($data)
     {
         $data = json_decode($data, true);
@@ -78,6 +127,9 @@ class StubaUser
         $this->parseStudyInformation();
     }
 
+    /**
+     *
+     */
     private function parseNameAndDegree()
     {
         //"Jhon Doe, Bc."
@@ -95,6 +147,9 @@ class StubaUser
         }
     }
 
+    /**
+     * @param $full_name
+     */
     private function parseName($full_name)
     {
         if (str_contains($full_name, ' ')) {
@@ -109,6 +164,9 @@ class StubaUser
         }
     }
 
+    /**
+     * @param array $degree
+     */
     private function parseDegree(array $degree)
     {
         if (count($degree) === 2) {
@@ -118,6 +176,9 @@ class StubaUser
         $this->title_prefix = trim($degree[0]);
     }
 
+    /**
+     *
+     */
     private function parseStudyInformation()
     {
         //"FEEIT I-API-MASUS den [term 3, year 2]"
@@ -133,6 +194,9 @@ class StubaUser
         }
     }
 
+    /**
+     * @return bool
+     */
     public function isValid()
     {
         if (!is_null($this->id)) {
@@ -141,6 +205,9 @@ class StubaUser
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return sprintf("%s: %s\n", $this->full_name, $this->study_information);
