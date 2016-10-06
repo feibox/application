@@ -1,9 +1,14 @@
 <?php
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('pages.dashboard');
 });
 
-Route::get('login', function () {
-    return view('pages.login');
-})->name('login');
+/*
+ * Auth routes
+ * */
+
+Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
+    Route::get('login', 'LoginController@showLoginForm');
+    Route::post('login', 'LoginController@login')->name('login');
+});
