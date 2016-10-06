@@ -1,19 +1,26 @@
-const elixir = require('laravel-elixir');
+var elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue');
+require('laravel-elixir-modernizr');
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
- | file for our application, as well as publishing vendor resources.
- |
- */
-
-elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+elixir(function (mix) {
+    mix
+    //fonts and images copy to public
+        .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/**', 'public/fonts/bootstrap')
+        .copy('node_modules/font-awesome/fonts', 'public/fonts/fontawesome')
+        .copy('node_modules/open-sans-fontface/fonts/**', 'public/fonts/open-sans')
+        //.copy('./resources/assets/images/**', 'public/images')
+        //frontend sass
+        .sass('./resources/assets/sass/app.scss', 'public/css/')
+        .modernizr('', 'public/js/vendor/modernizr-custom.js')
+        .scripts([
+            'node_modules/jquery/dist/jquery.js',
+            'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+            'node_modules/select2/dist/js/select2.js',
+            './resources/assets/js/**/*.js'
+        ], 'public/js/app.js', './')
+        //versioning
+        .version([
+            'css/app.css',
+            'js/app.js',
+        ]);
 });

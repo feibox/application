@@ -1,0 +1,37 @@
+// Modal
+.bs-example-modal {
+  .modal {
+    z-index: 100;
+    position: relative;
+    display: block;
+  }
+}
+
+.modal {
+  z-index: 100001;
+
+  .modal-dialog {
+    .modal-header {
+
+      font-family: 'Roboto Condensed', sans-serif;
+
+    }
+    .modal-content {
+      border-radius: 1px;
+      box-shadow: none;
+    }
+
+    .modal-footer {
+      .btn {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+.modal-backdrop {
+  z-index: 100000;
+}
+.modal-backdrop.in {
+  opacity: 0.8;
+}

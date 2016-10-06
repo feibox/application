@@ -1,20 +1,20 @@
+$(function() {
+  $(".navbar-expand-toggle").click(function() {
+    $(".app-container").toggleClass("expanded");
+    return $(".navbar-expand-toggle").toggleClass("fa-rotate-90");
+  });
+  return $(".navbar-right-expand-toggle").click(function() {
+    $(".navbar-right").toggleClass("expanded");
+    return $(".navbar-right-expand-toggle").toggleClass("fa-rotate-90");
+  });
+});
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
+$(function() {
+  return $('select').select2();
+});
 
-require('./bootstrap');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the body of the page. From here, you may begin adding components to
- * the application, or feel free to tweak this setup for your needs.
- */
-
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: 'body'
+$(function() {
+  return $(".side-menu .nav .dropdown").on('show.bs.collapse', function() {
+    return $(".side-menu .nav .dropdown .collapse").collapse('hide');
+  });
 });
