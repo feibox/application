@@ -19,6 +19,7 @@ class GetStubaData extends Command
     public function handle(StubaUser $user)
     {
         $user->initialize($this->argument('username'));
+
         if ($user->isValid()) {
             $this->comment(print_r($user, true));
         } else {

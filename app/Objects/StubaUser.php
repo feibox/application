@@ -135,7 +135,7 @@ class StubaUser
 
     public function isValid()
     {
-        if (!is_null($this->id) && !is_null($this->rank)) {
+        if (!is_null($this->id)) {
             return true;
         }
         return false;
