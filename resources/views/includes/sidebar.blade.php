@@ -3,7 +3,7 @@
         <div class="side-menu-container">
             <div class="navbar-header">
                 <span class="navbar-brand cursor-default" href="#">
-                    <div class="icon fa fa-paint-brush"></div>
+                    <div class="icon fa fa-first-order"></div>
                     <div class="title">The FEIbox</div>
                 </span>
                 <button type="button" class="navbar-expand-toggle pull-right visible-xs">
@@ -18,7 +18,7 @@
                 </li>
                 <li class="">
                     <a href="#">
-                        <span class="icon fa fa-female"></span><span class="title">Profile</span>
+                        <span class="icon fa fa-user"></span><span class="title">Profile</span>
                     </a>
                 </li>
                 <li class="">

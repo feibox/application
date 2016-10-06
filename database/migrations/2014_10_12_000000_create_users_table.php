@@ -15,12 +15,21 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('username');
+            $table->unsignedInteger('ais_id')->nullable()->default(null);
+            $table->unsignedTinyInteger('rank')->nullable()->default(null);
+            $table->unsignedTinyInteger('study_level')->nullable()->default(null);
             $table->string('email')->unique();
+            $table->string('user_name')->nullable()->default(null);
+            $table->string('first_name')->nullable()->default(null);
+            $table->string('middle_name')->nullable()->default(null);
+            $table->string('last_name')->nullable()->default(null);
+            $table->string('title_prefix')->nullable()->default(null);
+            $table->string('title_suffix')->nullable()->default(null);
+            $table->string('study_information')->nullable()->default(null);
             $table->string('password');
             $table->rememberToken();
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_valid')->default(false);
             $table->timestamps();
         });
     }
