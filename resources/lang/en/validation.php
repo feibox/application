@@ -95,6 +95,8 @@ return [
     |
     */
 
+    'stuba_email' => 'The :attribute must be a valid email address and must have @stuba.sk domain.',
+
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
