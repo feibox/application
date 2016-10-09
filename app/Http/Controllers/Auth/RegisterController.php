@@ -37,7 +37,7 @@ class RegisterController extends Controller
     public function verifyUser(User $user, $token)
     {
         $user->whereRegistrationToken($token)->firstOrFail()->confirmEmail();
-        //TODO: flash to session success
+        //TODO: flash to session success or login user
         //TODO: handle errors / exceptions
         return redirect('login');
     }
