@@ -30,6 +30,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('registration_token', '60')->nullable()->default(null);
             $table->boolean('verified')->default(false);
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_valid')->default(false);
             $table->timestamps();
         });
     }
