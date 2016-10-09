@@ -18,7 +18,6 @@ class CreateSubjectTranslationsTable extends Migration
             $table->integer('subject_id')->unsigned();
             $table->string('language', 10);
             $table->string('name');
-            $table->string('code', 32);
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->timestamps();
         });

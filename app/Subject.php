@@ -8,6 +8,7 @@ class Subject extends Model
 {
     protected $fillable = [
         'ais_id',
+        'code',
         'study_level',
         'study_year',
         'valid',

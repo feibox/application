@@ -50,14 +50,9 @@ class FetchSubjectCatalog extends Command
         $this->info(count($subjects) . ' found.');
 
         $this->info('Fetching language mutations...');
-        $bar = $this->output->createProgressBar(10);//count($subjects));
+        $bar = $this->output->createProgressBar(count($subjects));
 
-        $i = 0;
         foreach ($subjects as $key => $subject) {
-            if ($i === 10) {
-                break;
-            }
-            $i++;
             $subjects[$key]['sk'] = $catalog->getFreshSubjectData($subject['ais_id'], 'sk')['sk'];
             $bar->advance();
         }

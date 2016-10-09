@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class SubjectTranslation extends Model
 {
     protected $fillable = [
-        'code',
         'name',
         'language'
     ];

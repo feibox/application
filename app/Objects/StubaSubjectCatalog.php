@@ -38,13 +38,11 @@ class StubaSubjectCatalog
             $ais_id = $this->getAisId($anchor);
             $subjects = [
                 'ais_id' => $ais_id,
+                'code' => $code,
                 'study_level' => $this->getStudyLevel($code),
                 'en' => [
-                    'code' => $code,
                     'name' => $name,
-                ],
-                //TODO: remove me it makes me slow
-                //'sk' => $this->getFreshSubjectData($ais_id, 'sk')['sk'],
+                ]
             ];
             $data[] = $subjects;
             unset($anchors[$key]);
@@ -112,7 +110,7 @@ class StubaSubjectCatalog
 
         $partial = array_slice(explode(' ', $header->innerHtml, 3), 2)[0];
         $partial = array_slice(explode(' (FE', $partial), 0, 1)[0];
-        list($code, $name) = explode(' - ', $partial);
-        return ['code' => $code, 'name' => $name];
+        $name = explode(' - ', $partial)[1];
+        return ['name' => $name];
     }
 }
