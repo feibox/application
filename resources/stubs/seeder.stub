@@ -1,0 +1,14 @@
+<?php
+//:generated:
+use Illuminate\Database\Seeder;
+
+/** @noinspection PhpUndefinedClassInspection */
+class SubjectSeeder extends Seeder
+{
+
+    public function run()
+    {
+
+:body:
+    }
+}
