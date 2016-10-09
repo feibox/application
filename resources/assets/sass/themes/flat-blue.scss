@@ -954,6 +954,33 @@ $theme-danger-color: $color-red;
     }
   }
 
+  // Register page
+  .register-box {
+    .register-form {
+      .register-header  {
+        color: $color-white;
+      }
+      .register-body {
+        background-color: $color-white;
+      }
+    }
+
+    input {
+      background-color: $color-light-grey;
+      border: 1px solid $color-light-grey;
+    }
+
+    .register-footer {
+      a {
+        color: $color-white;
+      }
+      a:hover {
+        color: $color-white;
+        text-decoration: underline;
+      }
+    }
+  }
+
   // Badge
   .badge.primary {
     background-color: $color-dark-blue;

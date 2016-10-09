@@ -3,7 +3,7 @@
 <head>
     @include('includes.head')
 </head>
-<body class="flat-blue login-page">
+<body class="flat-blue login-page register-page">
 <div class="container">
     @yield('content')
 </div>
