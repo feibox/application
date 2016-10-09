@@ -9072,6 +9072,49 @@ body.login-page {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px; }
 
+body.register-page {
+  background-color: #22A7F0; }
+  body.register-page .register-box {
+    width: 100%;
+    max-width: 320px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding: 0; }
+    body.register-page .register-box > .title {
+      margin-bottom: 1em; }
+    body.register-page .register-box > .row {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 0; }
+  body.register-page .register-form {
+    padding: 0em; }
+    body.register-page .register-form .register-header {
+      margin-bottom: 1.2em;
+      font-size: 1.5em; }
+    body.register-page .register-form .register-body {
+      padding: 1.5em;
+      border-radius: 1px; }
+    body.register-page .register-form input, body.register-page .register-form .input-group-addon {
+      margin-top: 0.5em;
+      padding: 1.2em 1em;
+      font-size: 1.1em;
+      border-radius: 1px; }
+  body.register-page .register-button .btn {
+    padding: 0.5em 2em;
+    font-size: 1.1em;
+    border-radius: 1px;
+    margin-bottom: 0; }
+  body.register-page .register-footer {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 100%;
+    text-align: right;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px; }
+
 @media (max-width: 768px) {
   body.login-page .login-form .login-header {
     margin-bottom: 1em; }
@@ -9998,6 +10041,18 @@ body.login-page {
   .flat-blue .login-box .login-footer a {
     color: #FFF; }
   .flat-blue .login-box .login-footer a:hover {
+    color: #FFF;
+    text-decoration: underline; }
+  .flat-blue .register-box .register-form .register-header {
+    color: #FFF; }
+  .flat-blue .register-box .register-form .register-body {
+    background-color: #FFF; }
+  .flat-blue .register-box input {
+    background-color: #F9F9F9;
+    border: 1px solid #F9F9F9; }
+  .flat-blue .register-box .register-footer a {
+    color: #FFF; }
+  .flat-blue .register-box .register-footer a:hover {
     color: #FFF;
     text-decoration: underline; }
   .flat-blue .badge.primary {

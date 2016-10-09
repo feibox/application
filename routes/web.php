@@ -13,5 +13,6 @@ Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
     Route::post('login', 'LoginController@login')->name('login');
 
     Route::get('register', 'RegisterController@showRegistrationForm');
-    Route::post('register', 'RegisterController@register');
+    Route::post('register', 'RegisterController@register')->name('register');
+    Route::get('verify/{token}', 'RegisterController@verifyUser');
 });
