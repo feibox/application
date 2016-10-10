@@ -1,14 +1,11 @@
 <?php
-//:generated:
+//Generated at :generated:
 use Illuminate\Database\Seeder;
 
-/** @noinspection PhpUndefinedClassInspection */
 class SubjectSeeder extends Seeder
 {
-
     public function run()
     {
-
 :body:
     }
 }

@@ -6,7 +6,6 @@ use App\Objects\StubaSubjectCatalog;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-
 class FetchSubjectCatalog extends Command
 {
     /**

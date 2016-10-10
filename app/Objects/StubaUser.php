@@ -100,7 +100,6 @@ class StubaUser
             if ($result->getStatusCode() == 200 && !empty($body)) {
                 return $body;
             }
-
         } catch (TransferException $e) {
             return null;
         }
