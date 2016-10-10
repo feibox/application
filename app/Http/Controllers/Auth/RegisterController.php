@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Mail;
 use Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class RegisterController extends Controller
 {
@@ -36,9 +37,15 @@ class RegisterController extends Controller
 
     public function verifyUser(User $user, $token)
     {
-        $user->whereRegistrationToken($token)->firstOrFail()->confirmEmail();
+        try {
+            $user->whereRegistrationToken($token)->firstOrFail()->confirmEmail();
+        } catch (ModelNotFoundException $e) {
+            //TODO: or show meaningfull error page... user already verified etc..
+            abort(404);
+        }
+
         //TODO: flash to session success or login user
-        //TODO: handle errors / exceptions
+        //$this->guard()->login($user)
         return redirect('login');
     }
 }
