@@ -1,0 +1,50 @@
+// Bootstrap Wrap
+* {
+  outline: none;
+}
+.row {
+  & > [class*="col-"] {
+    margin-bottom: 25px;
+  }
+}
+
+.row.no-margin-bottom {
+  & > [class*="col-"] {
+    margin-bottom: 10px;
+  }
+}
+
+.row.no-gap {
+  margin-left: 0;
+  margin-right: 0;
+  & > [class*="col-"] {
+    padding-left:0;
+    padding-right: 0px;
+  }
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+
+.clear-both {
+  clear: both;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.no-margin {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+}

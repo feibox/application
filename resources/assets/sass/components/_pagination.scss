@@ -1,0 +1,19 @@
+// Pagination
+.pagination {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  li:first-child {
+    & > a , span{
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+  }
+
+  li:last-child {
+    & > a , span{
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
+}

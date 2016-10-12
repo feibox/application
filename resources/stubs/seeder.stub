@@ -1,0 +1,11 @@
+<?php
+//Generated at :generated:
+use Illuminate\Database\Seeder;
+
+class SubjectSeeder extends Seeder
+{
+    public function run()
+    {
+:body:
+    }
+}

@@ -1,0 +1,322 @@
+// Tabs
+
+.nav-tabs {
+  & > li {
+    margin-bottom: -1px;
+    & > a {
+      border-radius: 0;
+      border: 0;
+    }
+  }
+  & > li.active {
+    & > a, & > a:focus , & > a:hover{
+      border-radius: 0;
+      border-top: 0;
+    }
+  }
+}
+.tab-content {
+  & > div {
+    padding: 20px;
+
+  }
+}
+
+// Overide BS3 Tab for Position
+.tabs-below > .nav-tabs,
+.tabs-right > .nav-tabs,
+.tabs-left > .nav-tabs {
+  border-bottom: 0;
+}
+
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+  display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+  display: block;
+}
+
+.tabs-below > .nav-tabs > li {
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+
+.tabs-below > .nav-tabs > li > a:hover,
+.tabs-below > .nav-tabs > li > a:focus {
+  border-bottom-color: transparent;
+}
+
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+  float: none;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+  min-width: 74px;
+  margin-right: 0;
+  margin-bottom: 3px;
+}
+.tabs-left , .tabs-right{
+  display: table;
+}
+.tabs-left > .nav-tabs {
+  display:table-cell;
+  margin-right: 19px;
+}
+
+.tabs-left > .nav-tabs > li > a {
+  margin-right: -1px;
+}
+
+
+.tabs-right > .nav-tabs {
+  display:table-cell;
+  margin-left: 19px;
+}
+
+.tabs-right > .nav-tabs > li > a {
+  margin-left: -1px;
+}
+
+.tab:after {
+  content: '';
+  display: block;
+  clear:both;
+}
+
+
+// Tab Step Horizontal
+.step {
+  .nav-tabs {
+    border-bottom: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+
+    & > li[class^="col-"] {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    & > li:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+
+    & > li {
+      border-right: 0;
+      & > a {
+        margin-right: 0;
+        display: block;
+        width: 100%;
+        padding: 1em;
+        padding-left: 2em;
+        vertical-align: middle;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: left;
+        border-bottom: 0;
+
+        .icon {
+          font-size: 2.5em;
+          display: inline-block;
+          margin-right: 0.25em;
+          vertical-align: middle;
+
+        }
+        .step-title {
+          width: auto;
+          display: inline-block;
+          vertical-align: middle;
+          text-align: left;
+
+          .title {
+            font-weight: bold;
+            font-size: 1.1em;
+          }
+
+          .description {
+            font-size: 0.9em;
+          }
+        }
+      }
+      & > a:hover {
+        border-bottom: 0;
+      }
+    }
+
+    & > li:after {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      right: -15px;
+      transform: translate(0%, -50%);
+      z-index: 100001;
+    }
+
+    & > li:before {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      right: -16px;
+      transform: translate(0%, -50%);
+      z-index: 100000;
+    }
+
+    & > li.active {
+      & > a  , & > a:focus , & > a:hover {
+        border: 0;
+        border-radius: 0;
+        border-bottom: 0;
+      }
+    }
+
+    & > li:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    & > li:last-child:before , & > li:last-child:after {
+      display: none;
+    }
+  }
+
+  .tab-content {
+    & > div {
+      padding: 0;
+    }
+  }
+}
+
+.step.card-no-padding {
+  .nav-tabs {
+    margin-bottom: 0px;
+    & > li {
+      border-radius: 0;
+    }
+  }
+  .tab-content {
+    & > div {
+      padding: 20px;
+    }
+  }
+}
+
+.step.tabs-left {
+  .tab-content {
+    padding: 5px 15px;
+    display: table-cell;
+    vertical-align: top;
+    & > div {
+      padding: 20px;
+    }
+  }
+  .nav-tabs {
+    border-bottom: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+
+    & > li[class^="col-"] {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    & > li:first-child {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+    }
+
+    & > li {
+      border-right: 0px;
+      min-width: 250px;
+      display: table;
+      width: 250px;
+
+      & > a {
+        margin-right: 0;
+        display: table-cell;
+        width: 100%;
+        padding: 1em;
+        padding-left: 2em;
+        vertical-align: middle;
+        table-layout:fixed;
+        white-space: nowrap;
+        overflow: hidden;
+
+        .icon {
+          font-size: 2.5em;
+          display: inline-block;
+          margin-right: 0.25em;
+          vertical-align: middle;
+
+        }
+        .step-title {
+          width: auto;
+          display: inline-block;
+          vertical-align: middle;
+
+          .title {
+            font-weight: bold;
+            font-size: 1.1em;
+          }
+
+          .description {
+            font-size: 0.9em;
+          }
+        }
+      }
+      & > a:hover {
+        border-bottom: 0;
+      }
+    }
+
+    & > li:after {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      transform: translate(0%, -50%);
+      z-index: 10000;
+      display: none;
+    }
+
+    & > li:before {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      right: -16px;
+      transform: translate(0%, -50%);
+      z-index: 10000;
+      display: none;
+    }
+
+    & > li.active {
+      & > a  , & > a:focus , & > a:hover {
+        border: 0;
+        border-radius: 0;
+        border-bottom: 0;
+      }
+    }
+
+    & > li.active:after, & > li.active:before {
+      display: block;
+    }
+
+    & > li:last-child {
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
+}
