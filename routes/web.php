@@ -3,6 +3,7 @@
 Route::get('/', function () {
     return redirect()->route('login');
     //return view('pages.dashboard');
+    //testing autodeploy
 });
 
 /*
