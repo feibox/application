@@ -1,8 +1,8 @@
 <?php
 
 Route::get('/', function () {
-    return view('pages.dashboard');
-    //some change, testing auto-deployment
+    return redirect()->route('login');
+    //return view('pages.dashboard');
 });
 
 /*
