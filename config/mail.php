@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'feibox@stuba.sk',
+        'address' => 'no-reply@bmw-europe.eu',
         'name' => 'Feibox',
     ],
 
