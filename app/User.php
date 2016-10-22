@@ -107,7 +107,7 @@ class User extends Authenticatable
 
     public function verify($token)
     {
-        $this->where('registration_token', $token)->firstOrFail()->confirmEmail();
+        return $this->where('registration_token', $token)->firstOrFail()->confirmEmail();
     }
 
     public function confirmEmail()
@@ -115,6 +115,8 @@ class User extends Authenticatable
         $this->verified = true;
         $this->registration_token = null;
         $this->save();
+
+        return $this;
     }
 
     public function findByEmail($email)

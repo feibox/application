@@ -20,7 +20,6 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->verified === false || $user->is_valid === false) {
-
             $message = 'Your account is not valid, please inform Feibox people.';
 
             if (!$user->verified) {

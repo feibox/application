@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Mail\RegistrationConfirmation;
 use App\Objects\StubaUser;
 use App\User;
+use Auth;
 use Carbon\Carbon;
 use Mail;
 
@@ -36,7 +37,6 @@ class RegisterController extends Controller
 
     private function validateUser(User $user, StubaUser $stubaUser)
     {
-
         $username = explode('@', $user->email)[0];
         $stubaUser->initialize($username);
 
@@ -81,12 +81,11 @@ class RegisterController extends Controller
         return $this->sendVerificationMail($user);
     }
 
-    public function verifyUser(User $user, $token)
+    public function verifyUser($token)
     {
-        $user->verify($token);
-        //TODO: flash to session success or login user
-        //$this->guard()->login($user)
-        return redirect('login');
-    }
+        $user = $this->user->verify($token);
 
+        Auth::login($user, true);
+        return redirect()->route('dashboard');
+    }
 }

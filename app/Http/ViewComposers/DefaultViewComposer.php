@@ -10,7 +10,6 @@ class DefaultViewComposer
 
     public function __construct()
     {
-
         $this->user = \Auth::user();
     }
 
