@@ -154,8 +154,8 @@ class StubaUser
         if (str_contains($full_name, ' ')) {
             $name_parts = explode(' ', $full_name);
 
-            $this->first_name = array_shift($name_parts);
-            $this->last_name = array_pop($name_parts);
+            $this->last_name = array_shift($name_parts);
+            $this->first_name = array_pop($name_parts);
 
             if (count($name_parts) !== 0) {
                 $this->middle_name = implode(' ', $name_parts);
