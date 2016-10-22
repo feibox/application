@@ -100,6 +100,11 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
     public function verify($token)
     {
         $this->where('registration_token', $token)->firstOrFail()->confirmEmail();

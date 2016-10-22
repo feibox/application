@@ -22,6 +22,6 @@ Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/', 'DashboardController@index')->name('dashboard');
-
 });
