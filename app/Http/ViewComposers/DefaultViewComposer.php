@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\ViewComposers\Frontend;
+namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
 
-
-class DefaultComposer
+class DefaultViewComposer
 {
     protected $user;
 

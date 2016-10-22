@@ -291,4 +291,12 @@ class StubaUser
     {
         return $this->last_name;
     }
+
+    /**
+     * @return int|null
+     */
+    public function getRank()
+    {
+        return $this->rank;
+    }
 }

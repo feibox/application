@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\ViewComposers\DefaultViewComposer;
 use Illuminate\Support\ServiceProvider;
 use View;
 
@@ -15,7 +16,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composers([
-            'App\Http\ViewComposers\DefaultComposer' => 'pages.*',
+            DefaultViewComposer::class => 'pages.*',
         ]);
     }
 
