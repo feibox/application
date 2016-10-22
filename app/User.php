@@ -30,6 +30,11 @@ class User extends Authenticatable
         'registration_token',
     ];
 
+    protected $casts = [
+        'verified' => 'bool',
+        'is_valid' => 'bool',
+    ];
+
     /**
      * Boot the model.
      *

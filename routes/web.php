@@ -16,5 +16,10 @@ Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
 
     Route::get('register', 'RegisterController@showRegistrationForm');
     Route::post('register', 'RegisterController@register')->name('register');
-    Route::get('verify/{token}', 'RegisterController@verifyUser');
+    Route::get('verify/{token}', 'RegisterController@verifyUser')->name('account.verify');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+
 });

@@ -1,3 +1,3 @@
-This is an email sned after registration.
+This is an email send after registration.
 
-{{ $user->registration_token }}
+{{ route('account.verify', ['token' => $user->registration_token]) }}

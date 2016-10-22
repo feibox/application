@@ -14,7 +14,7 @@ class RegisterController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('pages.register');
+        return view('auth.register');
     }
 
     public function register(Request $request, User $user)
@@ -22,7 +22,7 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         $new_user = $user->create($request->all());
         Mail::to($new_user)->send(new RegistrationConfirmation($new_user));
-
+        //TODO:view info that email was sent + user needs to verify their account
         //$this->guard()->login($user);
         return redirect('/');
     }
@@ -40,7 +40,7 @@ class RegisterController extends Controller
         try {
             $user->whereRegistrationToken($token)->firstOrFail()->confirmEmail();
         } catch (ModelNotFoundException $e) {
-            //TODO: or show meaningfull error page... user already verified etc..
+            //TODO: or show meaningful error page... user already verified etc..
             abort(404);
         }
 
