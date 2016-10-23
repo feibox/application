@@ -61,7 +61,7 @@ class RegisterController extends Controller
 
     private function sendVerificationMail(User $user)
     {
-        //TODO:inform user that email was sent + user needs to verify their account //display this message
+        //TODO: inform user that email was sent + user needs to verify their account //display this message
         Mail::to($user->email)->send(new RegistrationConfirmation($user));
         return redirect('/')->with(['message' => 'Verification email was sent to ' . $user->email . '.']);
     }
@@ -75,7 +75,7 @@ class RegisterController extends Controller
             return redirect()
                 ->back()
                 ->withInput(['email' => $email])
-                ->withErrors(['message' => 'System refuses to send verification email (too many tries), please try later (5-10 minutes).']);
+                ->withErrors(['message' => 'System refuses to send verification email, please try later (5-10 minutes).']);
         }
 
         return $this->sendVerificationMail($user);

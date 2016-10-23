@@ -28,7 +28,8 @@ class LoginController extends Controller
 
             $this->logout($request);
 
-            return redirect()->back()
+            return redirect()
+                ->back()
                 ->withInput($request->only($this->username(), 'remember'))
                 ->withErrors([
                     'not_allowed' => $message,
