@@ -23,6 +23,7 @@
                         <div class="profile-info">
                             <h4 class="username">{{ $user->full_name }}</h4>
                             <p>{{ $user->email }}</p>
+                            <p class='muted'>{{ $user->study_information }}</p>
                             <div class="btn-group margin-bottom-2x" role="group">
                                 <a href="{{ route('logout') }}" type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> Logout</a>
                             </div>
