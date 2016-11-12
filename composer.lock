@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d041b6a8ccb7550dc9b7f91c6f46e93b",
-    "content-hash": "17a3dc81fc68ffc2a8050ec339b53efe",
+    "hash": "9007799f31e9598ffcc2499fd9028b87",
+    "content-hash": "f6cfc3b188ae6638cb27fc2d82f8768c",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -160,6 +160,56 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "edvinaskrucas/notification",
+            "version": "dev-docblock",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kyslik/notification.git",
+                "reference": "6b7ee24ce8368c836591ccce05275b7d636a80ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kyslik/notification/zipball/6b7ee24ce8368c836591ccce05275b7d636a80ef",
+                "reference": "6b7ee24ce8368c836591ccce05275b7d636a80ef",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/session": "^5.1",
+                "illuminate/support": "^5.1",
+                "php": "^5.5|^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Krucas\\Notification": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Edvinas Kručas",
+                    "email": "edv.krucas@gmail.com"
+                }
+            ],
+            "description": "Package for Laravel for helping to manage flash / instant notifications / messages.",
+            "keywords": [
+                "flash",
+                "instant",
+                "laravel",
+                "messages",
+                "notifications"
+            ],
+            "support": {
+                "source": "https://github.com/Kyslik/notification/tree/docblock"
+            },
+            "time": "2016-09-06 16:13:37"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -4444,7 +4494,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "edvinaskrucas/notification": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

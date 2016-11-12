@@ -7,11 +7,18 @@
   ],
   "license": "MIT",
   "type": "project",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/Kyslik/notification"
+    }
+  ],
   "require": {
     "php": ">=5.6.4",
     "laravel/framework": "5.3.*",
     "guzzlehttp/guzzle": "^6.2",
-    "paquettg/php-html-parser": "^1.7"
+    "paquettg/php-html-parser": "^1.7",
+    "edvinaskrucas/notification": "dev-docblock"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
