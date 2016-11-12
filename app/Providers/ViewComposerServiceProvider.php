@@ -16,7 +16,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composers([
-            DefaultViewComposer::class => 'pages.*',
+            DefaultViewComposer::class => ['pages.*', 'auth.password'],
         ]);
     }
 

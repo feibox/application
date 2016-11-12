@@ -13,7 +13,6 @@ class DefaultViewComposer
         $this->user = \Auth::user();
     }
 
-
     public function compose(View $view)
     {
         $view->with(['user' => $this->user]);

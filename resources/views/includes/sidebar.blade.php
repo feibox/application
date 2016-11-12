@@ -11,19 +11,14 @@
                 </button>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#">
+                <li class="{{ set_active_routes('dashboard') }}">
+                    <a href="{{ route('dashboard') }}">
                         <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="#">
-                        <span class="icon fa fa-user"></span><span class="title">Profile</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="#">
-                        <span class="icon fa fa-cogs"></span><span class="title">Settings</span>
+                <li class="{{ set_active_routes('account.password.edit') }}">
+                    <a href="{{ route('account.password.edit') }}">
+                        <span class="icon fa fa-user"></span><span class="title">Password</span>
                     </a>
                 </li>
             </ul>

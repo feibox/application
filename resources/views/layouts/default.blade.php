@@ -10,7 +10,7 @@
         @include('includes.sidebar')
         <div class="container-fluid">
             <div class="side-body padding-top">
-                {{--@notification()--}}
+                @notification()
                 @yield('content')
             </div>
         </div>

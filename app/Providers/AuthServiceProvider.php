@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        \Validator::extend('current_password', function ($attribute, $value, $parameters) {
+            return \Hash::check($value, \Auth::user()->getAuthPassword());
+        }, 'Current password is incorrect.');
     }
 }
