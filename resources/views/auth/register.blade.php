@@ -6,6 +6,7 @@
                 <div class="col-sm-12 text-center register-header">
                     <i class="register-logo fa fa-registered fa-5x"></i>
                     <h3 class="register-title">Feibox <span class="text-info">Registration</span></h3>
+                    <h6 class="text-primary">Already have an account? <a href="{{ route('login') }}">Login here!</a></h6>
                 </div>
                 <div class="col-sm-12">
                     <div class="register-body">
@@ -20,7 +21,7 @@
                             {{ csrf_field() }}
                             <div class="control">
                                 <input type="email" class="form-control" placeholder="stuba e-mail" name="email"
-                                       required="required" value="{{ old('email') }}"/>
+                                       required="required" value="{{ old('email', request('email')) }}"/>
                             </div>
                             <div class="control">
                                 <input type="password" placeholder="password" class="form-control" name="password" required="required"/>

@@ -4,8 +4,9 @@
         <div>
             <div class="login-form row">
                 <div class="col-sm-12 text-center login-header">
-                    <i class="login-logo fa fa-pied-piper fa-5x"></i>
+                    <i class="login-logo fa fa-first-order fa-5x"></i>
                     <h3 class="login-title">Feibox <span class="text-info">Panel</span></h3>
+                    <h6 class="text-primary">Want an account? <a href="{{ route('register', ['email' => old('email')]) }}">Register here!</a></h6>
                 </div>
                 <div class="col-sm-12">
                     <div class="login-body">
@@ -31,7 +32,7 @@
                         </form>
                     </div>
                     <div class="login-footer">
-                        <span class="text-right">Made with <i class="fa fa-heart text-danger"></i>.</span>
+                        <div class="text-right">Made with <i class="fa fa-heart text-danger"></i>.</div>
                     </div>
                 </div>
             </div>
