@@ -51,6 +51,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $full_name
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  */
 class User extends Authenticatable
 {
@@ -80,6 +82,7 @@ class User extends Authenticatable
     protected $casts = [
         'verified' => 'bool',
         'is_valid' => 'bool',
+        'is_admin' => 'bool',
     ];
 
     /**
@@ -115,7 +118,6 @@ class User extends Authenticatable
         $this->verified = true;
         $this->registration_token = null;
         $this->save();
-
         return $this;
     }
 

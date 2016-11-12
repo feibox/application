@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('password', 'PasswordController@update')->name('account.password.update');
     });
 
+    Route::group(['middleware' => 'admin', 'namespace' => 'admin'], function () {
+        Route::get('users', 'UsersController@index');
+    });
 
     Route::get('/', 'DashboardController@index')->name('dashboard');
 });
