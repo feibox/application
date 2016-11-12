@@ -37,7 +37,7 @@ class LoginController extends Controller
         } elseif (!$user->is_valid) {
             return $this->denyAccess('Your account is not valid, please inform Feibox people.');
         } else {
-            return $request;
+            return null;
         }
     }
 

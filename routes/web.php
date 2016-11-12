@@ -2,8 +2,6 @@
 
 Route::get('/', function () {
     return redirect()->route('login');
-    //return view('pages.dashboard');
-    //testing autodeploy
 });
 
 /*
@@ -22,15 +20,24 @@ Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::group(['namespace' => 'Auth'], function () {
+    Route::group(['prefix' => 'account','namespace' => 'Auth'], function () {
         Route::get('logout', 'LoginController@logout')->name('logout');
         Route::get('password', 'PasswordController@edit')->name('account.password.edit');
         Route::post('password', 'PasswordController@update')->name('account.password.update');
     });
 
-    Route::group(['middleware' => 'admin', 'namespace' => 'admin'], function () {
-        Route::get('users', 'UsersController@index');
+    Route::group(['prefix' => 'users', 'namespace' => 'admin'], function () {
+        Route::get('/', 'UsersController@index')->name('users.index');
+        Route::get('synchronize/{email}', 'UsersController@synchronize')->name('users.synchronize');
+
+        Route::group(['middleware' => 'admin'], function () {
+            //Route::get('users', 'UsersController@index');
+        });
     });
+
+
+
+
 
     Route::get('/', 'DashboardController@index')->name('dashboard');
 });

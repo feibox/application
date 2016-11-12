@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Kyslik\ColumnSortable\Sortable;
 
 /**
  * App\User
@@ -23,13 +23,14 @@ use Illuminate\Notifications\Notifiable;
  * @property string $password
  * @property string $remember_token
  * @property string $registration_token
- * @property boolean $verified
+ * @property boolean $is_verified
  * @property boolean $is_admin
  * @property boolean $is_valid
+ * @property boolean $is_banned
+ * @property boolean $is_terminated
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
+ * @property-read mixed $full_name
  * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereAisId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRank($value)
@@ -45,18 +46,19 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRegistrationToken($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereVerified($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereIsVerified($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereIsAdmin($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereIsValid($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereIsBanned($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereIsTerminated($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User sortable($defaultSortParameters = null)
  * @mixin \Eloquent
- * @property-read mixed $full_name
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -80,9 +82,26 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'verified' => 'bool',
+        'is_verified' => 'bool',
         'is_valid' => 'bool',
         'is_admin' => 'bool',
+        'is_banned' => 'bool',
+        'is_terminated' => 'bool'
+    ];
+
+    public $sortable = [
+        'id',
+        'ais_id',
+        'email',
+        'rank',
+        'study_level',
+        'user_name',
+        'first_name',
+        'last_name',
+        'is_verified',
+        'is_valid',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -115,7 +134,7 @@ class User extends Authenticatable
 
     public function confirmEmail()
     {
-        $this->verified = true;
+        $this->is_verified = true;
         $this->registration_token = null;
         $this->save();
         return $this;

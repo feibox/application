@@ -169,6 +169,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         //
 
         /*

@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Jobs\SynchronizeUser;
 use App\Mail\RegistrationConfirmation;
-use App\Objects\StubaUser;
 use App\User;
 use Auth;
 use Carbon\Carbon;
+use Krucas\Notification\Facades\Notification;
 use Mail;
 
 class RegisterController extends Controller
@@ -25,45 +26,26 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function register(RegisterRequest $request, StubaUser $stubaUser)
+    public function register(RegisterRequest $request)
     {
         $credentials = $request->only(['email', 'password']);
         $user = $this->user->create($credentials);
-        $this->validateUser($user, $stubaUser);
+        $this->synchronizeUser($user);
         $this->sendVerificationMail($user);
 
         return redirect('/');
     }
 
-    private function validateUser(User $user, StubaUser $stubaUser)
+    private function synchronizeUser(User $user)
     {
-        $username = explode('@', $user->email)[0];
-        $stubaUser->initialize($username);
-
-        if ($stubaUser->isValid()) {
-            $user->unguard();
-            $user->update([
-                'ais_id' => $stubaUser->getId(),
-                'rank' => $stubaUser->getRank(),
-                'study_level' => $stubaUser->getStudyLevel(),
-                'user_name' => $username,
-                'first_name' => $stubaUser->getFirstName(),
-                'middle_name' => $stubaUser->getMiddleName(),
-                'last_name' => $stubaUser->getLastName(),
-                'title_prefix' => $stubaUser->getTitlePrefix(),
-                'title_suffix' => $stubaUser->getTitleSuffix(),
-                'study_information' => $stubaUser->getStudyInformation(),
-                'is_valid' => true
-            ]);
-            $user->reguard();
-        }
+        dispatch((new SynchronizeUser($user))->onQueue('stuba-synchronization'));
     }
 
     private function sendVerificationMail(User $user)
     {
-        //TODO: inform user that email was sent + user needs to verify their account //display this message
         Mail::to($user->email)->send(new RegistrationConfirmation($user));
-        return redirect('/')->with(['message' => 'Verification email was sent to ' . $user->email . '.']);
+        Notification::info('Verification email was sent to ' . $user->email . '.');
+        return redirect()->back();
     }
 
     public function resendVerificationEmail($email)
@@ -72,10 +54,8 @@ class RegisterController extends Controller
 
         if ($user->updated_at->diffInMinutes(Carbon::now()) > rand(5, 10)) {
             $user->touch();
-            return redirect()
-                ->back()
-                ->withInput(['email' => $email])
-                ->withErrors(['message' => 'System refuses to send verification email, please try later (5-10 minutes).']);
+            Notification::warning('System refuses to send verification email, please try later (5-10 minutes).');
+            return redirect()->back()->withInput(['email' => $email]);
         }
 
         return $this->sendVerificationMail($user);
