@@ -5,10 +5,8 @@ use Illuminate\Database\Seeder;
 /** @noinspection PhpUndefinedClassInspection */
 class SubjectSeeder extends Seeder
 {
-
     public function run()
     {
-
         App\Subject::create(json_decode('{"ais_id":"313697","code":"I-URY","study_level":2,"en":{"name":"Accelerators"},"sk":{"name":"Ur\u00fdch\u013eova\u010de"}}', true));
         App\Subject::create(json_decode('{"ais_id":"313708","code":"I-ADRIA","study_level":2,"en":{"name":"Adaptive Control"},"sk":{"name":"Adapt\u00edvne riadenie"}}', true));
         App\Subject::create(json_decode('{"ais_id":"313590","code":"I-PMRMS","study_level":2,"en":{"name":"Advanced control methods for mechatronic systems"},"sk":{"name":"Pokro\u010dil\u00e9 met\u00f3dy riadenia mechatronick\u00fdch syst\u00e9mov"}}', true));
@@ -247,6 +245,5 @@ class SubjectSeeder extends Seeder
         App\Subject::create(json_decode('{"ais_id":"313200","code":"B-WEBTE1","study_level":1,"en":{"name":"Web technologies 1"},"sk":{"name":"Webov\u00e9 technol\u00f3gie 1"}}', true));
         App\Subject::create(json_decode('{"ais_id":"313643","code":"I-RST","study_level":2,"en":{"name":"Wireless Communication Systems and Routes"},"sk":{"name":"R\u00e1diokomunika\u010dn\u00e9 syst\u00e9my a trasy"}}', true));
         App\Subject::create(json_decode('{"ais_id":"313732","code":"I-BEK","study_level":2,"en":{"name":"Wireless Communications"},"sk":{"name":"Bezdr\u00f4tov\u00e9 komunik\u00e1cie"}}', true));
-
     }
 }
