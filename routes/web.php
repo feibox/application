@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('password', 'PasswordController@update')->name('account.password.update');
     });
 
-    Route::group(['prefix' => 'users', 'namespace' => 'admin'], function () {
+    Route::group(['prefix' => 'users', 'namespace' => 'Admin'], function () {
         Route::get('/', 'UsersController@index')->name('users.index');
         Route::get('synchronize/{email}', 'UsersController@synchronize')->name('users.synchronize');
 

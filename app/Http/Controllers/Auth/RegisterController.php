@@ -38,6 +38,7 @@ class RegisterController extends Controller
 
     private function synchronizeUser(User $user)
     {
+        //TODO: implement gate / policy here
         dispatch((new SynchronizeUser($user))->onQueue('stuba-synchronization'));
     }
 
