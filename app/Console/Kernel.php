@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\GetStubaData::class,
+        Commands\GetStubaUserData::class,
         Commands\FetchSubjectCatalog::class,
     ];
 

@@ -5,9 +5,9 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Objects\StubaUser;
 
-class GetStubaData extends Command
+class GetStubaUserData extends Command
 {
-    protected $signature = 'stuba:info {username}';
+    protected $signature = 'stuba:user {username}';
     protected $description = 'Gets user information from is.stuba.sk';
 
     public function __construct()
@@ -20,7 +20,7 @@ class GetStubaData extends Command
         $user->initialize($this->argument('username'));
 
         if ($user->isValid()) {
-            $this->comment(print_r($user, true));
+            $this->comment(d($user));
         } else {
             $this->error('Stuba can not be reached or user does not exist.');
         }

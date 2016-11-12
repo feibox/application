@@ -55,6 +55,10 @@ class StubaUser
      * @var bool
      */
     private $initialized;
+    /**
+     * @var bool
+     */
+    private $connection_successful;
 
     /**
      * StubaUser constructor.
@@ -62,6 +66,7 @@ class StubaUser
     public function __construct()
     {
         $this->initialized = false;
+        $this->connection_successful = true;
     }
 
     /**
@@ -97,13 +102,11 @@ class StubaUser
             ]);
 
             $body = $result->getBody()->getContents();
-            if ($result->getStatusCode() == 200 && !empty($body)) {
-                return $body;
-            }
         } catch (TransferException $e) {
-            return null;
+            $this->connection_successful = false;
+        } finally {
+            return (isset($body) && !empty($body)) ? $body : null;
         }
-        return null;
     }
 
     /**
@@ -114,7 +117,7 @@ class StubaUser
     {
         $data = json_decode($data, true);
         if (empty($data['data'])) {
-            throw new \Exception('Stuba responded with empty result.');
+            throw new \Exception('Stuba.sk responded with empty result.');
         }
 
         $json = $data['data'][0];
@@ -126,9 +129,6 @@ class StubaUser
         $this->parseStudyInformation();
     }
 
-    /**
-     *
-     */
     private function parseNameAndDegree()
     {
         //"Jhon Doe, Bc."
@@ -198,10 +198,7 @@ class StubaUser
      */
     public function isValid()
     {
-        if (!is_null($this->id)) {
-            return true;
-        }
-        return false;
+        return !is_null($this->id) ? true : false;
     }
 
     /**
@@ -298,5 +295,21 @@ class StubaUser
     public function getRank()
     {
         return $this->rank;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConnectionSuccessful()
+    {
+        return $this->connection_successful;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isInitialized()
+    {
+        return $this->initialized;
     }
 }
