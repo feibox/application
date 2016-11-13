@@ -51,7 +51,7 @@
                                         <td>{{ $item->updated_at->diffForHumans() }}</td>
                                         <td>
                                             <a href="#" class="btn btn-sm btn-default disabled">edit</a>
-                                            <a href="{{ route('users.synchronize', ['email' => $item->email]) }}" class="btn btn-sm btn-default" alt="re-sync" title="synchronize user with stuba"><i class="fa fa-refresh"></i></a>
+                                            <a href="{{ route('users.synchronize', ['id' => $item->id]) }}" class="btn btn-sm btn-default" alt="re-sync" title="synchronize user with stuba"><i class="fa fa-refresh"></i></a>
                                             <a href="#" class="btn btn-sm btn-danger" alt="ban" title="ban user"><i class="fa fa-ban"></i></a>
                                         </td>
                                     </tr>

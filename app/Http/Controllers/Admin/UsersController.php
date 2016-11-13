@@ -10,17 +10,29 @@ use Krucas\Notification\Facades\Notification;
 
 class UsersController extends Controller
 {
-    public function index(User $user)
+
+    /**
+     * @var User
+     */
+    private $user;
+
+    public function __construct(User $user)
     {
-        $users = $user->sortable(['updated_at' => 'desc'])->paginate(10);
+        $this->user = $user;
+    }
+
+    public function index()
+    {
+        $users = $this->user->sortable(['updated_at' => 'desc'])->paginate(10);
         return view('pages.users')->with(['users' => $users]);
     }
 
-    public function synchronize(User $user, $email)
+    public function synchronize($id)
     {
         //TODO: implement gate / policy here
-        dispatch((new SynchronizeUser($user->findByEmail($email)))->onQueue('stuba-synchronization'));
-        Notification::info('Your request to synchronize user (' . e($email) . ') is pushed on queue.');
+        $user = $this->user->findOrFail($id);
+        dispatch((new SynchronizeUser($user))->onQueue('stuba-synchronization'));
+        Notification::info('Your request to synchronize user (' . e($user->email) . ') is pushed on queue.');
         return redirect()->back();
     }
 
