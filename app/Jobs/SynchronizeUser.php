@@ -34,6 +34,8 @@ class SynchronizeUser implements ShouldQueue
 
         if (!$this->touch) {
             $this->user->timestamps = false;
+        } else {
+            $this->user->touch();
         }
 
         if ($stuba_user->isConnectionSuccessful() && $stuba_user->isValid()) {
@@ -53,7 +55,7 @@ class SynchronizeUser implements ShouldQueue
             ]);
             $this->user->reguard();
         } elseif (!$stuba_user->isConnectionSuccessful()) {
-            throw new \Exception('StubaUser is unable to connect to stuba.sk');
+            throw new \Exception('StubaUser is unable to connect to stuba.sk.');
         } else {
             if ($this->user->is_valid) {
                 $this->user->is_terminated = true;

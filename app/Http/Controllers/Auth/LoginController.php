@@ -52,7 +52,16 @@ class LoginController extends Controller
     private function resendVerificationMessage()
     {
         return 'Please check your email first and verify your account. Do you wish to resend verification email? 
-                <a href="' . route('account.resend.verification.email',
+                <a href="' . route('account.resend.verification.mail',
             $this->request->get('email')) . '">Yes, resend!</a>';
+    }
+
+    protected function credentials(Request $request)
+    {
+        if (!filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)) {
+            $credentials = [$this->username() => $request->get($this->username()) . '@stuba.sk'];
+        }
+
+        return array_merge($request->only($this->username(), 'password'), isset($credentials) ? $credentials : []);
     }
 }
