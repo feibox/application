@@ -28,7 +28,10 @@
                             </thead>
                             <tbody>
                             @foreach($users as $item)
-                                @if($item->is_valid && $item->is_verified)
+                                @if($item->is_terminated || $item->is_banned)
+                                    <tr class="danger">
+                                    @increment($dangerCount)
+                                @elseif($item->is_valid && $item->is_verified)
                                     <tr>
                                     @increment($primaryCount)
                                 @elseif($item->is_valid && !$item->is_verified)
@@ -37,9 +40,6 @@
                                 @elseif(!$item->is_valid && !$item->is_verified)
                                     <tr class="warning">
                                     @increment($warningCount)
-                                @elseif(!$item->is_terminated || !$item->is_banned)
-                                    <tr class="dander">
-                                    @increment($dangerCount)
                                 @endif
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->ais_id or '-' }}</td>
@@ -52,7 +52,11 @@
                                         <td>
                                             <a href="#" class="btn btn-sm btn-default disabled">edit</a>
                                             <a href="{{ route('users.synchronize', ['id' => $item->id]) }}" class="btn btn-sm btn-default" alt="re-sync" title="synchronize user with stuba"><i class="fa fa-refresh"></i></a>
-                                            <a href="#" class="btn btn-sm btn-danger" alt="ban" title="ban user"><i class="fa fa-ban"></i></a>
+                                            @if($item->is_banned)
+                                                <a href="{{ route('users.remove.ban', ['id' => $item->id]) }}" class="btn btn-sm btn-success" alt="remove ban" title="remove ban"><i class="fa fa-eraser"></i></a>
+                                            @else
+                                                <a href="{{ route('users.ban', ['id' => $item->id]) }}" class="btn btn-sm btn-danger" alt="ban" title="ban user"><i class="fa fa-ban"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                             @endforeach

@@ -132,6 +132,13 @@ class User extends Authenticatable
         return $this->where('registration_token', $token)->firstOrFail()->confirmEmail();
     }
 
+    public function setIsBanned($value)
+    {
+        $this->is_banned = $value;
+        $this->save();
+        return $this;
+    }
+
     public function confirmEmail()
     {
         $this->is_verified = true;

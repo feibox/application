@@ -36,6 +36,19 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
+    public function ban($id)
+    {
+        //TODO: implement gate / policy here
+        $this->user->findOrFail($id)->setIsBanned(true);
+        return redirect()->back();
+    }
+
+    public function removeBan($id)
+    {
+        $this->user->findOrFail($id)->setIsBanned(false);
+        return redirect()->back();
+    }
+
     public function show($id)
     {
         //
