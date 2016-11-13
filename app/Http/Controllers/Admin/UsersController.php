@@ -27,7 +27,7 @@ class UsersController extends Controller
         return view('pages.users')->with(['users' => $users]);
     }
 
-    public function synchronize($id)
+    public function synchronize($id = null)
     {
         $user = $this->getUser($id);
         $this->authorize($user);
@@ -40,13 +40,11 @@ class UsersController extends Controller
     public function ban($id)
     {
         $user = $this->user->findOrFail($id);
+        $this->authorize($user);
 
-        if (!request()->user()->can('ban', $user)) {
-            Notification::warning('Genius, you can not ban yourself.');
-        } else {
-            Notification::info('You gifted ban to ' . $user->link($user->user_name) . '!');
-            $user->setIsBanned(true);
-        }
+        Notification::info('You gifted ban to ' . $user->link($user->user_name) . '!');
+        $user->setIsBanned(true);
+
         return redirect()->back();
     }
 
