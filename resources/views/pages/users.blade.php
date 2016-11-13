@@ -19,10 +19,10 @@
                                 <th>@sortablelink('ais_id', 'ais id')</th>
                                 <th>@sortablelink('rank', 'rank')</th>
                                 <th>@sortablelink('email', 'email')</th>
-                                <th>@sortablelink('user_name', 'username')</th>
-                                <th>@sortablelink('first_name', 'name')</th>
-                                <th>@sortablelink('created_at', 'publish date')</th>
-                                <th>@sortablelink('updated_at', 'last update')</th>
+                                <th>@sortablelink('user_name', 'user name')</th>
+                                <th>@sortablelink('first_name', 'full name')</th>
+                                <th>@sortablelink('created_at', 'joined at')</th>
+                                <th>@sortablelink('updated_at', 'updated at')</th>
                                 <th>options</th>
                             </tr>
                             </thead>
@@ -32,10 +32,13 @@
                                     <tr>
                                     @increment($primaryCount)
                                 @elseif($item->is_valid && !$item->is_verified)
-                                    <tr class="warning">
-                                    @increment($warningCount) //
+                                    <tr class="info">
+                                    @increment($infoCount)
                                 @elseif(!$item->is_valid && !$item->is_verified)
-                                    <tr class="danger">
+                                    <tr class="warning">
+                                    @increment($warningCount)
+                                @elseif(!$item->is_terminated || !$item->is_banned)
+                                    <tr class="dander">
                                     @increment($dangerCount)
                                 @endif
                                         <td>{{ $item->id }}</td>
@@ -62,13 +65,16 @@
                         <div>
                             <ul class="list-group">
                                 <li class="list-group-item list-group-item-primary">
-                                    <span class="badge">{{ $primaryCount or '0' }}</span> User is validated and verified.
+                                    <span class="badge">{{ $primaryCount or '0' }}</span> Account is validated and verified.
+                                </li>
+                                <li class="list-group-item list-group-item-info">
+                                    <span class="badge">{{ $infoCount or '0' }}</span> Account is <strong>valid</strong> and not verified.
                                 </li>
                                 <li class="list-group-item list-group-item-warning">
-                                    <span class="badge">{{ $warningCount or '0' }}</span> User is <strong>valid</strong> and not verified.
+                                    <span class="badge">{{ $warningCount or '0' }}</span> Account is <strong>neither</strong> validated nor verified.
                                 </li>
                                 <li class="list-group-item list-group-item-danger">
-                                    <span class="badge">{{ $dangerCount or '0' }}</span> User is <strong>neither</strong> validated nor verified.
+                                    <span class="badge">{{ $dangerCount or '0' }}</span> Account is banned or terminated.
                                 </li>
                             </ul>
                         </div>
