@@ -32,7 +32,7 @@ class RegisterController extends Controller
         $this->synchronizeUser($user);
         $this->sendVerificationMail($user);
 
-        return redirect()->route('login');
+        return redirect()->route('login', ['email' => $user->email]);
     }
 
     private function synchronizeUser(User $user)
@@ -50,13 +50,14 @@ class RegisterController extends Controller
     {
         $user = $this->user->findByEmail($email);
 
-        if ($user->updated_at->diffInMinutes(Carbon::now()) > rand(5, 10)) {
+        if ($user->updated_at->diffInMinutes(Carbon::now()) < rand(5, 10)) {
             $user->touch();
             Notification::warning('System refuses to send verification email, please try later (5-10 minutes).');
             return redirect()->back()->withInput(['email' => $email]);
         }
 
-        return $this->sendVerificationMail($user);
+        $this->sendVerificationMail($user);
+        return redirect()->route('login', ['email' => $email]);
     }
 
     public function verifyUser($token)
