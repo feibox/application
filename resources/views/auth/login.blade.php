@@ -22,7 +22,7 @@
                             {{ csrf_field() }}
                             <div class="control">
                                 <input type="text" class="form-control" placeholder="e-mail or username" name="email"
-                                       required="required" value="{{ old('email') }}"/>
+                                       required="required" value="{{ old('email', request('email')) }}"/>
                             </div>
                             <div class="control">
                                 <input type="password" class="form-control" name="password" required="required"/>

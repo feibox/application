@@ -9,14 +9,14 @@ Route::get('/', function () {
  * */
 
 Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
-    Route::get('login', 'LoginController@showLoginForm');
+    Route::get('login/{email?}', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login')->name('login');
 
     Route::get('register', 'RegisterController@showRegistrationForm');
     Route::post('register', 'RegisterController@register')->name('register');
 
     Route::get('verify/{token}', 'RegisterController@verifyUser')->name('account.verify');
-    Route::get('resend/{email}', 'RegisterController@resendVerificationMail')->name('account.resend.verification.mail');
+    Route::get('resend/{email?}', 'RegisterController@resendVerificationMail')->name('account.resend.verification.mail');
 });
 
 Route::group(['middleware' => 'auth'], function () {
