@@ -21,7 +21,7 @@
                         <form action="{{ route('login') }}" method="post">
                             {{ csrf_field() }}
                             <div class="control">
-                                <input type="email" class="form-control" placeholder="e-mail" name="email"
+                                <input type="text" class="form-control" placeholder="e-mail or username" name="email"
                                        required="required" value="{{ old('email') }}"/>
                             </div>
                             <div class="control">
