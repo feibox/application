@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        Blade::directive('increment', function($variable) {
+        Blade::directive('increment', function ($variable) {
             return "<?php {$variable} = (isset({$variable}) ? {$variable}+1 : 1); ?>";
         });
     }

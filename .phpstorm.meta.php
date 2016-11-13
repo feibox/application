@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2016-10-22.
+    * Generated on 2016-11-13.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -40,6 +40,9 @@ namespace PHPSTORM_META {
             'view' instanceof \Illuminate\View\Factory,
             'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
+            'notification' instanceof \Krucas\Notification\Notification,
+            'Krucas\Notification\Subscriber' instanceof \Krucas\Notification\Subscriber,
+            'Krucas\Notification\Middleware\NotificationMiddleware' instanceof \Krucas\Notification\Middleware\NotificationMiddleware,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'validation.presence' instanceof \Illuminate\Validation\DatabasePresenceVerifier,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
@@ -156,6 +159,9 @@ namespace PHPSTORM_META {
             'view' instanceof \Illuminate\View\Factory,
             'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
+            'notification' instanceof \Krucas\Notification\Notification,
+            'Krucas\Notification\Subscriber' instanceof \Krucas\Notification\Subscriber,
+            'Krucas\Notification\Middleware\NotificationMiddleware' instanceof \Krucas\Notification\Middleware\NotificationMiddleware,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'validation.presence' instanceof \Illuminate\Validation\DatabasePresenceVerifier,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
@@ -272,6 +278,9 @@ namespace PHPSTORM_META {
             'view' instanceof \Illuminate\View\Factory,
             'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
+            'notification' instanceof \Krucas\Notification\Notification,
+            'Krucas\Notification\Subscriber' instanceof \Krucas\Notification\Subscriber,
+            'Krucas\Notification\Middleware\NotificationMiddleware' instanceof \Krucas\Notification\Middleware\NotificationMiddleware,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'validation.presence' instanceof \Illuminate\Validation\DatabasePresenceVerifier,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
@@ -388,6 +397,9 @@ namespace PHPSTORM_META {
             'view' instanceof \Illuminate\View\Factory,
             'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
+            'notification' instanceof \Krucas\Notification\Notification,
+            'Krucas\Notification\Subscriber' instanceof \Krucas\Notification\Subscriber,
+            'Krucas\Notification\Middleware\NotificationMiddleware' instanceof \Krucas\Notification\Middleware\NotificationMiddleware,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'validation.presence' instanceof \Illuminate\Validation\DatabasePresenceVerifier,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,

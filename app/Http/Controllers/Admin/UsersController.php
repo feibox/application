@@ -29,10 +29,9 @@ class UsersController extends Controller
 
     public function synchronize($id)
     {
-        //TODO: implement gate / policy here
-        //TODO: -> self sync allowed
-        //TODO: -> admin can do syncing willy-nilly
-        $user = $this->user->findOrFail($id);
+        $user = $this->getUser($id);
+        $this->authorize($user);
+
         dispatch((new SynchronizeUser($user))->onQueue('stuba-synchronization'));
         Notification::info('Your request to synchronize user (' . e($user->email) . ') is pushed on queue.');
         return redirect()->back();
@@ -40,27 +39,38 @@ class UsersController extends Controller
 
     public function ban($id)
     {
-        //TODO: implement gate / policy here
-        //TODO: -> only admin can gift out bans
-        //TODO: -> can not gift out self-ban
-        $this->user->findOrFail($id)->setIsBanned(true);
+        $user = $this->user->findOrFail($id);
+
+        if (!request()->user()->can('ban', $user)) {
+            Notification::warning('Genius, you can not ban yourself.');
+        } else {
+            Notification::info('You gifted ban to ' . $user->link($user->user_name) . '!');
+            $user->setIsBanned(true);
+        }
         return redirect()->back();
     }
 
     public function removeBan($id)
     {
-        //TODO: implement gate / policy here
-        //TODO: -> only admin can do this
-        $this->user->findOrFail($id)->setIsBanned(false);
+        $user = $this->user->findOrFail($id);
+        $this->authorize($user);
+
+        Notification::info('Ban for account with username  "' . $user->link($user->user_name) . '" was removed!');
+        $user->setIsBanned(false);
         return redirect()->back();
     }
 
-    public function detail($id)
+    public function detail($id = null)
     {
-        //TODO: implement gate / policy here
-        //TODO: -> user can see only self or anyone if admin
-        $user = $this->user->findOrFail($id);
+        $user = $this->getUser($id);
+        $this->authorize($user);
+
         return view('pages.users-detail')->with('user_detail', $user);
+    }
+
+    private function getUser($id)
+    {
+        return is_null($id) ? request()->user() : $this->user->findOrFail($id);
     }
 
     public function edit($id)

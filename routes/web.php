@@ -20,7 +20,7 @@ Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::group(['prefix' => 'account','namespace' => 'Auth'], function () {
+    Route::group(['prefix' => 'account', 'namespace' => 'Auth'], function () {
         Route::get('logout', 'LoginController@logout')->name('logout');
         Route::get('password', 'PasswordController@edit')->name('account.password.edit');
         Route::post('password', 'PasswordController@update')->name('account.password.update');

@@ -31,6 +31,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read mixed $full_name
+ * @property-read mixed $titled_name
  * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereAisId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRank($value)
@@ -142,6 +143,10 @@ class User extends Authenticatable
         return $this;
     }
 
+    /**
+     * @param $value
+     * @return $this
+     */
     public function setIsBanned($value)
     {
         $this->is_banned = $value;
@@ -149,8 +154,22 @@ class User extends Authenticatable
         return $this;
     }
 
+    /**
+     * @param $email
+     * @return \Illuminate\Database\Eloquent\Model|static
+     */
     public function findByEmail($email)
     {
         return $this->where('email', $email)->firstOrFail();
+    }
+
+    /**
+     * @param $display
+     * @return string
+     */
+    public function link($display)
+    {
+        $url = route('users.detail', ['id' => $this->id]);
+        return '<a href=' . $url . ' class="alert-link">' . $display . '</a>';
     }
 }

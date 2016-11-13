@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.3.19 on 2016-10-22.
+ * Generated for Laravel 5.3.22 on 2016-11-13.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2844,6 +2844,18 @@ namespace {
         }
         
         /**
+         * Bind values to their parameters in the given statement.
+         *
+         * @param \PDOStatement $statement
+         * @param array $bindings
+         * @return void 
+         * @static 
+         */
+        public static function bindValues($statement, $bindings){
+            \Illuminate\Database\MySqlConnection::bindValues($statement, $bindings);
+        }
+        
+        /**
          * Set the query grammar to the default implementation.
          *
          * @return void 
@@ -2959,19 +2971,6 @@ namespace {
         public static function cursor($query, $bindings = array(), $useReadPdo = true){
             //Method inherited from \Illuminate\Database\Connection            
             return \Illuminate\Database\MySqlConnection::cursor($query, $bindings, $useReadPdo);
-        }
-        
-        /**
-         * Bind values to their parameters in the given statement.
-         *
-         * @param \PDOStatement $statement
-         * @param array $bindings
-         * @return void 
-         * @static 
-         */
-        public static function bindValues($statement, $bindings){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\MySqlConnection::bindValues($statement, $bindings);
         }
         
         /**
@@ -3233,7 +3232,6 @@ namespace {
          *
          * @param \PDO|null $pdo
          * @return $this 
-         * @throws \RuntimeException
          * @static 
          */
         public static function setPdo($pdo){
@@ -6739,113 +6737,6 @@ namespace {
     }
 
 
-    class Notification extends \Illuminate\Support\Facades\Notification{
-        
-        /**
-         * Send the given notification to the given notifiable entities.
-         *
-         * @param \Illuminate\Support\Collection|array|mixed $notifiables
-         * @param mixed $notification
-         * @return void 
-         * @static 
-         */
-        public static function send($notifiables, $notification){
-            \Illuminate\Notifications\ChannelManager::send($notifiables, $notification);
-        }
-        
-        /**
-         * Send the given notification immediately.
-         *
-         * @param \Illuminate\Support\Collection|array|mixed $notifiables
-         * @param mixed $notification
-         * @return void 
-         * @static 
-         */
-        public static function sendNow($notifiables, $notification, $channels = null){
-            \Illuminate\Notifications\ChannelManager::sendNow($notifiables, $notification, $channels);
-        }
-        
-        /**
-         * Get a channel instance.
-         *
-         * @param string|null $name
-         * @return mixed 
-         * @static 
-         */
-        public static function channel($name = null){
-            return \Illuminate\Notifications\ChannelManager::channel($name);
-        }
-        
-        /**
-         * Get the default channel driver name.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function getDefaultDriver(){
-            return \Illuminate\Notifications\ChannelManager::getDefaultDriver();
-        }
-        
-        /**
-         * Get the default channel driver name.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function deliversVia(){
-            return \Illuminate\Notifications\ChannelManager::deliversVia();
-        }
-        
-        /**
-         * Set the default channel driver name.
-         *
-         * @param string $channel
-         * @return void 
-         * @static 
-         */
-        public static function deliverVia($channel){
-            \Illuminate\Notifications\ChannelManager::deliverVia($channel);
-        }
-        
-        /**
-         * Get a driver instance.
-         *
-         * @param string $driver
-         * @return mixed 
-         * @static 
-         */
-        public static function driver($driver = null){
-            //Method inherited from \Illuminate\Support\Manager            
-            return \Illuminate\Notifications\ChannelManager::driver($driver);
-        }
-        
-        /**
-         * Register a custom driver creator Closure.
-         *
-         * @param string $driver
-         * @param \Closure $callback
-         * @return $this 
-         * @static 
-         */
-        public static function extend($driver, $callback){
-            //Method inherited from \Illuminate\Support\Manager            
-            return \Illuminate\Notifications\ChannelManager::extend($driver, $callback);
-        }
-        
-        /**
-         * Get all of the created "drivers".
-         *
-         * @return array 
-         * @static 
-         */
-        public static function getDrivers(){
-            //Method inherited from \Illuminate\Support\Manager            
-            return \Illuminate\Notifications\ChannelManager::getDrivers();
-        }
-        
-    }
-
-
     class Password extends \Illuminate\Support\Facades\Password{
         
         /**
@@ -8827,6 +8718,17 @@ namespace {
         }
         
         /**
+         * Checks whether the method is cacheable or not.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function isMethodCacheable(){
+            //Method inherited from \Symfony\Component\HttpFoundation\Request            
+            return \Illuminate\Http\Request::isMethodCacheable();
+        }
+        
+        /**
          * Returns the request body content.
          *
          * @param bool $asResource If true, a resource will be returned
@@ -9849,36 +9751,36 @@ namespace {
          *
          * @param string $table
          * @param \Closure $callback
-         * @return \Illuminate\Database\Schema\Blueprint 
+         * @return void 
          * @static 
          */
         public static function create($table, $callback){
             //Method inherited from \Illuminate\Database\Schema\Builder            
-            return \Illuminate\Database\Schema\MySqlBuilder::create($table, $callback);
+            \Illuminate\Database\Schema\MySqlBuilder::create($table, $callback);
         }
         
         /**
          * Drop a table from the schema.
          *
          * @param string $table
-         * @return \Illuminate\Database\Schema\Blueprint 
+         * @return void 
          * @static 
          */
         public static function drop($table){
             //Method inherited from \Illuminate\Database\Schema\Builder            
-            return \Illuminate\Database\Schema\MySqlBuilder::drop($table);
+            \Illuminate\Database\Schema\MySqlBuilder::drop($table);
         }
         
         /**
          * Drop a table from the schema if it exists.
          *
          * @param string $table
-         * @return \Illuminate\Database\Schema\Blueprint 
+         * @return void 
          * @static 
          */
         public static function dropIfExists($table){
             //Method inherited from \Illuminate\Database\Schema\Builder            
-            return \Illuminate\Database\Schema\MySqlBuilder::dropIfExists($table);
+            \Illuminate\Database\Schema\MySqlBuilder::dropIfExists($table);
         }
         
         /**
@@ -9886,12 +9788,12 @@ namespace {
          *
          * @param string $from
          * @param string $to
-         * @return \Illuminate\Database\Schema\Blueprint 
+         * @return void 
          * @static 
          */
         public static function rename($from, $to){
             //Method inherited from \Illuminate\Database\Schema\Builder            
-            return \Illuminate\Database\Schema\MySqlBuilder::rename($from, $to);
+            \Illuminate\Database\Schema\MySqlBuilder::rename($from, $to);
         }
         
         /**
@@ -10245,6 +10147,18 @@ namespace {
         }
         
         /**
+         * Get an item from the session, or store the default value.
+         *
+         * @param string $key
+         * @param \Closure $callback
+         * @return mixed 
+         * @static 
+         */
+        public static function remember($key, $callback){
+            return \Illuminate\Session\Store::remember($key, $callback);
+        }
+        
+        /**
          * Push a value onto a session array.
          *
          * @param string $key
@@ -10293,8 +10207,7 @@ namespace {
         }
         
         /**
-         * Flash a key / value pair to the session
-         * for immediate use.
+         * Flash a key / value pair to the session for immediate use.
          *
          * @param string $key
          * @param mixed $value
@@ -11835,6 +11748,181 @@ namespace {
          */
         public static function getNames(){
             return \Illuminate\View\Factory::getNames();
+        }
+        
+    }
+
+
+    class Notification extends \Krucas\Notification\Facades\Notification{
+        
+        /**
+         * Return name of default container.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getDefaultContainerName(){
+            return \Krucas\Notification\Notification::getDefaultContainerName();
+        }
+        
+        /**
+         * Set types for a container.
+         *
+         * @param string $container
+         * @param array $types
+         * @return \Krucas\Notification\Notification 
+         * @static 
+         */
+        public static function setContainerTypes($container, $types = array()){
+            return \Krucas\Notification\Notification::setContainerTypes($container, $types);
+        }
+        
+        /**
+         * Return types for a container.
+         *
+         * @param $container
+         * @return array 
+         * @static 
+         */
+        public static function getContainerTypes($container){
+            return \Krucas\Notification\Notification::getContainerTypes($container);
+        }
+        
+        /**
+         * Set format for a container.
+         *
+         * @param $container
+         * @param null $format
+         * @return \Krucas\Notification\Notification 
+         * @static 
+         */
+        public static function setContainerFormat($container, $format = null){
+            return \Krucas\Notification\Notification::setContainerFormat($container, $format);
+        }
+        
+        /**
+         * Return format for a container.
+         *
+         * @param $container
+         * @return string|null 
+         * @static 
+         */
+        public static function getContainerFormat($container){
+            return \Krucas\Notification\Notification::getContainerFormat($container);
+        }
+        
+        /**
+         * Set formats for a container.
+         *
+         * @param $container
+         * @param array $formats
+         * @return \Krucas\Notification\Notification 
+         * @static 
+         */
+        public static function setContainerFormats($container, $formats = array()){
+            return \Krucas\Notification\Notification::setContainerFormats($container, $formats);
+        }
+        
+        /**
+         * Return formats for a container.
+         *
+         * @param $container
+         * @return array 
+         * @static 
+         */
+        public static function getContainerFormats($container){
+            return \Krucas\Notification\Notification::getContainerFormats($container);
+        }
+        
+        /**
+         * Add new container.
+         *
+         * @param string $container
+         * @param array $types
+         * @param null $defaultFormat
+         * @param array $formats
+         * @return \Krucas\Notification\Notification 
+         * @static 
+         */
+        public static function addContainer($container, $types = array(), $defaultFormat = null, $formats = array()){
+            return \Krucas\Notification\Notification::addContainer($container, $types, $defaultFormat, $formats);
+        }
+        
+        /**
+         * Return array of available containers.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getContainers(){
+            return \Krucas\Notification\Notification::getContainers();
+        }
+        
+        /**
+         * Returns container instance.
+         *
+         * @param null|string $container
+         * @param callable $callback
+         * @return \Krucas\Notification\NotificationsBag 
+         * @static 
+         */
+        public static function container($container = null, $callback = null){
+            return \Krucas\Notification\Notification::container($container, $callback);
+        }
+        
+        /**
+         * Create new message instance.
+         *
+         * @param null $message
+         * @return \Krucas\Notification\Message 
+         * @static 
+         */
+        public static function message($message = null){
+            return \Krucas\Notification\Notification::message($message);
+        }
+        
+        /**
+         * Fire given event.
+         *
+         * @param $event
+         * @param \Krucas\Notification\NotificationsBag $notificationBag
+         * @param \Krucas\Notification\Message $message
+         * @return array|bool|null 
+         * @static 
+         */
+        public static function fire($event, $notificationBag, $message){
+            return \Krucas\Notification\Notification::fire($event, $notificationBag, $message);
+        }
+        
+        /**
+         * Get the event dispatcher instance.
+         *
+         * @return \Illuminate\Contracts\Events\Dispatcher 
+         * @static 
+         */
+        public static function getEventDispatcher(){
+            return \Krucas\Notification\Notification::getEventDispatcher();
+        }
+        
+        /**
+         * Set the event dispatcher instance.
+         *
+         * @param \Illuminate\Contracts\Events\Dispatcher $dispatcher
+         * @return void 
+         * @static 
+         */
+        public static function setEventDispatcher($dispatcher){
+            \Krucas\Notification\Notification::setEventDispatcher($dispatcher);
+        }
+        
+        /**
+         * Unset the event dispatcher for models.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function unsetEventDispatcher(){
+            \Krucas\Notification\Notification::unsetEventDispatcher();
         }
         
     }
