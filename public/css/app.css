@@ -9706,6 +9706,9 @@ body.register-page {
     margin-top: 100px;
     margin-bottom: 20px; } }
 
+.full-width {
+  width: 100%; }
+
 .flat-blue {
   background-color: #F9F9F9;
   /* small screen */ }

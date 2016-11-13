@@ -60,35 +60,6 @@ class User extends Authenticatable
 {
     use Sortable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'registration_token',
-    ];
-
-    protected $casts = [
-        'is_verified' => 'bool',
-        'is_valid' => 'bool',
-        'is_admin' => 'bool',
-        'is_banned' => 'bool',
-        'is_terminated' => 'bool'
-    ];
-
     public $sortable = [
         'id',
         'ais_id',
@@ -102,6 +73,32 @@ class User extends Authenticatable
         'is_valid',
         'created_at',
         'updated_at'
+    ];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'email',
+        'password',
+    ];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'registration_token',
+    ];
+    protected $casts = [
+        'is_verified' => 'bool',
+        'is_valid' => 'bool',
+        'is_admin' => 'bool',
+        'is_banned' => 'bool',
+        'is_terminated' => 'bool'
     ];
 
     /**
@@ -127,22 +124,27 @@ class User extends Authenticatable
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
 
+    public function getTitledNameAttribute()
+    {
+        return $this->title_prefix . ' ' . $this->full_name . ' ' . $this->title_suffix;
+    }
+
     public function verify($token)
     {
         return $this->where('registration_token', $token)->firstOrFail()->confirmEmail();
-    }
-
-    public function setIsBanned($value)
-    {
-        $this->is_banned = $value;
-        $this->save();
-        return $this;
     }
 
     public function confirmEmail()
     {
         $this->is_verified = true;
         $this->registration_token = null;
+        $this->save();
+        return $this;
+    }
+
+    public function setIsBanned($value)
+    {
+        $this->is_banned = $value;
         $this->save();
         return $this;
     }

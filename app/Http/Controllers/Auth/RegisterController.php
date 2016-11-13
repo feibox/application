@@ -50,6 +50,7 @@ class RegisterController extends Controller
     {
         $user = $this->user->findByEmail($email);
 
+        //FIXME: see #4 on GH
         if ($user->updated_at->diffInMinutes(Carbon::now()) < rand(5, 10)) {
             $user->touch();
             Notification::warning('System refuses to send verification email, please try later (5-10 minutes).');

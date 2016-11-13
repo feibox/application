@@ -50,13 +50,15 @@
                                         <td>{{ $item->created_at->diffForHumans() }}</td>
                                         <td>{{ $item->updated_at->diffForHumans() }}</td>
                                         <td>
+                                            <a href="{{ route('users.detail', ['id' => $item->id]) }}" class="btn btn-sm btn-default" alt="view" title="view"><i class="fa fa-eye"></i></a>
                                             <a href="#" class="btn btn-sm btn-default disabled">edit</a>
                                             <a href="{{ route('users.synchronize', ['id' => $item->id]) }}" class="btn btn-sm btn-default" alt="re-sync" title="synchronize user with stuba"><i class="fa fa-refresh"></i></a>
                                             @if($item->is_banned)
                                                 <a href="{{ route('users.remove.ban', ['id' => $item->id]) }}" class="btn btn-sm btn-success" alt="remove ban" title="remove ban"><i class="fa fa-eraser"></i></a>
                                             @else
-                                                <a href="{{ route('users.ban', ['id' => $item->id]) }}" class="btn btn-sm btn-danger" alt="ban" title="ban user"><i class="fa fa-ban"></i></a>
+                                                <a href="{{ route('users.ban', ['id' => $item->id]) }}" class="btn btn-sm btn-danger" alt="ban" title="ban"><i class="fa fa-ban"></i></a>
                                             @endif
+
                                         </td>
                                     </tr>
                             @endforeach

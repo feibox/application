@@ -30,6 +30,8 @@ class UsersController extends Controller
     public function synchronize($id)
     {
         //TODO: implement gate / policy here
+        //TODO: -> self sync allowed
+        //TODO: -> admin can do syncing willy-nilly
         $user = $this->user->findOrFail($id);
         dispatch((new SynchronizeUser($user))->onQueue('stuba-synchronization'));
         Notification::info('Your request to synchronize user (' . e($user->email) . ') is pushed on queue.');
@@ -39,19 +41,26 @@ class UsersController extends Controller
     public function ban($id)
     {
         //TODO: implement gate / policy here
+        //TODO: -> only admin can gift out bans
+        //TODO: -> can not gift out self-ban
         $this->user->findOrFail($id)->setIsBanned(true);
         return redirect()->back();
     }
 
     public function removeBan($id)
     {
+        //TODO: implement gate / policy here
+        //TODO: -> only admin can do this
         $this->user->findOrFail($id)->setIsBanned(false);
         return redirect()->back();
     }
 
-    public function show($id)
+    public function detail($id)
     {
-        //
+        //TODO: implement gate / policy here
+        //TODO: -> user can see only self or anyone if admin
+        $user = $this->user->findOrFail($id);
+        return view('pages.users-detail')->with('user_detail', $user);
     }
 
     public function edit($id)
