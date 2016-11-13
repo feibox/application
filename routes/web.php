@@ -16,7 +16,7 @@ Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
     Route::post('register', 'RegisterController@register')->name('register');
 
     Route::get('verify/{token}', 'RegisterController@verifyUser')->name('account.verify');
-    Route::get('resend/{email}', 'RegisterController@resendVerificationEmail')->name('account.resend.verification.email');
+    Route::get('resend/{email}', 'RegisterController@resendVerificationMail')->name('account.resend.verification.mail');
 });
 
 Route::group(['middleware' => 'auth'], function () {

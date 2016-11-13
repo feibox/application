@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Jobs\SendVerificationMail;
 use App\Jobs\SynchronizeUser;
-use App\Mail\RegistrationConfirmation;
 use App\User;
 use Auth;
 use Carbon\Carbon;
 use Krucas\Notification\Facades\Notification;
-use Mail;
 
 class RegisterController extends Controller
 {
@@ -33,23 +32,21 @@ class RegisterController extends Controller
         $this->synchronizeUser($user);
         $this->sendVerificationMail($user);
 
-        return redirect('/');
+        return redirect()->route('login');
     }
 
     private function synchronizeUser(User $user)
     {
-        //TODO: implement gate / policy here
         dispatch((new SynchronizeUser($user))->onQueue('stuba-synchronization'));
     }
 
     private function sendVerificationMail(User $user)
     {
-        Mail::to($user->email)->send(new RegistrationConfirmation($user));
+        dispatch((new SendVerificationMail($user))->onQueue('email'));
         Notification::info('Verification email was sent to ' . $user->email . '.');
-        return redirect()->back();
     }
 
-    public function resendVerificationEmail($email)
+    public function resendVerificationMail($email)
     {
         $user = $this->user->findByEmail($email);
 

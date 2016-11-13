@@ -6,7 +6,7 @@
                 <div class="col-sm-12 text-center login-header">
                     <i class="login-logo fa fa-first-order fa-5x"></i>
                     <h3 class="login-title">Feibox <span class="text-info">Panel</span></h3>
-                    <h6 class="text-primary">Want an account? <a href="{{ route('register', ['email' => old('email')]) }}">Register here!</a></h6>
+                    <h6 class="text-primary">Want an account? <a href="{{ route('register', ['email' => old('email', null)]) }}">Register here!</a></h6>
                 </div>
                 <div class="col-sm-12">
                     <div class="login-body">

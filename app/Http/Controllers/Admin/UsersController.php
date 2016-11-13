@@ -18,30 +18,10 @@ class UsersController extends Controller
 
     public function synchronize(User $user, $email)
     {
+        //TODO: implement gate / policy here
         dispatch((new SynchronizeUser($user->findByEmail($email)))->onQueue('stuba-synchronization'));
         Notification::info('Your request to synchronize user (' . e($email) . ') is pushed on queue.');
         return redirect()->back();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
