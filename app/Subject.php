@@ -57,17 +57,28 @@ class Subject extends Model
         'is_enabled',
     ];
 
+    protected $casts = [
+        'is_enabled' => 'bool',
+        'is_valid' => 'bool',
+    ];
+
     public static function create(array $attributes = [])
     {
         $model = parent::create(array_except($attributes, ['sk', 'en']));
 
         if (array_has($attributes, ['sk', 'en'])) {
             if (!empty($attributes['sk'] && !empty($attributes['en']))) {
+                
                 $model->translations()->saveMany([
                     new \App\SubjectTranslation(array_merge($attributes['sk'], ['language' => 'sk'])),
                     new \App\SubjectTranslation(array_merge($attributes['en'], ['language' => 'en'])),
                 ]);
-                $model->update(['is_valid' => true]);
+
+                if (is_null($model->study_year)) {
+                    $model->update(['is_valid' => true]);
+                } else {
+                    $model->update(['is_valid' => true, 'is_enabled' => true]);
+                }
             }
         }
 
@@ -106,11 +117,6 @@ class Subject extends Model
         return $this->formNameSortingQuery($query, $direction);
     }
 
-    public function nameSkSortable($query, $direction)
-    {
-        return $this->formNameSortingQuery($query, $direction, 'sk');
-    }
-
     private function formNameSortingQuery($query, $direction, $language = 'en')
     {
         return $query
@@ -121,5 +127,10 @@ class Subject extends Model
             })
             ->orderBy('subject_translations.name', $direction)
             ->select('subjects.*');
+    }
+
+    public function nameSkSortable($query, $direction)
+    {
+        return $this->formNameSortingQuery($query, $direction, 'sk');
     }
 }

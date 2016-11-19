@@ -39,6 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'subjects', 'namespace' => 'Admin'], function () {
         Route::get('/', 'SubjectsController@index')->name('subjects.index');
+        Route::get('/enable/{id}', 'SubjectsController@enable')->name('subjects.enable');
+        Route::get('/disable/{id}', 'SubjectsController@disable')->name('subjects.disable');
 
     });
 

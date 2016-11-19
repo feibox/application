@@ -75,6 +75,7 @@ class User extends Authenticatable
         'created_at',
         'updated_at'
     ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -84,6 +85,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -94,6 +96,7 @@ class User extends Authenticatable
         'remember_token',
         'registration_token',
     ];
+
     protected $casts = [
         'is_verified' => 'bool',
         'is_valid' => 'bool',

@@ -26,23 +26,50 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($subjects as $subject)
+                            @foreach($subjects as $subject)
+                                @if($subject->is_valid && $subject->is_enabled)
                                     <tr>
-                                        <td>{{ $subject->id }}</td>
-                                        <td>
-                                            <a href="http://is.stuba.sk/katalog/syllabus.pl?predmet={{ $subject->ais_id }};lang=en">
+                                    @increment($primaryCount)
+                                @elseif($subject->is_valid && !$subject->is_enabled)
+                                    <tr class="info">
+                                    @increment($infoCount)
+                                @elseif(!$subject->is_valid && !$subject->is_enabled)
+                                    <tr class="danger">
+                                        @increment($dangerCount)
+                                @endif
+                                    <td>{{ $subject->id }}</td>
+                                    <td>
+                                        <a href="http://is.stuba.sk/katalog/syllabus.pl?predmet={{ $subject->ais_id }};lang=en">
+                                            <span class="label label-primary">
                                                 {{ $subject->code or '-' }}
-                                                </a>
-                                        </td>
-                                        <td>{{ $subject->name_en or '-' }}</td>
-                                        <td>{{ $subject->study_level or '-' }}</td>
-                                        <td>{{ $subject->study_year or '-' }}</td>
-                                        <td>{{ $subject->created_at->diffForHumans() }}</td>
-                                        <td>{{ $subject->updated_at->diffForHumans() }}</td>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                                <i class="fa fa-link"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>{{ $subject->name_en or '-' }}</td>
+                                    <td>{{ $subject->study_level or '-' }}</td>
+                                    <td>{{ $subject->study_year or '-' }}</td>
+                                    <td>{{ $subject->created_at->diffForHumans() }}</td>
+                                    <td>{{ $subject->updated_at->diffForHumans() }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-default disabled" alt="view" title="view">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-default disabled" alt="re-sync" title="re-sync with STUBA">
+                                            <i class="fa fa-refresh"></i>
+                                        </a>
+                                        @if($subject->is_enabled)
+                                            <a href="{{ route('subjects.disable', ['id' => $subject->id]) }}" class="btn btn-sm btn-danger enabled" alt="disable" title="disable">
+                                                <i class="fa fa-square-o"></i>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('subjects.enable', ['id' => $subject->id]) }}" class="btn btn-sm btn-success {{$subject->study_year or 'disabled'}}" alt="enable" title="enable">
+                                                <i class="fa fa-check-square-o"></i>
+                                            </a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                         <div class="text-center">
@@ -52,20 +79,16 @@
                         <div>
                             <ul class="list-group">
                                 <li class="list-group-item list-group-item-primary">
-                                    <span class="badge">{{ $primaryCount or '0' }}</span> Account is validated and
-                                    verified.
+                                    <span class="badge">{{ $primaryCount or '0' }}</span> Subject is validated and
+                                    enabled.
                                 </li>
                                 <li class="list-group-item list-group-item-info">
-                                    <span class="badge">{{ $infoCount or '0' }}</span> Account is <strong>valid</strong>
-                                    and not verified.
-                                </li>
-                                <li class="list-group-item list-group-item-warning">
-                                    <span class="badge">{{ $warningCount or '0' }}</span> Account is
-                                    <strong>neither</strong> validated nor verified.
+                                    <span class="badge">{{ $infoCount or '0' }}</span> Subject is <strong>valid</strong>
+                                    and not enabled.
                                 </li>
                                 <li class="list-group-item list-group-item-danger">
-                                    <span class="badge">{{ $dangerCount or '0' }}</span> Account is banned or
-                                    terminated.
+                                    <span class="badge">{{ $dangerCount or '0' }}</span> Subject is neither valid nor
+                                    enabled.
                                 </li>
                             </ul>
                         </div>
