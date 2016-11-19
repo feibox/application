@@ -37,5 +37,10 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
+    Route::group(['prefix' => 'subjects', 'namespace' => 'Admin'], function () {
+        Route::get('/', 'SubjectsController@index')->name('subjects.index');
+
+    });
+
     Route::get('/', 'DashboardController@index')->name('dashboard');
 });

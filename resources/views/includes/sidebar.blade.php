@@ -21,7 +21,13 @@
                         <span class="icon fa fa-users"></span><span class="title">Users</span>
                     </a>
                 </li>
-
+                @can('view', \App\Subject::class)
+                    <li class="{{ set_active_routes('subjects.index') }}">
+                        <a href="{{ route('subjects.index') }}">
+                            <span class="icon fa fa-book"></span><span class="title">Subjects</span>
+                        </a>
+                    </li>
+                @endcan
                 <li class="panel panel-default dropdown {{ set_active_paths('account/*') }}">
                     <a data-toggle="collapse" href="#dropdown-posts" class="{{ set_active_paths('account/*', 'collapsed') }}">
                         <span class="icon fa fa-id-card-o"></span><span class="title">Account</span>

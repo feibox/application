@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2016-11-13.
+    * Generated on 2016-11-19.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -33,7 +33,7 @@ namespace PHPSTORM_META {
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
             'Illuminate\Notifications\ChannelManager' instanceof \Illuminate\Notifications\ChannelManager,
             'session' instanceof \Illuminate\Session\SessionManager,
-            'session.store' instanceof \Illuminate\Session\Store,
+            'session.store' instanceof \Illuminate\Session\EncryptedStore,
             'Illuminate\Session\Middleware\StartSession' instanceof \Illuminate\Session\Middleware\StartSession,
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'view.finder' instanceof \Illuminate\View\FileViewFinder,
@@ -152,7 +152,7 @@ namespace PHPSTORM_META {
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
             'Illuminate\Notifications\ChannelManager' instanceof \Illuminate\Notifications\ChannelManager,
             'session' instanceof \Illuminate\Session\SessionManager,
-            'session.store' instanceof \Illuminate\Session\Store,
+            'session.store' instanceof \Illuminate\Session\EncryptedStore,
             'Illuminate\Session\Middleware\StartSession' instanceof \Illuminate\Session\Middleware\StartSession,
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'view.finder' instanceof \Illuminate\View\FileViewFinder,
@@ -271,7 +271,7 @@ namespace PHPSTORM_META {
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
             'Illuminate\Notifications\ChannelManager' instanceof \Illuminate\Notifications\ChannelManager,
             'session' instanceof \Illuminate\Session\SessionManager,
-            'session.store' instanceof \Illuminate\Session\Store,
+            'session.store' instanceof \Illuminate\Session\EncryptedStore,
             'Illuminate\Session\Middleware\StartSession' instanceof \Illuminate\Session\Middleware\StartSession,
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'view.finder' instanceof \Illuminate\View\FileViewFinder,
@@ -390,7 +390,7 @@ namespace PHPSTORM_META {
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
             'Illuminate\Notifications\ChannelManager' instanceof \Illuminate\Notifications\ChannelManager,
             'session' instanceof \Illuminate\Session\SessionManager,
-            'session.store' instanceof \Illuminate\Session\Store,
+            'session.store' instanceof \Illuminate\Session\EncryptedStore,
             'Illuminate\Session\Middleware\StartSession' instanceof \Illuminate\Session\Middleware\StartSession,
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'view.finder' instanceof \Illuminate\View\FileViewFinder,

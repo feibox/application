@@ -6,7 +6,7 @@
                 <div class="card-header">
                     <div class="card-title">
                         <div class="title">Users
-                            <span class="description">List of all ({{ $users->total() }})  users.</span>
+                            <span class="description">List of all ({{ $users->total() }}) users.</span>
                         </div>
                     </div>
                 </div>
