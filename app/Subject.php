@@ -68,7 +68,7 @@ class Subject extends Model
 
         if (array_has($attributes, ['sk', 'en'])) {
             if (!empty($attributes['sk'] && !empty($attributes['en']))) {
-                
+
                 $model->translations()->saveMany([
                     new \App\SubjectTranslation(array_merge($attributes['sk'], ['language' => 'sk'])),
                     new \App\SubjectTranslation(array_merge($attributes['en'], ['language' => 'en'])),

@@ -59,10 +59,13 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         if (!filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)) {
-            $credentials = [$this->username() => $request->get($this->username()) . '@stuba.sk'];
+            $credentials = [
+                $this->username() => $request->get($this->username()) . '@stuba.sk',
+                'password' => $request->get('password')
+            ];
             $request->replace($credentials);
         }
-
+        
         return $request->only($this->username(), 'password');
     }
 }
