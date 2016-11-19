@@ -2,10 +2,11 @@
 //Generated at :generated:
 use Illuminate\Database\Seeder;
 
-class SubjectSeeder extends Seeder
+class SubjectsSeeder extends Seeder
 {
     public function run()
     {
+        \DB::table('subjects')->delete();
 :body:
     }
 }

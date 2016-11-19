@@ -4,6 +4,11 @@ namespace App\Objects;
 use GuzzleHttp\Client;
 use PHPHtmlParser\Dom;
 
+//TODO: make this class proper object (with subjects property)
+//TODO: use collections
+//TODO: add exceptions
+//TODO: rewrite language part to use xml instead of HTML parser and remove HTML PARSER dependency
+
 class StubaSubjectCatalog
 {
     public function getData()
@@ -112,5 +117,39 @@ class StubaSubjectCatalog
         $partial = array_slice(explode(' (FE', $partial), 0, 1)[0];
         $name = explode(' - ', $partial)[1];
         return ['name' => $name];
+    }
+
+    public function getSemesterData($ais_id)
+    {
+        $client = new Client();
+        $result = $client->get('http://is.stuba.sk/katalog/syllabus.pl', [
+            'query' => [
+                'predmet' => $ais_id,
+                'vystup' => '4'
+            ]
+        ]);
+        $xml = simplexml_load_string($result->getBody()->getContents());
+
+        foreach ($xml->il->odporucany_semester_studia_zoznam->odporucany_semester_studia as $node) {
+            if (!isset($semester)) {
+                $semester = (string)$node->semester;
+                continue;
+            }
+
+            if ($semester > $node->semester) {
+                $semester = (string)$node->semester;
+            }
+        }
+
+        return isset($semester) ? $semester : null;
+    }
+
+    public function calculateStudyYear($study_level, $semester)
+    {
+        if (is_null($study_level) || is_null($semester)) {
+            return null;
+        }
+
+        return (int) ceil($semester / 2) + (($study_level == 1) ? 0 : 3);
     }
 }
