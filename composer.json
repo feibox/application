@@ -19,7 +19,7 @@
     "guzzlehttp/guzzle": "^6.2",
     "paquettg/php-html-parser": "^1.7",
     "edvinaskrucas/notification": "dev-docblock",
-    "kyslik/column-sortable": "~5.0"
+    "kyslik/column-sortable": "dev-master"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

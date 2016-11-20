@@ -65,7 +65,7 @@ class LoginController extends Controller
             ];
             $request->replace($credentials);
         }
-        
+
         return $request->only($this->username(), 'password');
     }
 }

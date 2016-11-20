@@ -1,9 +1,8 @@
 <!doctype html>
 <html>
 <head>
-    @include('includes.head')
+    @include('includes.head', ['css' => false])
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
     <style>
         html, body {
             height: 100%;
@@ -14,6 +13,7 @@
             padding: 0;
             width: 100%;
             /*color: #B0BEC5;*/
+            background-color: #22A7F0;
             display: table;
             font-weight: 100;
             font-family: 'Lato', sans-serif;

@@ -10,5 +10,7 @@
 <!-- Title -->
 <title>FEIBOX</title>
 
-<!-- our elixir css && js -->
-<link rel="stylesheet" href="{{ elixir("css/app.css") }}">
+<!-- our elixir css -->
+@if(!isset($css))
+    <link rel="stylesheet" href="{{ elixir("css/app.css") }}">
+@endif

@@ -1,5 +1,9 @@
 <?php
 
+Route::get('error/{num}', function ($num) {
+    abort($num);
+});
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -16,7 +20,8 @@ Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
     Route::post('register', 'RegisterController@register')->name('register');
 
     Route::get('verify/{token}', 'RegisterController@verifyUser')->name('account.verify');
-    Route::get('resend/{email?}', 'RegisterController@resendVerificationMail')->name('account.resend.verification.mail');
+    Route::get('resend/{email?}',
+        'RegisterController@resendVerificationMail')->name('account.resend.verification.mail');
 });
 
 Route::group(['middleware' => 'auth'], function () {
