@@ -16,7 +16,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $folders
  * @property-read \App\Folder $parentFolder
+ * @property-read \App\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $childFolders
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\File[] $files
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereSubjectId($value)
@@ -25,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder subject($subject_id)
+ * @method static \Illuminate\Database\Query\Builder|\App\Folder parent($parent_id)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder name($name)
  * @mixin \Eloquent
  */
@@ -51,6 +54,11 @@ class Folder extends Model
         return $this->belongsTo(Folder::class, 'parent_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
     public function childFolders()
     {
         return $this->hasMany(Folder::class, 'parent_id', 'id');
@@ -65,9 +73,13 @@ class Folder extends Model
         return $query->where('subject_id', '=', $subject_id);
     }
 
+    public function scopeParent($query, $parent_id)
+    {
+        return $query->where('parent_id', '=', $parent_id);
+    }
+
     public function scopeName($query, $name)
     {
         return $query->where('name', $name);
     }
-
 }

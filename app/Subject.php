@@ -141,7 +141,7 @@ class Subject extends Model
         return $this->hasMany(Folder::class);
     }
 
-    public function parentFolders()
+    public function rootFolders()
     {
         return $this->folders()->where('parent_id', 0);
     }

@@ -42,7 +42,7 @@
                                         <a href="{{ route('subject.folder', ['subject_id' => $subject->id, 'folder' => $folder_prefix . $folder->name]) }}">{{ $folder->name}}</a>
                                     </td>
                                     <td>
-                                        -
+                                        {{ $folder->user->user_name }}
                                     </td>
                                     <td>{{ $folder->created_at->diffForHumans() }}</td>
                                     <td>{{ $folder->updated_at->diffForHumans() }}</td>
@@ -53,31 +53,40 @@
                             </tbody>
                         </table>
                     @else
-                        @if(is_null($current_folder))
-                            Nothing interesting here :(. Want to create a <a class="btn-link"
-                                                                             href="{{ route('subject.folder.create', ['subject_id' => $subject->id]) }}">folder</a>
-                            ?
-                        @else
-                            Nothing interesting here :(. Want to create a <a class="btn-link"
-                                                                             href="{{ route('subject.folder.specific.create', ['subject_id' => $subject->id, 'folder' => $current_folder->name]) }}">folder</a>
-                            ?
-                        @endif
+
                     @endif
+                    <div class="sub-title">Create folder</div>
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                        </div>
+                    @endif
+                    <form action="{{ route('subject.folder.store', ['subject_id' => $subject->id]) }}"
+                          method="post"
+                          enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        @if(!is_null($current_folder))
+                            <input type="hidden" name="parent_id" value="{{ $current_folder->id }}">
+                        @endif
+                        @include('components.input', ['attributeName' => 'name', 'required' => 'required'])
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
         @if(!is_null($current_folder))
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <div class="title">
-                                files
+            @if($current_folder->files->count() > 0)
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="title">
+                                    Files for <strong>{{ $current_folder->name }}</strong> folder
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        @if($current_folder->files->count() > 0)
+                        <div class="card-body">
+
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
@@ -91,24 +100,30 @@
                                 <tbody>
                                 @foreach($current_folder->files as $file)
                                     <tr>
+                                        <td>{{ $file->original_filename}}</td>
                                         <td>
-                                            <a href="{{ asset($file->filename) }}">{{ $file->original_filename}}</a>
+                                            <a href="{{ route('users.detail', ['id' => $file->user->id]) }}">{{ $file->user->user_name }}</a>
                                         </td>
-                                        <td> - </td>
                                         <td>{{ $file->created_at->diffForHumans() }}</td>
                                         <td>{{ $file->updated_at->diffForHumans() }}</td>
                                         <td>
+                                            <a href="{{ route('file.download', ['subject_id' => $subject->id, 'folder' => $current_folder->name, 'file_id' => $file->id]) }}"
+                                               class="btn btn-sm btn-default" alt="download" title="download file"><i
+                                                        class="fa fa-download"></i></a>
+                                            <a href="#" class="btn btn-sm btn-danger disabled" alt="delete"
+                                               title="delete file"><i
+                                                        class="fa fa-remove"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                        @else
-                            Nothing interesting here :(. Want to upload a <a href="#">file</a>?
-                        @endif
+
+                        </div>
                     </div>
+
                 </div>
-            </div>
+            @endif
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
@@ -119,7 +134,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('file.upload', ['subject_id' => $subject->id, 'folder' => $current_folder->name]) }}" method="post"
+                        <form action="{{ route('file.upload', ['subject_id' => $subject->id, 'folder' => $current_folder->name]) }}"
+                              method="post"
                               enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <input type="hidden" name="folder_id" value="{{ $current_folder->id }}">

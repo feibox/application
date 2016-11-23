@@ -49,31 +49,14 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/disable/{id}', 'SubjectsController@disable')->name('subjects.disable');
         });
 
-        Route::group(['prefix' => '{subject_id}/folder', 'middleware' => 'subject'], function () {
-            Route::get('/create', 'FolderController@create')->name('subject.folder.create');
-            Route::post('/store', 'FolderController@store')->name('subject.folder.store');
-        });
+        Route::post('{subject_id}/store', 'FolderController@store')->name('subject.folder.store')->middleware('subject');
 
         Route::group(['prefix' => '{subject_id}/{folder?}', 'middleware' => 'subject'], function () {
             Route::get('/', 'FolderController@index')->name('subject.folder');
-            Route::get('/create', 'FolderController@create')->name('subject.folder.specific.create');
-            Route::post('/file-upload', 'FolderController@upload')->name('file.upload');
+            Route::get('{file_id}', 'FileController@download')->name('file.download');
+            Route::post('upload', 'FileController@upload')->name('file.upload');
         });
     });
 
-    Route::get('files/{filename}', function ($filename) {
-        // Check if file exists in app/storage/file folder
-        $file_path = storage_path('app/files/' . $filename);
-        if (file_exists($file_path)) {
-            // Send Download
-            return Response::download($file_path, $filename, [
-                'Content-Length: ' . filesize($file_path)
-            ]);
-        } else {
-            // Error
-            exit('Requested file does not exist on our server!');
-        }
-    })
-        ->where('filename', '[A-Za-z0-9\-\_\.]+');
     Route::get('/', 'DashboardController@index')->name('dashboard');
 });
