@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
 use App\Folder;
+use App\Http\Requests\FileUploadRequest;
 use App\Http\Requests\StoreFolderRequest;
 use App\Subject;
 use Krucas\Notification\Facades\Notification;
@@ -30,12 +32,11 @@ class FolderController extends Controller
             $folder = $this->getDeepestFolder($folder);
             $subject = $this->subject->find($subject_id);
             $current_folder = $this->folder->subject($subject_id)->name($folder)->with('parentFolder',
-                'childFolders')->first();
+                'childFolders', 'files')->first();
 
             if (is_null($current_folder)) {
                 abort(404);
             }
-
             $folders = $current_folder->childFolders;
         }
 
@@ -79,8 +80,23 @@ class FolderController extends Controller
             'parent_id' => $parent_id
         ]);
 
-
         Notification::success('Folder created');
         return redirect()->route('subject.folder', ['subject_id' => $subject_id]);
+    }
+
+    public function upload(FileUploadRequest $request, File $file)
+    {
+        $uploaded_file = $request->file('uploading_file');
+        $path = $request->uploading_file->store('files');
+
+        $file->create([
+            'mime' => $uploaded_file->getClientOriginalExtension(),
+            'filename' => $path,
+            'original_filename' => $uploaded_file->getClientOriginalName(),
+            'folder_id' => $request->get('folder_id')
+        ]);
+
+        Notification::success('File uploaded.');
+        return redirect()->back();
     }
 }

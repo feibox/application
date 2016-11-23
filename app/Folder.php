@@ -56,6 +56,10 @@ class Folder extends Model
         return $this->hasMany(Folder::class, 'parent_id', 'id');
     }
 
+    public function files() {
+        return $this->hasMany(File::class, 'folder_id', 'id');
+    }
+
     public function scopeSubject($query, $subject_id)
     {
         return $query->where('subject_id', '=', $subject_id);

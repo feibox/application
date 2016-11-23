@@ -57,10 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => '{subject_id}/{folder?}', 'middleware' => 'subject'], function () {
             Route::get('/', 'FolderController@index')->name('subject.folder');
             Route::get('/create', 'FolderController@create')->name('subject.folder.specific.create');
-            Route::post('/store', 'FolderController@store')->name('subject.folder.specific.store');
+            Route::post('/file-upload', 'FolderController@upload')->name('file.upload');
         });
-
-
     });
 
     Route::get('/', 'DashboardController@index')->name('dashboard');
