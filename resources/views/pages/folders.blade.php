@@ -49,7 +49,12 @@
                             </tbody>
                         </table>
                     @else
-                        Nothing interesting here :(. Want to create a <a href="#">folder</a>?
+                        @if(is_null($current_folder))
+                            Nothing interesting here :(. Want to create a <a class="btn-link" href="{{ route('subject.folder.create', ['subject_id' => $subject->id]) }}">folder</a>?
+                        @else
+                            Nothing interesting here :(. Want to create a <a class="btn-link" href="{{ route('subject.folder.specific.create', ['subject_id' => $subject->id, 'folder' => $current_folder->name]) }}">folder</a>?
+
+                        @endif
                     @endif
                 </div>
             </div>

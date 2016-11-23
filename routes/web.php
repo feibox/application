@@ -49,9 +49,18 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/disable/{id}', 'SubjectsController@disable')->name('subjects.disable');
         });
 
+        Route::group(['prefix' => '{subject_id}/folder', 'middleware' => 'subject'], function () {
+            Route::get('/create', 'FolderController@create')->name('subject.folder.create');
+            Route::post('/store', 'FolderController@store')->name('subject.folder.store');
+        });
+
         Route::group(['prefix' => '{subject_id}/{folder?}', 'middleware' => 'subject'], function () {
             Route::get('/', 'FolderController@index')->name('subject.folder');
+            Route::get('/create', 'FolderController@create')->name('subject.folder.specific.create');
+            Route::post('/store', 'FolderController@store')->name('subject.folder.specific.store');
         });
+
+
     });
 
     Route::get('/', 'DashboardController@index')->name('dashboard');

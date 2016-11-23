@@ -21,6 +21,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\SubjectTranslation[] $translations
  * @property-read mixed $name_en
  * @property-read mixed $name_sk
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $folders
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereAisId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereCode($value)
