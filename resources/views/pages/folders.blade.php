@@ -92,7 +92,7 @@
                                 @foreach($current_folder->files as $file)
                                     <tr>
                                         <td>
-                                            <a href="#">{{ $file->original_filename}}</a>
+                                            <a href="{{ asset($file->filename) }}">{{ $file->original_filename}}</a>
                                         </td>
                                         <td> - </td>
                                         <td>{{ $file->created_at->diffForHumans() }}</td>
