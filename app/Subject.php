@@ -133,4 +133,16 @@ class Subject extends Model
     {
         return $this->formNameSortingQuery($query, $direction, 'sk');
     }
+
+
+    public function folders()
+    {
+        return $this->hasMany(Folder::class);
+    }
+
+    public function parentFolders()
+    {
+        return $this->folders()->where('parent_id', 0);
+    }
+
 }

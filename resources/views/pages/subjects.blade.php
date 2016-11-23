@@ -52,7 +52,7 @@
                                     <td>{{ $subject->created_at->diffForHumans() }}</td>
                                     <td>{{ $subject->updated_at->diffForHumans() }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-default disabled" alt="view" title="view">
+                                        <a href="{{ route('subject.folder', ['subject_id' => $subject->id]) }}" class="btn btn-sm btn-default" alt="view" title="view">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         <a href="#" class="btn btn-sm btn-default disabled" alt="re-sync" title="re-sync with STUBA">
