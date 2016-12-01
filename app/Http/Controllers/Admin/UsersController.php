@@ -22,6 +22,7 @@ class UsersController extends Controller
 
     public function index()
     {
+        $this->authorize($this->getUser());
         $users = $this->user->sortable(['updated_at' => 'desc'])->paginate(10);
 
         return view('pages.users')->with(['users' => $users]);
@@ -36,6 +37,11 @@ class UsersController extends Controller
         Notification::info('Your request to synchronize user ('.e($user->email).') is pushed on queue.');
 
         return redirect()->back();
+    }
+
+    private function getUser($id = null)
+    {
+        return is_null($id) ? request()->user() : $this->user->findOrFail($id);
     }
 
     public function ban($id)
@@ -66,11 +72,6 @@ class UsersController extends Controller
         $this->authorize($user);
 
         return view('pages.users-detail')->with('user_detail', $user);
-    }
-
-    private function getUser($id)
-    {
-        return is_null($id) ? request()->user() : $this->user->findOrFail($id);
     }
 
     public function edit($id)

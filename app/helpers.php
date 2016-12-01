@@ -76,8 +76,8 @@ if (!function_exists('array_value_replace')) {
 
     /**
      * @param array $array
-     * @param $replace
-     * @param null $with
+     * @param       $replace
+     * @param null  $with
      *
      * @return array
      */
@@ -98,5 +98,19 @@ if (!function_exists('d')) {
         array_map(function ($x) {
             (new Dumper())->dump($x);
         }, func_get_args());
+    }
+}
+
+if (!function_exists('is_email')) {
+    function is_email($email)
+    {
+        return (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) ? true : false;
+    }
+}
+
+if (!function_exists('system_account')) {
+    function system_account()
+    {
+        return app(App\User::class)->systemAccount();
     }
 }
