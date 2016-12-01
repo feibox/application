@@ -24,7 +24,7 @@ class StoreFolderRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|alpha',
+            'name' => 'required|alpha_num',
             'parent_id' => 'exists:folders,id',
         ];
     }
