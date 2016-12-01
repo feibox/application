@@ -5,18 +5,19 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\File
+ * App\File.
  *
- * @property integer $id
+ * @property int $id
  * @property string $filename
  * @property string $mime
  * @property string $original_filename
- * @property integer $uploaded_by
- * @property integer $folder_id
+ * @property int $uploaded_by
+ * @property int $folder_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\Folder $folder
  * @property-read \App\User $user
+ *
  * @method static \Illuminate\Database\Query\Builder|\App\File whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\File whereFilename($value)
  * @method static \Illuminate\Database\Query\Builder|\App\File whereMime($value)
@@ -29,7 +30,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class File extends Model
 {
-
     protected $fillable = [
         'filename',
         'original_filename',
@@ -39,16 +39,14 @@ class File extends Model
     ];
 
     protected $casts = [
-        'id'          => 'integer',
+        'id' => 'integer',
         'uploaded_by' => 'integer',
     ];
-
 
     public function folder()
     {
         return $this->belongsTo(Folder::class);
     }
-
 
     public function user()
     {

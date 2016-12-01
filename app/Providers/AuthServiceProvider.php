@@ -12,18 +12,16 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 class AuthServiceProvider extends ServiceProvider
 {
-
     /**
      * The policy mappings for the application.
      *
      * @var array
      */
     protected $policies = [
-        User::class    => UserPolicy::class,
+        User::class => UserPolicy::class,
         Subject::class => SubjectPolicy::class,
-        File::class    => FilePolicy::class,
+        File::class => FilePolicy::class,
     ];
-
 
     /**
      * Register any authentication / authorization services.

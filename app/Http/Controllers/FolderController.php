@@ -29,7 +29,7 @@ class FolderController extends Controller
         } else {
             $folder_prefix = $folder.'-';
             $folders_array = $this->getFoldersArray($folder);
-            $parent_id = $this->getParentFolderId($folders_array);
+            $parent_id = $this->getParentFolderId($folders_array, $subject_id);
             $folder = end($folders_array);
             $subject = $this->subject->find($subject_id);
             $current_folder = $this->folder->subject($subject_id)->parent($parent_id)->name($folder)->with('parentFolder',
@@ -58,14 +58,14 @@ class FolderController extends Controller
         return [$folder];
     }
 
-    private function getParentFolderId(array $folder_array)
+    private function getParentFolderId(array $folder_array, $subject_id)
     {
         if (count($folder_array) > 1) {
             array_pop($folder_array);
             $parent_name = end($folder_array);
-            $parent_id = $this->getParentFolderId($folder_array);
+            $parent_id = $this->getParentFolderId($folder_array, $subject_id);
 
-            return $this->folder->name($parent_name)->parent($parent_id)->select(['id'])->firstOrFail()->id;
+            return $this->folder->subject($subject_id)->name($parent_name)->parent($parent_id)->select(['id'])->firstOrFail()->id;
         }
 
         return 0;
@@ -97,6 +97,6 @@ class FolderController extends Controller
 
         Notification::success('Folder created');
 
-        return redirect()->route('subject.folder', ['subject_id' => $subject_id]);
+        return redirect()->route('subjects.folder', ['subject_id' => $subject_id]);
     }
 }

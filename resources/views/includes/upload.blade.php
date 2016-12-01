@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="{{ route('file.upload', ['subject_id' => $subject->id, 'folder' => $current_folder->name]) }}"
+            <form action="{{ route('files.upload', ['subject_id' => $subject->id, 'folder' => $current_folder->name]) }}"
                   method="post"
                   enctype="multipart/form-data">
                 {{ csrf_field() }}

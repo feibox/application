@@ -5,13 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Folder
+ * App\Folder.
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
- * @property integer $subject_id
- * @property integer $parent_id
- * @property integer $created_by
+ * @property int $subject_id
+ * @property int $parent_id
+ * @property int $created_by
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $folders
@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $childFolders
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\File[] $files
+ *
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereSubjectId($value)

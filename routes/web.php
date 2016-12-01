@@ -49,17 +49,17 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/disable/{id}', 'SubjectsController@disable')->name('subjects.disable');
         });
 
-        Route::post('{subject_id}/store', 'FolderController@store')->name('subject.folder.store')->middleware('subject');
+        Route::post('{subject_id}/store', 'FolderController@store')->name('subjects.folder.store')->middleware('subject');
 
         Route::group(['prefix' => '{subject_id}/{folder?}', 'middleware' => 'subject'], function () {
-            Route::get('/', 'FolderController@index')->name('subject.folder');
-            Route::post('upload', 'FileController@upload')->name('file.upload');
+            Route::get('/', 'FolderController@index')->name('subjects.folder');
+            Route::post('upload', 'FileController@upload')->name('files.upload');
         });
     });
 
     Route::group(['prefix' => 'files'], function() {
-        Route::get('{file_id}/download', 'FileController@download')->name('file.download');
-        Route::get('{file_id}/destroy', 'FileController@destroy')->name('file.destroy');
+        Route::get('{file_id}/download', 'FileController@download')->name('files.download');
+        Route::get('{file_id}/destroy', 'FileController@destroy')->name('files.destroy');
     });
 
     Route::get('/', 'DashboardController@index')->name('dashboard');

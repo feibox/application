@@ -37,7 +37,7 @@
                                     <tr class="danger">
                                         @increment($dangerCount)
                                 @endif
-                                        <td><a href="{{ route('subject.folder', ['subject_id' => $subject->id]) }}">{{ $subject->id }}</a></td>
+                                        <td><a href="{{ route('subjects.folder', ['subject_id' => $subject->id]) }}">{{ $subject->id }}</a></td>
                                         <td class="rowlink-skip">
                                             <a href="http://is.stuba.sk/katalog/syllabus.pl?predmet={{ $subject->ais_id }};lang=en">
                                                 <span class="label label-primary">

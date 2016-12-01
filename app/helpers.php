@@ -114,3 +114,41 @@ if (!function_exists('system_account')) {
         return app(App\User::class)->systemAccount();
     }
 }
+
+function breadcrumb_subject_folders(\App\Subject $subject)
+{
+    $segments = request()->segments();
+    $data = [];
+
+    if (count($segments) >= 3) {
+        if (str_contains($segments[2], '-')) {
+            $folders = explode('-', $segments[2]);
+        } else {
+            $folders = [$segments[2]];
+        }
+
+        $previous_folder = null;
+        foreach ($folders as $folder) {
+            if (is_null($previous_folder)) {
+                array_push($data, '<a href="'.url()->route('subjects.folder',
+                        ['subject_id' => $subject->id, 'folder' => $folder]).'">'.ucfirst($folder).'</a>');
+            } else {
+                array_push($data, '<a href="'.url()->route('subjects.folder', [
+                            'subject_id' => $subject->id,
+                            'folder' => $previous_folder.$folder,
+                        ]).'">'.ucfirst($folder).'</a>');
+            }
+            $previous_folder .= $folder.'-';
+        }
+    }
+
+    $data = array_reverse($data);
+
+    if (count($segments) >= 2) {
+        array_push($data, '<a href="'.url()->route('subjects.folder',
+                ['subject_id' => $subject->id]).'">'.ucfirst($subject->code).'</a>');
+    }
+    array_push($data, '<a href="'.url()->route('subjects.index').'">Subjects</a>');
+
+    return array_reverse($data);
+}

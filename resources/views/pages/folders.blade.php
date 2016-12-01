@@ -6,13 +6,7 @@
                 <div class="card-header">
                     <div class="card-title">
                         <div class="title">
-                            Folders for subject
-                            <a href="http://is.stuba.sk/katalog/syllabus.pl?predmet={{ $subject->ais_id }};lang=en">
-                                <span class="label label-primary">
-                                    {{ $subject->code or '-' }}
-                                    <i class="fa fa-link"></i>
-                                </span>
-                            </a>
+                            Folder
                             <span class="description">
                             @if(is_null($current_folder))
                                     root
@@ -39,7 +33,7 @@
                             @foreach($folders as $folder)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('subject.folder', ['subject_id' => $subject->id, 'folder' => $folder_prefix . $folder->name]) }}">{{ $folder->name}}</a>
+                                        <a href="{{ route('subjects.folder', ['subject_id' => $subject->id, 'folder' => $folder_prefix . $folder->name]) }}">{{ $folder->name}}</a>
                                     </td>
                                     <td>
                                         {{ $folder->user->user_name }}
@@ -61,7 +55,7 @@
                             <strong>Oh snap!</strong> Change a few things up and try submitting again.
                         </div>
                     @endif
-                    <form action="{{ route('subject.folder.store', ['subject_id' => $subject->id]) }}"
+                    <form action="{{ route('subjects.folder.store', ['subject_id' => $subject->id]) }}"
                           method="post"
                           enctype="multipart/form-data">
                         {{ csrf_field() }}

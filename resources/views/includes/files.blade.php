@@ -29,11 +29,11 @@
                             <td>{{ $file->created_at->diffForHumans() }}</td>
                             <td>{{ $file->updated_at->diffForHumans() }}</td>
                             <td>
-                                <a href="{{ route('file.download', ['file_id' => $file->id]) }}"
+                                <a href="{{ route('files.download', ['file_id' => $file->id]) }}"
                                    class="btn btn-sm btn-default" alt="download" title="download file"><i
                                             class="fa fa-download"></i></a>
                                 @can('destroy', $file)
-                                    <a href="{{ route('file.destroy', ['file_id' => $file->id]) }}" class="btn btn-sm btn-danger" alt="delete"
+                                    <a href="{{ route('files.destroy', ['subject_id' => $subject->id, 'folder' => $current_folder->name, 'file_id' => $file->id]) }}" class="btn btn-sm btn-danger" alt="delete"
                                        title="delete file"><i class="fa fa-remove"></i></a>
                                 @endcan
                             </td>
