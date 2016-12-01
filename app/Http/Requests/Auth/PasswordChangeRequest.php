@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PasswordChangeRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -16,6 +17,7 @@ class PasswordChangeRequest extends FormRequest
         return true;
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,7 +27,7 @@ class PasswordChangeRequest extends FormRequest
     {
         return [
             'current_password' => 'required|current_password',
-            'new_password' => 'required|confirmed|min:6',
+            'new_password'     => 'required|confirmed|min:6',
         ];
     }
 }

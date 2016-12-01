@@ -7,58 +7,72 @@ use GuzzleHttp\Exception\TransferException;
 
 class StubaUser
 {
+
     /**
      * @var int
      */
     private $id;
+
     /**
      * @var string
      */
     private $username;
+
     /**
      * @var null|int
      */
     private $rank;
+
     /**
      * @var null|string
      */
     private $full_name;
+
     /**
      * @var null|string
      */
     private $first_name;
+
     /**
      * @var null|string
      */
     private $middle_name;
+
     /**
      * @var null|string
      */
     private $last_name;
+
     /**
      * @var null|string
      */
     private $title_prefix;
+
     /**
      * @var null|string
      */
     private $title_suffix;
+
     /**
      * @var null|int
      */
     private $study_level;
+
     /**
      * @var null|string
      */
     private $study_information;
+
     /**
      * @var bool
      */
     private $initialized;
+
     /**
      * @var bool
      */
     private $connection_successful;
+
 
     /**
      * StubaUser constructor.
@@ -68,6 +82,7 @@ class StubaUser
         $this->initialized = false;
         $this->connection_successful = true;
     }
+
 
     /**
      * @param $username
@@ -82,10 +97,12 @@ class StubaUser
         try {
             $this->parseData($data);
             $this->initialized = true;
-        } finally {
+        }
+        finally {
             return $this;
         }
     }
+
 
     /**
      * @return null|string
@@ -96,19 +113,21 @@ class StubaUser
         try {
             $result = $client->post('http://is.stuba.sk/uissuggest.pl', [
                 'form_params' => [
-                    '_suggestKey' => $this->username,
+                    '_suggestKey'      => $this->username,
                     '_suggestMaxItems' => '1',
-                    '_suggestHandler' => 'lide',
+                    '_suggestHandler'  => 'lide',
                 ],
             ]);
 
             $body = $result->getBody()->getContents();
         } catch (TransferException $e) {
             $this->connection_successful = false;
-        } finally {
-            return (isset($body) && !empty($body)) ? $body : null;
+        }
+        finally {
+            return (isset($body) && ! empty($body)) ? $body : null;
         }
     }
+
 
     /**
      * @param $data
@@ -131,6 +150,7 @@ class StubaUser
         $this->parseStudyInformation();
     }
 
+
     private function parseNameAndDegree()
     {
         //"Jhon Doe, Bc."
@@ -139,7 +159,7 @@ class StubaUser
         //"Jhon Doe, Ing., PhD."
         //"Jhon Doe"
 
-        if (!str_contains($this->full_name, ',')) {
+        if ( ! str_contains($this->full_name, ',')) {
             $this->parseName($this->full_name);
         } else {
             $exploded = explode(',', $this->full_name);
@@ -147,6 +167,7 @@ class StubaUser
             $this->parseDegree($exploded);
         }
     }
+
 
     /**
      * @param $full_name
@@ -165,6 +186,7 @@ class StubaUser
         }
     }
 
+
     /**
      * @param array $degree
      */
@@ -176,6 +198,7 @@ class StubaUser
 
         $this->title_prefix = trim($degree[0]);
     }
+
 
     private function parseStudyInformation()
     {
@@ -192,13 +215,15 @@ class StubaUser
         }
     }
 
+
     /**
      * @return bool
      */
     public function isValid()
     {
-        return !is_null($this->id) ? true : false;
+        return ! is_null($this->id) ? true : false;
     }
+
 
     /**
      * @return string
@@ -208,6 +233,7 @@ class StubaUser
         return sprintf("%s: %s\n", $this->full_name, $this->study_information);
     }
 
+
     /**
      * @return null|string
      */
@@ -215,6 +241,7 @@ class StubaUser
     {
         return $this->study_information;
     }
+
 
     /**
      * @return null|string
@@ -224,6 +251,7 @@ class StubaUser
         return $this->study_level;
     }
 
+
     /**
      * @return null|string
      */
@@ -231,6 +259,7 @@ class StubaUser
     {
         return $this->title_suffix;
     }
+
 
     /**
      * @return null|string
@@ -240,6 +269,7 @@ class StubaUser
         return $this->title_prefix;
     }
 
+
     /**
      * @return null|string
      */
@@ -247,6 +277,7 @@ class StubaUser
     {
         return $this->id;
     }
+
 
     /**
      * @return null|string
@@ -256,6 +287,7 @@ class StubaUser
         return $this->username;
     }
 
+
     /**
      * @return null|string
      */
@@ -263,6 +295,7 @@ class StubaUser
     {
         return $this->full_name;
     }
+
 
     /**
      * @return null|string
@@ -272,6 +305,7 @@ class StubaUser
         return $this->first_name;
     }
 
+
     /**
      * @return null|string
      */
@@ -279,6 +313,7 @@ class StubaUser
     {
         return $this->middle_name;
     }
+
 
     /**
      * @return null|string
@@ -288,6 +323,7 @@ class StubaUser
         return $this->last_name;
     }
 
+
     /**
      * @return int|null
      */
@@ -296,6 +332,7 @@ class StubaUser
         return $this->rank;
     }
 
+
     /**
      * @return bool
      */
@@ -303,6 +340,7 @@ class StubaUser
     {
         return $this->connection_successful;
     }
+
 
     /**
      * @return bool

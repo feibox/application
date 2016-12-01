@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
-use Validator;
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class ValidatorServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap the application services.
      */
@@ -14,6 +15,7 @@ class ValidatorServiceProvider extends ServiceProvider
     {
         Validator::extend('stuba_email', 'App\Validators\StubaEmailValidator@validate');
     }
+
 
     /**
      * Register the application services.

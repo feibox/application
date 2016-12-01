@@ -12,16 +12,20 @@ use Mail;
 
 class SendVerificationMail implements ShouldQueue
 {
+
     use InteractsWithQueue, Queueable, SerializesModels;
+
     /**
      * @var User
      */
     private $user;
 
+
     public function __construct(User $user)
     {
         $this->user = $user;
     }
+
 
     /**
      * Execute the job.

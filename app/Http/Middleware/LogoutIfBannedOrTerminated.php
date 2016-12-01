@@ -8,6 +8,7 @@ use Krucas\Notification\Facades\Notification;
 
 class LogoutIfBannedOrTerminated
 {
+
     /**
      * Handle an incoming request.
      *
@@ -20,7 +21,7 @@ class LogoutIfBannedOrTerminated
     {
         $user = $request->user();
 
-        if (!is_null($user) && ($user->is_terminated || $user->is_banned)) {
+        if ( ! is_null($user) && ($user->is_terminated || $user->is_banned)) {
             Auth::logout();
             Notification::error('Your account has been '.(($user->is_banned) ? 'banned' : 'terminated').'.');
 

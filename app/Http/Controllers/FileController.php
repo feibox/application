@@ -9,15 +9,18 @@ use Response;
 
 class FileController extends Controller
 {
+
     /**
      * @var File
      */
     private $file;
 
+
     public function __construct(File $file)
     {
         $this->file = $file;
     }
+
 
     public function download($file_id)
     {
@@ -35,6 +38,7 @@ class FileController extends Controller
         }
     }
 
+
     public function upload(FileUploadRequest $request, File $file)
     {
         $this->authorize('upload', File::class);
@@ -44,17 +48,18 @@ class FileController extends Controller
             $request->get('folder_id').str_random(32).md5($uploaded_file->getClientOriginalName()).'.'.$uploaded_file->getClientOriginalExtension());
 
         $file->create([
-            'mime' => $uploaded_file->getClientOriginalExtension(),
-            'filename' => $path,
+            'mime'              => $uploaded_file->getClientOriginalExtension(),
+            'filename'          => $path,
             'original_filename' => $uploaded_file->getClientOriginalName(),
-            'folder_id' => $request->get('folder_id'),
-            'uploaded_by' => $request->user()->id,
+            'folder_id'         => $request->get('folder_id'),
+            'uploaded_by'       => $request->user()->id,
         ]);
 
         Notification::success('File uploaded.');
 
         return redirect()->back();
     }
+
 
     public function destroy($file_id)
     {

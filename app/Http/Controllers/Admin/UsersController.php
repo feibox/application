@@ -10,23 +10,33 @@ use Krucas\Notification\Facades\Notification;
 
 class UsersController extends Controller
 {
+
     /**
      * @var User
      */
     private $user;
+
 
     public function __construct(User $user)
     {
         $this->user = $user;
     }
 
+
     public function index()
     {
         $this->authorize($this->getUser());
-        $users = $this->user->sortable(['updated_at' => 'desc'])->paginate(10);
+        $users = $this->user->sortable([ 'updated_at' => 'desc' ])->paginate(10);
 
-        return view('pages.users')->with(['users' => $users]);
+        return view('pages.users')->with([ 'users' => $users ]);
     }
+
+
+    private function getUser($id = null)
+    {
+        return is_null($id) ? request()->user() : $this->user->findOrFail($id);
+    }
+
 
     public function synchronize($id = null)
     {
@@ -39,10 +49,6 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
-    private function getUser($id = null)
-    {
-        return is_null($id) ? request()->user() : $this->user->findOrFail($id);
-    }
 
     public function ban($id)
     {
@@ -55,6 +61,7 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
+
     public function removeBan($id)
     {
         $user = $this->user->findOrFail($id);
@@ -66,6 +73,7 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
+
     public function detail($id = null)
     {
         $user = $this->getUser($id);
@@ -74,13 +82,16 @@ class UsersController extends Controller
         return view('pages.users-detail')->with('user_detail', $user);
     }
 
+
     public function edit($id)
     {
     }
 
+
     public function update(Request $request, $id)
     {
     }
+
 
     public function destroy($id)
     {

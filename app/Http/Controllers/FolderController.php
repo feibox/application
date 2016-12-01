@@ -9,15 +9,18 @@ use Krucas\Notification\Facades\Notification;
 
 class FolderController extends Controller
 {
+
     private $subject;
 
     private $folder;
+
 
     public function __construct(Subject $subject, Folder $folder)
     {
         $this->subject = $subject;
         $this->folder = $folder;
     }
+
 
     public function index($subject_id, $folder = null)
     {
@@ -43,11 +46,12 @@ class FolderController extends Controller
 
         return view('pages.folders')->with([
             'current_folder' => $current_folder,
-            'folders' => $folders,
-            'subject' => $subject,
-            'folder_prefix' => $folder_prefix,
+            'folders'        => $folders,
+            'subject'        => $subject,
+            'folder_prefix'  => $folder_prefix,
         ]);
     }
+
 
     private function getFoldersArray($folder)
     {
@@ -55,8 +59,9 @@ class FolderController extends Controller
             return explode('-', $folder);
         }
 
-        return [$folder];
+        return [ $folder ];
     }
+
 
     private function getParentFolderId(array $folder_array, $subject_id)
     {
@@ -65,33 +70,35 @@ class FolderController extends Controller
             $parent_name = end($folder_array);
             $parent_id = $this->getParentFolderId($folder_array, $subject_id);
 
-            return $this->folder->whereSubjectId($subject_id)->whereName($parent_name)->whereParentId($parent_id)->select(['id'])->firstOrFail()->id;
+            return $this->folder->whereSubjectId($subject_id)->whereName($parent_name)->whereParentId($parent_id)->select([ 'id' ])->firstOrFail()->id;
         }
 
         return null;
     }
 
+
     public function create($subject_id, $folder = null)
     {
         $subject = $this->subject->findOrFail($subject_id);
         $current_folder = null;
-        if (!is_null($folder)) {
+        if ( ! is_null($folder)) {
             $folders_array = $this->getFoldersArray($folder);
             $parent_id = $this->getParentFolderId($folders_array);
             $folder = end($folders_array);
             $current_folder = $this->folder->whereSubjectId($subject_id)->whereParentId($parent_id)->whereName($folder)->first();
         }
 
-        return view('pages.folder-create')->with(['subject' => $subject, 'current_folder' => $current_folder]);
+        return view('pages.folder-create')->with([ 'subject' => $subject, 'current_folder' => $current_folder ]);
     }
+
 
     public function store(StoreFolderRequest $request, $subject_id)
     {
         $parent_id = $request->get('parent_id', null);
         $this->folder->create([
-            'name' => $request->get('name'),
+            'name'       => $request->get('name'),
             'subject_id' => $subject_id,
-            'parent_id' => $parent_id,
+            'parent_id'  => $parent_id,
             'created_by' => $request->user()->id,
         ]);
 
@@ -100,6 +107,7 @@ class FolderController extends Controller
         return redirect()->back();
     }
 
+    //TODO: authorize, notification on failure
     //public function destroy($folder_id)
     //{
     //    $folder = $this->folder->findOrFail($folder_id);

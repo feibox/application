@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\SubjectTranslation
  *
- * @property integer $id
- * @property integer $subject_id
- * @property string $language
- * @property string $name
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property integer           $id
+ * @property integer           $subject_id
+ * @property string            $language
+ * @property string            $name
+ * @property \Carbon\Carbon    $created_at
+ * @property \Carbon\Carbon    $updated_at
  * @property-read \App\Subject $subject
  * @method static \Illuminate\Database\Query\Builder|\App\SubjectTranslation whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\SubjectTranslation whereSubjectId($value)
@@ -24,10 +24,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SubjectTranslation extends Model
 {
+
     protected $fillable = [
         'name',
         'language',
     ];
+
 
     public function subject()
     {

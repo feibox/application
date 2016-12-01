@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class FileUploadRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -16,6 +17,7 @@ class FileUploadRequest extends FormRequest
         return true;
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,7 +27,7 @@ class FileUploadRequest extends FormRequest
     {
         return [
             'uploading_file' => 'required|file',
-            'folder_id' => 'required|exists:folders,id',
+            'folder_id'      => 'required|exists:folders,id',
         ];
     }
 }

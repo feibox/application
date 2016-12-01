@@ -8,6 +8,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class FetchSubjectCatalog extends Command
 {
+
     /**
      * The name and signature of the console command.
      *
@@ -29,15 +30,17 @@ class FetchSubjectCatalog extends Command
      */
     protected $files;
 
+
     public function __construct(Filesystem $files)
     {
         parent::__construct();
         $this->files = $files;
     }
 
+
     public function handle()
     {
-        if (!$this->option('rewrite') && !$this->option('force')) {
+        if ( ! $this->option('rewrite') && ! $this->option('force')) {
             $this->ensureSeederDoesntAlreadyExist('SubjectsSeeder');
         }
 
@@ -51,7 +54,8 @@ class FetchSubjectCatalog extends Command
 
         foreach ($subjects as $key => $subject) {
             $subjects[$key]['sk'] = $catalog->getFreshSubjectData($subject['ais_id'], 'sk')['sk'];
-            $subjects[$key]['study_year'] = $catalog->calculateStudyYear($subject['study_level'], $catalog->getSemesterData($subject['ais_id']));
+            $subjects[$key]['study_year'] = $catalog->calculateStudyYear($subject['study_level'],
+                $catalog->getSemesterData($subject['ais_id']));
             $bar->advance();
         }
 
@@ -68,10 +72,11 @@ class FetchSubjectCatalog extends Command
             $this->comment('$ php artisan db:seed --class=SubjectsSeeder');
             if ($this->option('force') || $this->confirm('Do you want to run SubjectsSeeder right now? [y|N]')) {
                 $this->info('Running seeder...');
-                $this->call('db:seed', ['--class' => 'SubjectsSeeder']);
+                $this->call('db:seed', [ '--class' => 'SubjectsSeeder' ]);
             }
         }
     }
+
 
     protected function ensureSeederDoesntAlreadyExist($name)
     {
@@ -80,10 +85,12 @@ class FetchSubjectCatalog extends Command
         }
     }
 
+
     protected function getSeedPath()
     {
         return $this->laravel->databasePath().'/seeds/SubjectsSeeder.php';
     }
+
 
     protected function populateStub($subjects)
     {

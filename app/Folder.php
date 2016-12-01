@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Folder
  *
- * @property integer $id
- * @property string $name
- * @property integer $subject_id
- * @property integer $parent_id
- * @property integer $created_by
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property integer                                                     $id
+ * @property string                                                      $name
+ * @property integer                                                     $subject_id
+ * @property integer                                                     $parent_id
+ * @property integer                                                     $created_by
+ * @property \Carbon\Carbon                                              $created_at
+ * @property \Carbon\Carbon                                              $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $folders
- * @property-read \App\Folder $parentFolder
- * @property-read \App\User $user
- * @property-read \App\Subject $subject
+ * @property-read \App\Folder                                            $parentFolder
+ * @property-read \App\User                                              $user
+ * @property-read \App\Subject                                           $subject
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $childFolders
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\File[] $files
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\File[]   $files
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereSubjectId($value)

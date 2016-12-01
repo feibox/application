@@ -21,6 +21,7 @@ class FilePolicy
     public function upload(User $user)
     {
         $folder = resolve(\App\Folder::class)->with('subject')->findOrFail(request()->get('folder_id'));
+
         return $user->can('upload', $folder->subject);
     }
 

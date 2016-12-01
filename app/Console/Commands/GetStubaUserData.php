@@ -2,18 +2,22 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Objects\StubaUser;
+use Illuminate\Console\Command;
 
 class GetStubaUserData extends Command
 {
+
     protected $signature = 'stuba:user {username}';
+
     protected $description = 'Gets user information from is.stuba.sk';
+
 
     public function __construct()
     {
         parent::__construct();
     }
+
 
     public function handle(StubaUser $user)
     {

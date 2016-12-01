@@ -9,6 +9,7 @@ use Krucas\Notification\Facades\Notification;
 
 class LoginController extends Controller
 {
+
     use AuthenticatesUsers;
 
     protected $redirectTo = '/';
@@ -18,10 +19,12 @@ class LoginController extends Controller
      */
     protected $request;
 
+
     public function showLoginForm()
     {
         return view('auth.login');
     }
+
 
     protected function authenticated(Request $request, $user)
     {
@@ -32,14 +35,15 @@ class LoginController extends Controller
         } elseif ($user->is_banned) {
             //TODO: add TOS term of service document
             return $this->denyAccess('Your account has been banned, most likely you violated <a href="#">TOS</a>.');
-        } elseif (!$user->is_verified) {
+        } elseif ( ! $user->is_verified) {
             return $this->denyAccess($this->resendVerificationMessage());
-        } elseif (!$user->is_valid) {
+        } elseif ( ! $user->is_valid) {
             return $this->denyAccess('Your account is not valid, please inform Feibox people.');
         } else {
             return;
         }
     }
+
 
     private function denyAccess($message)
     {
@@ -49,19 +53,20 @@ class LoginController extends Controller
         return redirect()->back()->withInput($this->request->only($this->username(), 'remember'));
     }
 
+
     private function resendVerificationMessage()
     {
         return 'Please check your email first and verify your account. Do you wish to resend verification email? 
-                <a href="' .route('account.resend.verification.mail',
-            $this->request->get('email')).'">Yes, resend!</a>';
+                <a href="'.route('account.resend.verification.mail', $this->request->get('email')).'">Yes, resend!</a>';
     }
+
 
     protected function credentials(Request $request)
     {
-        if (!filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)) {
+        if ( ! filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)) {
             $credentials = [
                 $this->username() => $request->get($this->username()).'@stuba.sk',
-                'password' => $request->get('password'),
+                'password'        => $request->get('password'),
             ];
             $request->replace($credentials);
         }

@@ -9,29 +9,33 @@ use Krucas\Notification\Facades\Notification;
 
 class SubjectsController extends Controller
 {
+
     /**
      * @var Subject
      */
     private $subject;
+
 
     public function __construct(Subject $subject)
     {
         $this->subject = $subject;
     }
 
+
     public function index()
     {
         $this->authorize($this->subject);
         $subjects = $this->subject->with('translations')->sortable('code')->paginate(10);
 
-        return view('pages.subjects')->with(['subjects' => $subjects]);
+        return view('pages.subjects')->with([ 'subjects' => $subjects ]);
     }
+
 
     public function enable($id)
     {
         $subject = $this->subject->findOrFail($id);
 
-        if ($subject->is_valid && !is_null($subject->study_year)) {
+        if ($subject->is_valid && ! is_null($subject->study_year)) {
             $subject->is_enabled = true;
             $subject->save();
             Notification::success('Subject '.$subject->code.' was enabled.');
@@ -41,6 +45,7 @@ class SubjectsController extends Controller
 
         return redirect()->back();
     }
+
 
     public function disable($id)
     {
@@ -57,6 +62,7 @@ class SubjectsController extends Controller
         return redirect()->back();
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -67,6 +73,7 @@ class SubjectsController extends Controller
     public function edit($id)
     {
     }
+
 
     /**
      * Update the specified resource in storage.

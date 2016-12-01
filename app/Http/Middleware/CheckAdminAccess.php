@@ -6,6 +6,7 @@ use Closure;
 
 class CheckAdminAccess
 {
+
     /**
      * Handle an incoming request.
      *
@@ -16,7 +17,7 @@ class CheckAdminAccess
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->user()->is_admin) {
+        if ( ! $request->user()->is_admin) {
             abort(401);
         }
 

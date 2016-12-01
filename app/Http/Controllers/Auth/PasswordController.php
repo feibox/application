@@ -8,10 +8,12 @@ use Krucas\Notification\Facades\Notification;
 
 class PasswordController extends Controller
 {
+
     public function edit()
     {
         return view('auth.password');
     }
+
 
     public function update(PasswordChangeRequest $request)
     {

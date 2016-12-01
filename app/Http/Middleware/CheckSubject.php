@@ -7,12 +7,15 @@ use Closure;
 
 class CheckSubject
 {
+
     private $subject;
+
 
     public function __construct(Subject $subject)
     {
         $this->subject = $subject;
     }
+
 
     /**
      * Handle an incoming request.

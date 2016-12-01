@@ -12,6 +12,7 @@ use PHPHtmlParser\Dom;
 
 class StubaSubjectCatalog
 {
+
     public function getData()
     {
         $client = new Client();
@@ -19,20 +20,20 @@ class StubaSubjectCatalog
 
         /** @noinspection PhpDuplicateArrayKeysInspection */
         $result = $client->post('http://is.stuba.sk/katalog/index.pl', [
-            'headers' => [
-                'content-type' => 'application/x-www-form-urlencoded',
-                'Accept' => '*/*',
+            'headers'     => [
+                'content-type'    => 'application/x-www-form-urlencoded',
+                'Accept'          => '*/*',
                 'Accept-Encoding' => 'gzip, deflate',
             ],
             'form_params' => [
-                'kredity_od' => '',
-                'kredity_do' => '',
-                'fakulta' => '21030',
-                'obdobi' => '221',
-                'obdobi_fak' => '474',
-                'obdobi_fak' => '473',
+                'kredity_od'         => '',
+                'kredity_do'         => '',
+                'fakulta'            => '21030',
+                'obdobi'             => '221',
+                'obdobi_fak'         => '474',
+                'obdobi_fak'         => '473',
                 'vyhledat_rozsirene' => 'Search+for+courses',
-                'jak' => 'rozsirene',
+                'jak'                => 'rozsirene',
             ],
         ]);
 
@@ -43,10 +44,10 @@ class StubaSubjectCatalog
             list($code, $name) = explode(' ', $anchor->innerHtml, 2);
             $ais_id = $this->getAisId($anchor);
             $subjects = [
-                'ais_id' => $ais_id,
-                'code' => $code,
+                'ais_id'      => $ais_id,
+                'code'        => $code,
                 'study_level' => $this->getStudyLevel($code),
-                'en' => [
+                'en'          => [
                     'name' => $name,
                 ],
             ];
@@ -57,15 +58,16 @@ class StubaSubjectCatalog
         return isset($data) ? $data : [];
     }
 
+
     private function getAisId($anchor)
     {
-        $start = strpos($anchor->outerHtml,
-                '<a href="syllabus.pl?predmet=') + strlen('<a href="syllabus.pl?predmet=');
+        $start = strpos($anchor->outerHtml, '<a href="syllabus.pl?predmet=') + strlen('<a href="syllabus.pl?predmet=');
         $end = strpos($anchor->outerHtml, ';zpet=/katalog/index.pl', $start);
         $r = substr($anchor->outerHtml, $start, $end - $start);
 
         return $r;
     }
+
 
     private function getStudyLevel($code)
     {
@@ -76,8 +78,9 @@ class StubaSubjectCatalog
         return 1;
     }
 
+
     /**
-     * @param $ais_id
+     * @param             $ais_id
      * @param null|string $only 'sk' / 'en' / null - both
      *
      * @return array
@@ -90,7 +93,7 @@ class StubaSubjectCatalog
             $result_sk = $client->get('http://is.stuba.sk/katalog/syllabus.pl', [
                 'query' => [
                     'predmet' => $ais_id,
-                    'lang' => 'sk',
+                    'lang'    => 'sk',
                 ],
             ]);
 
@@ -101,7 +104,7 @@ class StubaSubjectCatalog
             $result_en = $client->get('http://is.stuba.sk/katalog/syllabus.pl', [
                 'query' => [
                     'predmet' => $ais_id,
-                    'lang' => 'en',
+                    'lang'    => 'en',
                 ],
             ]);
 
@@ -110,6 +113,7 @@ class StubaSubjectCatalog
 
         return isset($data) ? $data : [];
     }
+
 
     private function extractCodeAndName($body)
     {
@@ -121,8 +125,9 @@ class StubaSubjectCatalog
         $partial = array_slice(explode(' (FE', $partial), 0, 1)[0];
         $name = explode(' - ', $partial)[1];
 
-        return ['name' => $name];
+        return [ 'name' => $name ];
     }
+
 
     public function getSemesterData($ais_id)
     {
@@ -130,13 +135,13 @@ class StubaSubjectCatalog
         $result = $client->get('http://is.stuba.sk/katalog/syllabus.pl', [
             'query' => [
                 'predmet' => $ais_id,
-                'vystup' => '4',
+                'vystup'  => '4',
             ],
         ]);
         $xml = simplexml_load_string($result->getBody()->getContents());
 
         foreach ($xml->il->odporucany_semester_studia_zoznam->odporucany_semester_studia as $node) {
-            if (!isset($semester)) {
+            if ( ! isset($semester)) {
                 $semester = (string) $node->semester;
                 continue;
             }
@@ -148,6 +153,7 @@ class StubaSubjectCatalog
 
         return isset($semester) ? $semester : null;
     }
+
 
     public function calculateStudyYear($study_level, $semester)
     {

@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 
 class CreateSystemAccount extends Command
 {
+
     /**
      * The name and signature of the console command.
      *
@@ -26,6 +27,7 @@ class CreateSystemAccount extends Command
      */
     private $user;
 
+
     /**
      * Create a new command instance.
      *
@@ -37,6 +39,7 @@ class CreateSystemAccount extends Command
         $this->user = $user;
     }
 
+
     /**
      * Execute the console command.
      *
@@ -44,12 +47,12 @@ class CreateSystemAccount extends Command
      */
     public function handle()
     {
-        if (!$this->user->exists('system')) {
+        if ( ! $this->user->exists('system')) {
             $this->user->create([
-                'user_name' => 'system',
-                'email' => 'system@feibox',
-                'password' => 'system',
-                'is_banned' => true,
+                'user_name'     => 'system',
+                'email'         => 'system@feibox',
+                'password'      => 'system',
+                'is_banned'     => true,
                 'is_terminated' => true,
             ]);
             $this->info('System user created.');

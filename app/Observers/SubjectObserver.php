@@ -7,15 +7,18 @@ use App\Subject;
 
 class SubjectObserver
 {
+
     /**
      * @var Folder
      */
     private $folder;
 
+
     public function __construct(Folder $folder)
     {
         $this->folder = $folder;
     }
+
 
     /**
      * Listen to the User created event.

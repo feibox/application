@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap any application services.
      */
@@ -16,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
             return "<?php {$variable} = (isset({$variable}) ? {$variable}+1 : 1); ?>";
         });
     }
+
 
     /**
      * Register any application services.

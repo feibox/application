@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreFolderRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -16,6 +17,7 @@ class StoreFolderRequest extends FormRequest
         return true;
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +26,7 @@ class StoreFolderRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|alpha_num',
+            'name'      => 'required|alpha_num',
             'parent_id' => 'exists:folders,id',
         ];
     }
