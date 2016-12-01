@@ -5,19 +5,18 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\File.
+ * App\File
  *
- * @property int $id
+ * @property integer $id
  * @property string $filename
  * @property string $mime
  * @property string $original_filename
- * @property int $uploaded_by
- * @property int $folder_id
+ * @property integer $uploaded_by
+ * @property integer $folder_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\Folder $folder
  * @property-read \App\User $user
- *
  * @method static \Illuminate\Database\Query\Builder|\App\File whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\File whereFilename($value)
  * @method static \Illuminate\Database\Query\Builder|\App\File whereMime($value)

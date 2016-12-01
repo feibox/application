@@ -8,12 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Kyslik\ColumnSortable\Sortable;
 
 /**
- * App\User.
+ * App\User
  *
- * @property int $id
- * @property int $ais_id
- * @property bool $rank
- * @property bool $study_level
+ * @property integer $id
+ * @property integer $ais_id
+ * @property boolean $rank
+ * @property boolean $study_level
  * @property string $email
  * @property string $user_name
  * @property string $first_name
@@ -25,16 +25,15 @@ use Kyslik\ColumnSortable\Sortable;
  * @property string $password
  * @property string $remember_token
  * @property string $registration_token
- * @property bool $is_verified
- * @property bool $is_admin
- * @property bool $is_valid
- * @property bool $is_banned
- * @property bool $is_terminated
+ * @property boolean $is_verified
+ * @property boolean $is_admin
+ * @property boolean $is_valid
+ * @property boolean $is_banned
+ * @property boolean $is_terminated
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read mixed $full_name
  * @property-read mixed $titled_name
- *
  * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereAisId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRank($value)
@@ -62,6 +61,7 @@ use Kyslik\ColumnSortable\Sortable;
  */
 class User extends Authenticatable
 {
+
     use Sortable;
 
     public $sortable = [
@@ -102,12 +102,13 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'is_verified' => 'bool',
-        'is_valid' => 'bool',
-        'is_admin' => 'bool',
-        'is_banned' => 'bool',
+        'is_verified'   => 'bool',
+        'is_valid'      => 'bool',
+        'is_admin'      => 'bool',
+        'is_banned'     => 'bool',
         'is_terminated' => 'bool',
     ];
+
 
     /**
      * Boot the model.
@@ -120,10 +121,12 @@ class User extends Authenticatable
         });
     }
 
+
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
 
     public function getFullNameAttribute()
     {
@@ -134,15 +137,18 @@ class User extends Authenticatable
         return ucfirst($this->first_name).' '.ucfirst($this->last_name);
     }
 
+
     public function getTitledNameAttribute()
     {
         return $this->title_prefix.' '.$this->full_name.' '.$this->title_suffix;
     }
 
+
     public function verify($token)
     {
         return $this->where('registration_token', $token)->firstOrFail()->confirmEmail();
     }
+
 
     public function confirmEmail()
     {
@@ -152,6 +158,7 @@ class User extends Authenticatable
 
         return $this;
     }
+
 
     /**
      * @param $value
@@ -166,6 +173,7 @@ class User extends Authenticatable
         return $this;
     }
 
+
     /**
      * @param $email
      *
@@ -176,6 +184,7 @@ class User extends Authenticatable
         return $this->where('email', $email)->firstOrFail();
     }
 
+
     public function systemAccount()
     {
         try {
@@ -185,6 +194,7 @@ class User extends Authenticatable
         }
     }
 
+
     /**
      * @param $display
      *
@@ -192,10 +202,11 @@ class User extends Authenticatable
      */
     public function link($display)
     {
-        $url = route('users.detail', ['id' => $this->id]);
+        $url = route('users.detail', [ 'id' => $this->id ]);
 
         return '<a href='.$url.' class="alert-link">'.$display.'</a>';
     }
+
 
     public function exists($term)
     {
@@ -208,6 +219,7 @@ class User extends Authenticatable
             return false;
         }
     }
+
 
     /**
      * @param $term

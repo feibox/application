@@ -23,7 +23,7 @@ class FolderController extends Controller
     {
         if (is_null($folder)) {
             $folder_prefix = '';
-            $subject = $this->subject->with('rootFolders.user')->find($subject_id);
+            $subject = $this->subject->with('rootFolders.user')->findOrFail($subject_id);
             $current_folder = null;
             $folders = $subject->rootFolders;
         } else {
@@ -31,8 +31,8 @@ class FolderController extends Controller
             $folders_array = $this->getFoldersArray($folder);
             $parent_id = $this->getParentFolderId($folders_array, $subject_id);
             $folder = end($folders_array);
-            $subject = $this->subject->find($subject_id);
-            $current_folder = $this->folder->subject($subject_id)->parent($parent_id)->name($folder)->with('parentFolder',
+            $subject = $this->subject->findOrFail($subject_id);
+            $current_folder = $this->folder->whereSubjectId($subject_id)->whereParentId($parent_id)->whereName($folder)->with('parentFolder',
                 'childFolders.user', 'files.user')->first();
             if (is_null($current_folder)) {
                 abort(404);
@@ -65,10 +65,10 @@ class FolderController extends Controller
             $parent_name = end($folder_array);
             $parent_id = $this->getParentFolderId($folder_array, $subject_id);
 
-            return $this->folder->subject($subject_id)->name($parent_name)->parent($parent_id)->select(['id'])->firstOrFail()->id;
+            return $this->folder->whereSubjectId($subject_id)->whereName($parent_name)->whereParentId($parent_id)->select(['id'])->firstOrFail()->id;
         }
 
-        return 0;
+        return null;
     }
 
     public function create($subject_id, $folder = null)
@@ -79,7 +79,7 @@ class FolderController extends Controller
             $folders_array = $this->getFoldersArray($folder);
             $parent_id = $this->getParentFolderId($folders_array);
             $folder = end($folders_array);
-            $current_folder = $this->folder->subject($subject_id)->parent($parent_id)->name($folder)->first();
+            $current_folder = $this->folder->whereSubjectId($subject_id)->whereParentId($parent_id)->whereName($folder)->first();
         }
 
         return view('pages.folder-create')->with(['subject' => $subject, 'current_folder' => $current_folder]);
@@ -87,7 +87,7 @@ class FolderController extends Controller
 
     public function store(StoreFolderRequest $request, $subject_id)
     {
-        $parent_id = $request->get('parent_id', 0);
+        $parent_id = $request->get('parent_id', null);
         $this->folder->create([
             'name' => $request->get('name'),
             'subject_id' => $subject_id,
@@ -95,8 +95,21 @@ class FolderController extends Controller
             'created_by' => $request->user()->id,
         ]);
 
-        Notification::success('Folder created');
+        Notification::success('Folder created.');
 
-        return redirect()->route('subjects.folder', ['subject_id' => $subject_id]);
+        return redirect()->back();
     }
+
+    //public function destroy($folder_id)
+    //{
+    //    $folder = $this->folder->findOrFail($folder_id);
+    //    $this->authorize($folder);
+
+    //    if ($folder->isEmpty()) {
+    //        $folder->delete();
+    //        Notification::success('Folder deleted.');
+    //    }
+
+    //    return redirect()->back();
+    //}
 }

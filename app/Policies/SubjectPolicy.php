@@ -2,15 +2,26 @@
 
 namespace App\Policies;
 
+use App\Subject;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SubjectPolicy
 {
+
     use HandlesAuthorization;
+
 
     public function before(User $user)
     {
         return ($user->is_admin) ? true : false;
+    }
+
+
+    public function upload(User $user, Subject $subject)
+    {
+        if ($subject->is_enabled === true && ! is_null($subject->study_year)) {
+            return $user->rank >= $subject->study_year;
+        }
     }
 }

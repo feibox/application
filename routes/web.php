@@ -12,7 +12,7 @@ Route::get('/', function () {
  * Auth routes
  * */
 
-Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
+Route::group([ 'middleware' => 'guest', 'namespace' => 'Auth' ], function () {
     Route::get('login/{email?}', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login')->name('login');
 
@@ -24,42 +24,46 @@ Route::group(['middleware' => 'guest', 'namespace' => 'Auth'], function () {
         'RegisterController@resendVerificationMail')->name('account.resend.verification.mail');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::group(['prefix' => 'account', 'namespace' => 'Auth'], function () {
+Route::group([ 'middleware' => 'auth' ], function () {
+    Route::group([ 'prefix' => 'account', 'namespace' => 'Auth' ], function () {
         Route::get('logout', 'LoginController@logout')->name('logout');
         Route::get('password', 'PasswordController@edit')->name('account.password.edit');
         Route::post('password', 'PasswordController@update')->name('account.password.update');
     });
 
-    Route::group(['prefix' => 'users', 'namespace' => 'Admin'], function () {
+    Route::group([ 'prefix' => 'users', 'namespace' => 'Admin' ], function () {
         Route::get('/', 'UsersController@index')->name('users.index');
         Route::get('detail/{id?}', 'UsersController@detail')->name('users.detail');
         Route::get('synchronize/{id?}', 'UsersController@synchronize')->name('users.synchronize');
         Route::get('ban/{id}', 'UsersController@ban')->name('users.ban');
         Route::get('remove-ban/{id}', 'UsersController@removeBan')->name('users.remove.ban');
-        Route::group(['middleware' => 'admin'], function () {
+        Route::group([ 'middleware' => 'admin' ], function () {
             //Route::get('users', 'UsersController@index');
         });
     });
 
-    Route::group(['prefix' => 'subjects'], function () {
-        Route::group(['namespace' => 'Admin'], function () {
+    Route::group([ 'prefix' => 'subjects' ], function () {
+        Route::group([ 'namespace' => 'Admin' ], function () {
             Route::get('/', 'SubjectsController@index')->name('subjects.index');
             Route::get('/enable/{id}', 'SubjectsController@enable')->name('subjects.enable');
             Route::get('/disable/{id}', 'SubjectsController@disable')->name('subjects.disable');
         });
 
-        Route::post('{subject_id}/store', 'FolderController@store')->name('subjects.folder.store')->middleware('subject');
+        Route::post('{subject_id}/store',
+            'FolderController@store')->name('subjects.folder.store')->middleware('subject');
 
-        Route::group(['prefix' => '{subject_id}/{folder?}', 'middleware' => 'subject'], function () {
-            Route::get('/', 'FolderController@index')->name('subjects.folder');
-            Route::post('upload', 'FileController@upload')->name('files.upload');
-        });
+        Route::get('{subject_id}/{folder?}', 'FolderController@index')->name('subjects.folder');
+
     });
 
-    Route::group(['prefix' => 'files'], function() {
+    Route::group([ 'prefix' => 'folders' ], function () {
+        Route::get('{folder_id}/destroy', 'FolderController@destroy')->name('folders.destroy');
+    });
+
+    Route::group([ 'prefix' => 'files' ], function () {
         Route::get('{file_id}/download', 'FileController@download')->name('files.download');
         Route::get('{file_id}/destroy', 'FileController@destroy')->name('files.destroy');
+        Route::post('upload', 'FileController@upload')->name('files.upload');
     });
 
     Route::get('/', 'DashboardController@index')->name('dashboard');

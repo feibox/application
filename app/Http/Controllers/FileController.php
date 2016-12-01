@@ -37,6 +37,8 @@ class FileController extends Controller
 
     public function upload(FileUploadRequest $request, File $file)
     {
+        $this->authorize('upload', File::class);
+
         $uploaded_file = $request->file('uploading_file');
         $path = $request->uploading_file->storeAs('files',
             $request->get('folder_id').str_random(32).md5($uploaded_file->getClientOriginalName()).'.'.$uploaded_file->getClientOriginalExtension());
@@ -57,6 +59,7 @@ class FileController extends Controller
     public function destroy($file_id)
     {
         $file = $this->file->findOrFail($file_id);
+        $this->authorize($file);
         $file_path = storage_path('app/'.$file->filename);
 
         if (file_exists($file_path)) {

@@ -18,9 +18,12 @@ class CreateFilesTable extends Migration
             $table->string('filename');
             $table->string('mime');
             $table->string('original_filename');
-            $table->integer('uploaded_by')->unsigned()->default(0);
+            $table->integer('uploaded_by')->unsigned();
             $table->integer('folder_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('folder_id')->references('id')->on('folders')->onDelete('restrict');
+            $table->foreign('uploaded_by')->references('id')->on('users')->onDelete('restrict');
         });
     }
 
