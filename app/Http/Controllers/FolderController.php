@@ -10,6 +10,7 @@ use Krucas\Notification\Facades\Notification;
 class FolderController extends Controller
 {
     private $subject;
+
     private $folder;
 
     public function __construct(Subject $subject, Folder $folder)
@@ -82,16 +83,6 @@ class FolderController extends Controller
         }
 
         return view('pages.folder-create')->with(['subject' => $subject, 'current_folder' => $current_folder]);
-    }
-
-    private function getDeepestFolder($folder)
-    {
-        if (str_contains($folder, '-')) {
-            $folders = explode('-', $folder);
-            $folder = end($folders);
-        }
-
-        return $folder;
     }
 
     public function store(StoreFolderRequest $request, $subject_id)

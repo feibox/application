@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\File;
+use App\Policies\FilePolicy;
 use App\Policies\SubjectPolicy;
 use App\Policies\UserPolicy;
 use App\Subject;
@@ -10,16 +12,18 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 class AuthServiceProvider extends ServiceProvider
 {
+
     /**
      * The policy mappings for the application.
      *
      * @var array
      */
     protected $policies = [
-        //'App\Model' => 'App\Policies\ModelPolicy',
-        User::class => UserPolicy::class,
+        User::class    => UserPolicy::class,
         Subject::class => SubjectPolicy::class,
+        File::class    => FilePolicy::class,
     ];
+
 
     /**
      * Register any authentication / authorization services.
