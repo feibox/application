@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Debug\Dumper;
 
-if (!function_exists('class_case')) {
+if ( ! function_exists('class_case')) {
 
     /**
      * @param $str
@@ -15,7 +15,7 @@ if (!function_exists('class_case')) {
     }
 }
 
-if (!function_exists('human_readable')) {
+if ( ! function_exists('human_readable')) {
 
     /**
      * @param $str
@@ -28,7 +28,7 @@ if (!function_exists('human_readable')) {
     }
 }
 
-if (!function_exists('set_active_paths')) {
+if ( ! function_exists('set_active_paths')) {
 
     /**
      * @param string|array $paths
@@ -38,7 +38,7 @@ if (!function_exists('set_active_paths')) {
      */
     function set_active_paths($paths, $active = 'active')
     {
-        if (!is_array($paths)) {
+        if ( ! is_array($paths)) {
             $paths = (array) $paths;
         }
 
@@ -50,7 +50,7 @@ if (!function_exists('set_active_paths')) {
     }
 }
 
-if (!function_exists('set_active_routes')) {
+if ( ! function_exists('set_active_routes')) {
 
     /**
      * @param string|array $routes
@@ -60,7 +60,7 @@ if (!function_exists('set_active_routes')) {
      */
     function set_active_routes($routes, $output = 'active')
     {
-        if (!is_array($routes)) {
+        if ( ! is_array($routes)) {
             $routes = (array) $routes;
         }
 
@@ -72,7 +72,7 @@ if (!function_exists('set_active_routes')) {
     }
 }
 
-if (!function_exists('array_value_replace')) {
+if ( ! function_exists('array_value_replace')) {
 
     /**
      * @param array $array
@@ -89,7 +89,7 @@ if (!function_exists('array_value_replace')) {
     }
 }
 
-if (!function_exists('d')) {
+if ( ! function_exists('d')) {
     /**
      * @param  mixed
      */
@@ -101,54 +101,56 @@ if (!function_exists('d')) {
     }
 }
 
-if (!function_exists('is_email')) {
+if ( ! function_exists('is_email')) {
     function is_email($email)
     {
-        return (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) ? true : false;
+        return ( ! filter_var($email, FILTER_VALIDATE_EMAIL) === false) ? true : false;
     }
 }
 
-if (!function_exists('system_account')) {
+if ( ! function_exists('system_account')) {
     function system_account()
     {
         return app(App\User::class)->systemAccount();
     }
 }
 
-function breadcrumb_subject_folders(\App\Subject $subject)
-{
-    $segments = request()->segments();
-    $data = [];
+if ( ! function_exists('breadcrumb_subject_folders')) {
+    function breadcrumb_subject_folders(\App\Subject $subject)
+    {
+        $segments = request()->segments();
+        $data = [];
 
-    if (count($segments) >= 3) {
-        if (str_contains($segments[2], '-')) {
-            $folders = explode('-', $segments[2]);
-        } else {
-            $folders = [$segments[2]];
-        }
-
-        $previous_folder = null;
-        foreach ($folders as $folder) {
-            if (is_null($previous_folder)) {
-                array_push($data, '<a href="'.url()->route('subjects.folder',
-                        ['subject_id' => $subject->id, 'folder' => $folder]).'">'.ucfirst($folder).'</a>');
+        if (count($segments) >= 3) {
+            if (str_contains($segments[2], '-')) {
+                $folders = explode('-', $segments[2]);
             } else {
-                array_push($data, '<a href="'.url()->route('subjects.folder', [
-                            'subject_id' => $subject->id,
-                            'folder' => $previous_folder.$folder,
-                        ]).'">'.ucfirst($folder).'</a>');
+                $folders = [ $segments[2] ];
             }
-            $previous_folder .= $folder.'-';
+
+            $previous_folder = null;
+            foreach ($folders as $folder) {
+                if (is_null($previous_folder)) {
+                    array_push($data, '<a href="'.url()->route('subjects.folder',
+                            [ 'subject_id' => $subject->id, 'folder' => $folder ]).'">'.ucfirst($folder).'</a>');
+                } else {
+                    array_push($data, '<a href="'.url()->route('subjects.folder', [
+                            'subject_id' => $subject->id,
+                            'folder'     => $previous_folder.$folder,
+                        ]).'">'.ucfirst($folder).'</a>');
+                }
+                $previous_folder .= $folder.'-';
+            }
         }
+
+        $data = array_reverse($data);
+
+        if (count($segments) >= 2) {
+            array_push($data, '<a href="'.url()->route('subjects.folder',
+                    [ 'subject_id' => $subject->id ]).'">'.ucfirst($subject->code).'</a>');
+        }
+        array_push($data, '<a href="'.url()->route('subjects.index').'">Subjects</a>');
+
+        return array_reverse($data);
     }
-
-    $data = array_reverse($data);
-
-    if (count($segments) >= 2) {
-        array_push($data, '<a href="'.url()->route('subjects.folder',
-                ['subject_id' => $subject->id]).'">'.ucfirst($subject->code).'</a>');
-    }
-    array_push($data, '<a href="'.url()->route('subjects.index').'">Subjects</a>');
-
-    return array_reverse($data);
 }
