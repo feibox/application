@@ -23,6 +23,7 @@ class SubjectsController extends Controller
     {
         $this->authorize($this->subject);
         $subjects = $this->subject->with('translations')->sortable('code')->paginate(10);
+
         return view('pages.subjects')->with(['subjects' => $subjects]);
     }
 
@@ -33,7 +34,7 @@ class SubjectsController extends Controller
         if ($subject->is_valid && !is_null($subject->study_year)) {
             $subject->is_enabled = true;
             $subject->save();
-            Notification::success('Subject ' . $subject->code . ' was enabled.');
+            Notification::success('Subject '.$subject->code.' was enabled.');
         } else {
             Notification::error('Subject without study year or not valid can not be set as "enabled".');
         }
@@ -48,7 +49,7 @@ class SubjectsController extends Controller
         if ($subject->is_enabled) {
             $subject->is_enabled = false;
             $subject->save();
-            Notification::success('Subject ' . $subject->code . ' was disabled.');
+            Notification::success('Subject '.$subject->code.' was disabled.');
         } else {
             Notification::warning('Subject can not be disabled more than once :)');
         }
@@ -63,62 +64,61 @@ class SubjectsController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
     }
 }

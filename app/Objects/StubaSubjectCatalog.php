@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Objects;
 
 use GuzzleHttp\Client;
@@ -14,14 +15,14 @@ class StubaSubjectCatalog
     public function getData()
     {
         $client = new Client();
-        $dom = new Dom;
+        $dom = new Dom();
 
         /** @noinspection PhpDuplicateArrayKeysInspection */
         $result = $client->post('http://is.stuba.sk/katalog/index.pl', [
             'headers' => [
                 'content-type' => 'application/x-www-form-urlencoded',
                 'Accept' => '*/*',
-                'Accept-Encoding' => 'gzip, deflate'
+                'Accept-Encoding' => 'gzip, deflate',
             ],
             'form_params' => [
                 'kredity_od' => '',
@@ -31,8 +32,8 @@ class StubaSubjectCatalog
                 'obdobi_fak' => '474',
                 'obdobi_fak' => '473',
                 'vyhledat_rozsirene' => 'Search+for+courses',
-                'jak' => 'rozsirene'
-            ]
+                'jak' => 'rozsirene',
+            ],
         ]);
 
         $body = $result->getBody()->getContents();
@@ -47,7 +48,7 @@ class StubaSubjectCatalog
                 'study_level' => $this->getStudyLevel($code),
                 'en' => [
                     'name' => $name,
-                ]
+                ],
             ];
             $data[] = $subjects;
             unset($anchors[$key]);
@@ -62,6 +63,7 @@ class StubaSubjectCatalog
                 '<a href="syllabus.pl?predmet=') + strlen('<a href="syllabus.pl?predmet=');
         $end = strpos($anchor->outerHtml, ';zpet=/katalog/index.pl', $start);
         $r = substr($anchor->outerHtml, $start, $end - $start);
+
         return $r;
     }
 
@@ -70,12 +72,14 @@ class StubaSubjectCatalog
         if (starts_with($code, 'I-')) {
             return 2;
         }
+
         return 1;
     }
 
     /**
      * @param $ais_id
      * @param null|string $only 'sk' / 'en' / null - both
+     *
      * @return array
      */
     public function getFreshSubjectData($ais_id, $only = null)
@@ -86,8 +90,8 @@ class StubaSubjectCatalog
             $result_sk = $client->get('http://is.stuba.sk/katalog/syllabus.pl', [
                 'query' => [
                     'predmet' => $ais_id,
-                    'lang' => 'sk'
-                ]
+                    'lang' => 'sk',
+                ],
             ]);
 
             $data['sk'] = $this->extractCodeAndName($result_sk->getBody()->getContents());
@@ -97,8 +101,8 @@ class StubaSubjectCatalog
             $result_en = $client->get('http://is.stuba.sk/katalog/syllabus.pl', [
                 'query' => [
                     'predmet' => $ais_id,
-                    'lang' => 'en'
-                ]
+                    'lang' => 'en',
+                ],
             ]);
 
             $data['en'] = $this->extractCodeAndName($result_en->getBody()->getContents());
@@ -116,6 +120,7 @@ class StubaSubjectCatalog
         $partial = array_slice(explode(' ', $header->innerHtml, 3), 2)[0];
         $partial = array_slice(explode(' (FE', $partial), 0, 1)[0];
         $name = explode(' - ', $partial)[1];
+
         return ['name' => $name];
     }
 
@@ -125,19 +130,19 @@ class StubaSubjectCatalog
         $result = $client->get('http://is.stuba.sk/katalog/syllabus.pl', [
             'query' => [
                 'predmet' => $ais_id,
-                'vystup' => '4'
-            ]
+                'vystup' => '4',
+            ],
         ]);
         $xml = simplexml_load_string($result->getBody()->getContents());
 
         foreach ($xml->il->odporucany_semester_studia_zoznam->odporucany_semester_studia as $node) {
             if (!isset($semester)) {
-                $semester = (string)$node->semester;
+                $semester = (string) $node->semester;
                 continue;
             }
 
             if ($semester > $node->semester) {
-                $semester = (string)$node->semester;
+                $semester = (string) $node->semester;
             }
         }
 
@@ -147,7 +152,7 @@ class StubaSubjectCatalog
     public function calculateStudyYear($study_level, $semester)
     {
         if (is_null($study_level) || is_null($semester)) {
-            return null;
+            return;
         }
 
         return (int) ceil($semester / 2) + (($study_level == 1) ? 0 : 3);

@@ -6,12 +6,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Kyslik\ColumnSortable\Sortable;
 
 /**
- * App\User
+ * App\User.
  *
- * @property integer $id
- * @property integer $ais_id
- * @property boolean $rank
- * @property boolean $study_level
+ * @property int $id
+ * @property int $ais_id
+ * @property bool $rank
+ * @property bool $study_level
  * @property string $email
  * @property string $user_name
  * @property string $first_name
@@ -23,15 +23,16 @@ use Kyslik\ColumnSortable\Sortable;
  * @property string $password
  * @property string $remember_token
  * @property string $registration_token
- * @property boolean $is_verified
- * @property boolean $is_admin
- * @property boolean $is_valid
- * @property boolean $is_banned
- * @property boolean $is_terminated
+ * @property bool $is_verified
+ * @property bool $is_admin
+ * @property bool $is_valid
+ * @property bool $is_banned
+ * @property bool $is_terminated
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read mixed $full_name
  * @property-read mixed $titled_name
+ *
  * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereAisId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRank($value)
@@ -73,7 +74,7 @@ class User extends Authenticatable
         'is_verified',
         'is_valid',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
@@ -102,13 +103,11 @@ class User extends Authenticatable
         'is_valid' => 'bool',
         'is_admin' => 'bool',
         'is_banned' => 'bool',
-        'is_terminated' => 'bool'
+        'is_terminated' => 'bool',
     ];
 
     /**
      * Boot the model.
-     *
-     * @return void
      */
     public static function boot()
     {
@@ -125,12 +124,12 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+        return ucfirst($this->first_name).' '.ucfirst($this->last_name);
     }
 
     public function getTitledNameAttribute()
     {
-        return $this->title_prefix . ' ' . $this->full_name . ' ' . $this->title_suffix;
+        return $this->title_prefix.' '.$this->full_name.' '.$this->title_suffix;
     }
 
     public function verify($token)
@@ -143,22 +142,26 @@ class User extends Authenticatable
         $this->is_verified = true;
         $this->registration_token = null;
         $this->save();
+
         return $this;
     }
 
     /**
      * @param $value
+     *
      * @return $this
      */
     public function setIsBanned($value)
     {
         $this->is_banned = $value;
         $this->save();
+
         return $this;
     }
 
     /**
      * @param $email
+     *
      * @return \Illuminate\Database\Eloquent\Model|static
      */
     public function findByEmail($email)
@@ -168,11 +171,13 @@ class User extends Authenticatable
 
     /**
      * @param $display
+     *
      * @return string
      */
     public function link($display)
     {
         $url = route('users.detail', ['id' => $this->id]);
-        return '<a href=' . $url . ' class="alert-link">' . $display . '</a>';
+
+        return '<a href='.$url.' class="alert-link">'.$display.'</a>';
     }
 }

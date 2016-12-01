@@ -9,12 +9,9 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {
-        //
         Blade::directive('increment', function ($variable) {
             return "<?php {$variable} = (isset({$variable}) ? {$variable}+1 : 1); ?>";
         });
@@ -22,11 +19,8 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register()
     {
-        //
     }
 }

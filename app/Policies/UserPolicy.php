@@ -15,7 +15,8 @@ class UserPolicy
             if (!$user->is_admin) {
                 return false;
             }
-            return null;
+
+            return;
         }
 
         return ($user->is_admin) ? true : null;

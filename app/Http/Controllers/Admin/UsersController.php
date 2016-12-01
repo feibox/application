@@ -10,7 +10,6 @@ use Krucas\Notification\Facades\Notification;
 
 class UsersController extends Controller
 {
-
     /**
      * @var User
      */
@@ -24,6 +23,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = $this->user->sortable(['updated_at' => 'desc'])->paginate(10);
+
         return view('pages.users')->with(['users' => $users]);
     }
 
@@ -33,7 +33,8 @@ class UsersController extends Controller
         $this->authorize($user);
 
         dispatch((new SynchronizeUser($user))->onQueue('stuba-synchronization'));
-        Notification::info('Your request to synchronize user (' . e($user->email) . ') is pushed on queue.');
+        Notification::info('Your request to synchronize user ('.e($user->email).') is pushed on queue.');
+
         return redirect()->back();
     }
 
@@ -42,7 +43,7 @@ class UsersController extends Controller
         $user = $this->user->findOrFail($id);
         $this->authorize($user);
 
-        Notification::info('You gifted ban to ' . $user->link($user->user_name) . '!');
+        Notification::info('You gifted ban to '.$user->link($user->user_name).'!');
         $user->setIsBanned(true);
 
         return redirect()->back();
@@ -53,8 +54,9 @@ class UsersController extends Controller
         $user = $this->user->findOrFail($id);
         $this->authorize($user);
 
-        Notification::info('Ban for account with username  "' . $user->link($user->user_name) . '" was removed!');
+        Notification::info('Ban for account with username  "'.$user->link($user->user_name).'" was removed!');
         $user->setIsBanned(false);
+
         return redirect()->back();
     }
 
@@ -73,16 +75,13 @@ class UsersController extends Controller
 
     public function edit($id)
     {
-        //
     }
 
     public function update(Request $request, $id)
     {
-        //
     }
 
     public function destroy($id)
     {
-        //
     }
 }

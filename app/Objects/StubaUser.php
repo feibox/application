@@ -8,7 +8,7 @@ use GuzzleHttp\Exception\TransferException;
 class StubaUser
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
     /**
@@ -16,7 +16,7 @@ class StubaUser
      */
     private $username;
     /**
-     * @var null|integer
+     * @var null|int
      */
     private $rank;
     /**
@@ -44,7 +44,7 @@ class StubaUser
      */
     private $title_suffix;
     /**
-     * @var null|integer
+     * @var null|int
      */
     private $study_level;
     /**
@@ -71,6 +71,7 @@ class StubaUser
 
     /**
      * @param $username
+     *
      * @return $this
      */
     public function initialize($username)
@@ -98,7 +99,7 @@ class StubaUser
                     '_suggestKey' => $this->username,
                     '_suggestMaxItems' => '1',
                     '_suggestHandler' => 'lide',
-                ]
+                ],
             ]);
 
             $body = $result->getBody()->getContents();
@@ -111,6 +112,7 @@ class StubaUser
 
     /**
      * @param $data
+     *
      * @throws \Exception
      */
     private function parseData($data)
@@ -175,9 +177,6 @@ class StubaUser
         $this->title_prefix = trim($degree[0]);
     }
 
-    /**
-     *
-     */
     private function parseStudyInformation()
     {
         //"FEEIT I-API-MASUS den [term 3, year 2]"
@@ -306,7 +305,7 @@ class StubaUser
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isInitialized()
     {

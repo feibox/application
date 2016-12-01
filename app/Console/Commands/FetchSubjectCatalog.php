@@ -44,7 +44,7 @@ class FetchSubjectCatalog extends Command
         $catalog = new StubaSubjectCatalog();
         $this->info('Fetching catalog from remote...');
         $subjects = $catalog->getData();
-        $this->info(count($subjects) . ' found.');
+        $this->info(count($subjects).' found.');
 
         $this->info('Fetching language mutations...');
         $bar = $this->output->createProgressBar(count($subjects));
@@ -76,13 +76,13 @@ class FetchSubjectCatalog extends Command
     protected function ensureSeederDoesntAlreadyExist($name)
     {
         if (class_exists($name)) {
-            throw new \InvalidArgumentException('A ' . $name . ' seeder already exists. Run it instead of re-fetching all data again.');
+            throw new \InvalidArgumentException('A '.$name.' seeder already exists. Run it instead of re-fetching all data again.');
         }
     }
 
     protected function getSeedPath()
     {
-        return $this->laravel->databasePath() . '/seeds/SubjectsSeeder.php';
+        return $this->laravel->databasePath().'/seeds/SubjectsSeeder.php';
     }
 
     protected function populateStub($subjects)
@@ -91,8 +91,8 @@ class FetchSubjectCatalog extends Command
 
         $body = '';
         foreach ($subjects as $subject) {
-            $body .= "        App\\Subject::create(json_decode('" . json_encode($subject,
-                    JSON_HEX_QUOT | JSON_HEX_APOS) . "', true));\n";
+            $body .= "        App\\Subject::create(json_decode('".json_encode($subject,
+                    JSON_HEX_QUOT | JSON_HEX_APOS)."', true));\n";
         }
 
         $stub = str_replace(':body:', $body, $stub);

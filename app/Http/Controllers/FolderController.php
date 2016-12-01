@@ -26,7 +26,7 @@ class FolderController extends Controller
             $current_folder = null;
             $folders = $subject->rootFolders;
         } else {
-            $folder_prefix = $folder . '-';
+            $folder_prefix = $folder.'-';
             $folders_array = $this->getFoldersArray($folder);
             $parent_id = $this->getParentFolderId($folders_array);
             $folder = end($folders_array);
@@ -44,7 +44,7 @@ class FolderController extends Controller
             'current_folder' => $current_folder,
             'folders' => $folders,
             'subject' => $subject,
-            'folder_prefix' => $folder_prefix
+            'folder_prefix' => $folder_prefix,
         ]);
     }
 
@@ -53,6 +53,7 @@ class FolderController extends Controller
         if (str_contains($folder, '-')) {
             return explode('-', $folder);
         }
+
         return [$folder];
     }
 
@@ -62,6 +63,7 @@ class FolderController extends Controller
             array_pop($folder_array);
             $parent_name = end($folder_array);
             $parent_id = $this->getParentFolderId($folder_array);
+
             return $this->folder->name($parent_name)->parent($parent_id)->select(['id'])->firstOrFail()->id;
         }
 
@@ -88,6 +90,7 @@ class FolderController extends Controller
             $folders = explode('-', $folder);
             $folder = end($folders);
         }
+
         return $folder;
     }
 
@@ -98,10 +101,11 @@ class FolderController extends Controller
             'name' => $request->get('name'),
             'subject_id' => $subject_id,
             'parent_id' => $parent_id,
-            'created_by' => $request->user()->id
+            'created_by' => $request->user()->id,
         ]);
 
         Notification::success('Folder created');
+
         return redirect()->route('subject.folder', ['subject_id' => $subject_id]);
     }
 }

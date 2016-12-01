@@ -19,6 +19,7 @@ class PasswordController extends Controller
         $user->password = $request->input('new_password');
         $user->save();
         Notification::success('Password to the application has been changed.');
+
         return redirect()->route('account.password.edit');
     }
 }

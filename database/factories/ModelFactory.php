@@ -20,16 +20,16 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     $title_prefix = ($study_level === 2) ? 'Bc.' : null;
 
     if ($study_level == 2) {
-        $study_information = 'FEEIT I-API den [term 3, year ' . ($rank - 3) . ']';
+        $study_information = 'FEEIT I-API den [term 3, year '.($rank - 3).']';
     } else {
-        $study_information = 'FEEIT B-API den [term 3, year ' . $rank . ']';
+        $study_information = 'FEEIT B-API den [term 3, year '.$rank.']';
     }
 
     return [
         'ais_id' => $faker->unique()->numberBetween(1000, 100000),
         'rank' => $rank,
         'study_level' => $study_level,
-        'email' => $user_name . '@stuba.sk',
+        'email' => $user_name.'@stuba.sk',
         'user_name' => $user_name,
         'first_name' => $faker->firstName,
         'middle_name' => $faker->firstName,
@@ -48,7 +48,7 @@ $factory->defineAs(App\User::class, 'invalid', function (Faker\Generator $faker)
     static $password;
 
     return [
-        'email' => $faker->unique()->userName . '@stuba.sk',
+        'email' => $faker->unique()->userName.'@stuba.sk',
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(30),
     ];

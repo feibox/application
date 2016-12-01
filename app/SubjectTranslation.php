@@ -5,15 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\SubjectTranslation
+ * App\SubjectTranslation.
  *
- * @property integer $id
- * @property integer $subject_id
+ * @property int $id
+ * @property int $subject_id
  * @property string $language
  * @property string $name
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\Subject $subject
+ *
  * @method static \Illuminate\Database\Query\Builder|\App\SubjectTranslation whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\SubjectTranslation whereSubjectId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\SubjectTranslation whereLanguage($value)
@@ -26,7 +27,7 @@ class SubjectTranslation extends Model
 {
     protected $fillable = [
         'name',
-        'language'
+        'language',
     ];
 
     public function subject()

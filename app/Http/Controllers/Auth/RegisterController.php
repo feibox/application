@@ -43,7 +43,7 @@ class RegisterController extends Controller
     private function sendVerificationMail(User $user)
     {
         dispatch((new SendVerificationMail($user))->onQueue('email'));
-        Notification::info('Verification email was sent to ' . $user->email . '.');
+        Notification::info('Verification email was sent to '.$user->email.'.');
     }
 
     public function resendVerificationMail($email)
@@ -54,10 +54,12 @@ class RegisterController extends Controller
         if ($user->updated_at->diffInMinutes(Carbon::now()) < rand(5, 10)) {
             $user->touch();
             Notification::warning('System refuses to send verification email, please try later (5-10 minutes).');
+
             return redirect()->back()->withInput(['email' => $email]);
         }
 
         $this->sendVerificationMail($user);
+
         return redirect()->route('login', ['email' => $email]);
     }
 
@@ -66,6 +68,7 @@ class RegisterController extends Controller
         $user = $this->user->verify($token);
 
         Auth::login($user, true);
+
         return redirect()->route('dashboard');
     }
 }

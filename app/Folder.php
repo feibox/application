@@ -5,13 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Folder
+ * App\Folder.
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
- * @property integer $subject_id
- * @property integer $parent_id
- * @property integer $created_by
+ * @property int $subject_id
+ * @property int $parent_id
+ * @property int $created_by
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $folders
@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $childFolders
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\File[] $files
+ *
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Folder whereSubjectId($value)
@@ -37,21 +38,21 @@ class Folder extends Model
         'name',
         'subject_id',
         'parent_id',
-        'created_by'
+        'created_by',
     ];
 
     protected $casts = [
-        'is_root' => 'bool'
+        'is_root' => 'bool',
     ];
 
     public function folders()
     {
-        return $this->hasMany(Folder::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id');
     }
 
     public function parentFolder()
     {
-        return $this->belongsTo(Folder::class, 'parent_id', 'id');
+        return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
     public function user()
@@ -61,10 +62,11 @@ class Folder extends Model
 
     public function childFolders()
     {
-        return $this->hasMany(Folder::class, 'parent_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
-    public function files() {
+    public function files()
+    {
         return $this->hasMany(File::class, 'folder_id', 'id');
     }
 

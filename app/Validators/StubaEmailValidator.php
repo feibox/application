@@ -12,6 +12,7 @@ class StubaEmailValidator
                 return true;
             }
         }
+
         return false;
     }
 }

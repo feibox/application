@@ -25,7 +25,7 @@ class FileUploadRequest extends FormRequest
     {
         return [
             'uploading_file' => 'required|file',
-            'folder_id' => 'required|exists:folders,id'
+            'folder_id' => 'required|exists:folders,id',
         ];
     }
 }

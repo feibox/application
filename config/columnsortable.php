@@ -12,11 +12,11 @@ return [
         ],
         'amount' => [
             'rows' => ['amount', 'price'],
-            'class' => 'fa fa-sort-amount'
+            'class' => 'fa fa-sort-amount',
         ],
         'numeric' => [
             'rows' => ['created_at', 'updated_at', 'rank', 'id', 'ais_id'],
-            'class' => 'fa fa-sort-numeric'
+            'class' => 'fa fa-sort-numeric',
         ],
     ],
 
@@ -79,5 +79,5 @@ return [
     /*
     default order for non-sorted columns
      */
-    'default_direction_unsorted' => 'asc'
+    'default_direction_unsorted' => 'asc',
 ];

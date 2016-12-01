@@ -18,6 +18,7 @@ class SynchronizeUser implements ShouldQueue
 
     /**
      * SynchronizeUser constructor.
+     *
      * @param User $user
      * @param bool $touch
      */
@@ -51,7 +52,7 @@ class SynchronizeUser implements ShouldQueue
                 'title_prefix' => $stuba_user->getTitlePrefix(),
                 'title_suffix' => $stuba_user->getTitleSuffix(),
                 'study_information' => $stuba_user->getStudyInformation(),
-                'is_valid' => true
+                'is_valid' => true,
             ]);
             $this->user->reguard();
         } elseif (!$stuba_user->isConnectionSuccessful()) {

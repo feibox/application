@@ -7,21 +7,22 @@ use Illuminate\Support\Facades\DB;
 use Kyslik\ColumnSortable\Sortable;
 
 /**
- * App\Subject
+ * App\Subject.
  *
- * @property integer $id
- * @property integer $ais_id
+ * @property int $id
+ * @property int $ais_id
  * @property string $code
- * @property boolean $study_level
- * @property boolean $study_year
- * @property boolean $is_valid
- * @property boolean $is_enabled
+ * @property bool $study_level
+ * @property bool $study_year
+ * @property bool $is_valid
+ * @property bool $is_enabled
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\SubjectTranslation[] $translations
  * @property-read mixed $name_en
  * @property-read mixed $name_sk
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $folders
+ *
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereAisId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereCode($value)
@@ -46,7 +47,7 @@ class Subject extends Model
         'is_valid',
         'is_enabled',
         'updated_at',
-        'created_at'
+        'created_at',
     ];
 
     protected $fillable = [
@@ -69,7 +70,6 @@ class Subject extends Model
 
         if (array_has($attributes, ['sk', 'en'])) {
             if (!empty($attributes['sk'] && !empty($attributes['en']))) {
-
                 $model->translations()->saveMany([
                     new \App\SubjectTranslation(array_merge($attributes['sk'], ['language' => 'sk'])),
                     new \App\SubjectTranslation(array_merge($attributes['en'], ['language' => 'en'])),
@@ -135,7 +135,6 @@ class Subject extends Model
         return $this->formNameSortingQuery($query, $direction, 'sk');
     }
 
-
     public function folders()
     {
         return $this->hasMany(Folder::class);
@@ -145,5 +144,4 @@ class Subject extends Model
     {
         return $this->folders()->where('parent_id', 0);
     }
-
 }

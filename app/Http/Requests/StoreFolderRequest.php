@@ -25,7 +25,7 @@ class StoreFolderRequest extends FormRequest
     {
         return [
             'name' => 'required|alpha',
-            'parent_id' => 'exists:folders,id'
+            'parent_id' => 'exists:folders,id',
         ];
     }
 }

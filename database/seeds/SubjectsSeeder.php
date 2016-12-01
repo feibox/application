@@ -248,6 +248,5 @@ class SubjectsSeeder extends Seeder
         App\Subject::create(json_decode('{"ais_id":"313200","code":"B-WEBTE1","study_level":1,"en":{"name":"Web technologies 1"},"sk":{"name":"Webov\u00e9 technol\u00f3gie 1"},"study_year":null}', true));
         App\Subject::create(json_decode('{"ais_id":"313643","code":"I-RST","study_level":2,"en":{"name":"Wireless Communication Systems and Routes"},"sk":{"name":"R\u00e1diokomunika\u010dn\u00e9 syst\u00e9my a trasy"},"study_year":5}', true));
         App\Subject::create(json_decode('{"ais_id":"313732","code":"I-BEK","study_level":2,"en":{"name":"Wireless Communications"},"sk":{"name":"Bezdr\u00f4tov\u00e9 komunik\u00e1cie"},"study_year":4}', true));
-
     }
 }
