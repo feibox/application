@@ -7,22 +7,21 @@ use Illuminate\Support\Facades\DB;
 use Kyslik\ColumnSortable\Sortable;
 
 /**
- * App\Subject.
+ * App\Subject
  *
- * @property int $id
- * @property int $ais_id
+ * @property integer $id
+ * @property integer $ais_id
  * @property string $code
- * @property bool $study_level
- * @property bool $study_year
- * @property bool $is_valid
- * @property bool $is_enabled
+ * @property boolean $study_level
+ * @property boolean $study_year
+ * @property boolean $is_valid
+ * @property boolean $is_enabled
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\SubjectTranslation[] $translations
  * @property-read mixed $name_en
  * @property-read mixed $name_sk
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Folder[] $folders
- *
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereAisId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereCode($value)
