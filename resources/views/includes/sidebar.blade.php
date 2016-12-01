@@ -16,11 +16,13 @@
                         <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
                     </a>
                 </li>
+                @can('view', \App\User::class)
                 <li class="{{ set_active_routes('users.index') }}">
                     <a href="{{ route('users.index') }}">
                         <span class="icon fa fa-users"></span><span class="title">Users</span>
                     </a>
                 </li>
+                @endcan
                 @can('view', \App\Subject::class)
                     <li class="{{ set_active_routes('subjects.index') }}">
                         <a href="{{ route('subjects.index') }}">
@@ -28,16 +30,27 @@
                         </a>
                     </li>
                 @endcan
-                <li class="panel panel-default dropdown {{ set_active_paths('account/*') }}">
-                    <a data-toggle="collapse" href="#dropdown-posts" class="{{ set_active_paths('account/*', 'collapsed') }}">
+                <li class="nav-divider"></li>
+                <li class="panel panel-default dropdown {{ set_active_paths(['account/*', 'users/detail']) }}">
+                    <a data-toggle="collapse" href="#dropdown-account" class="{{ set_active_paths(['account/*', 'users/detail'], 'collapsed') }}">
                         <span class="icon fa fa-id-card-o"></span><span class="title">Account</span>
                     </a>
-                    <div id="dropdown-posts" class="panel-collapse collapse {{ set_active_paths('account/*', 'in') }}">
+                    <div id="dropdown-account" class="panel-collapse collapse {{ set_active_paths(['account/*', 'users/detail'], 'in') }}">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li>
+                                <li class="{{ set_active_routes('users.detail', 'dropdown-active') }}">
+                                    <a href="{{ route('users.detail') }}">
+                                        <span class="icon fa fa-eye"></span><span class="title">Detail</span>
+                                    </a>
+                                </li>
+                                <li class="{{ set_active_routes('account.password.edit', 'dropdown-active') }}">
                                     <a href="{{ route('account.password.edit') }}">
-                                        <span class="icon fa fa-user"></span><span class="title">Password</span>
+                                        <span class="icon fa fa-lock"></span><span class="title">Password</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('logout') }}">
+                                        <span class="icon fa fa-sign-out"></span><span class="title">Logout</span>
                                     </a>
                                 </li>
                             </ul>

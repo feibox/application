@@ -1,4 +1,3 @@
-
 $color-white: #FFF;
 $color-light-grey-1: #FDFDFD;
 $color-light-grey: #F9F9F9;
@@ -8,7 +7,6 @@ $color-grey-level1: #E4E4E4;
 $color-grey-level2: #DDD;
 $color-grey-level3: #CCC;
 $color-dark-grey: #2f2f30;
-
 
 $color-clearer-dark-blue: #9eaabd;
 $color-clear-dark-blue: #73849d;
@@ -73,7 +71,7 @@ $theme-danger-color: $color-red;
   .navbar, .navbar.navbar-default {
     border-bottom: 0px;
 
-    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 
     & > .container-fluid {
       background-color: $color-white;
@@ -162,7 +160,7 @@ $theme-danger-color: $color-red;
     background-color: $color-dark-blue;
     border-bottom: 0px;
 
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 
     & > .container-fluid {
       background-color: $color-dark-blue;
@@ -250,7 +248,7 @@ $theme-danger-color: $color-red;
   // Menu Bar
   .side-menu {
     background-color: $color-white;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
 
     .navbar-header {
       background-color: $color-blue;
@@ -272,6 +270,10 @@ $theme-danger-color: $color-red;
       -webkit-box-shadow: none;
       box-shadow: none;
 
+      li.nav-divider {
+        height: 3px;
+        //background-color: $color-dark-blue-1;
+      }
       li {
         & > a {
           color: $color-dark-blue-hover;
@@ -301,6 +303,9 @@ $theme-danger-color: $color-red;
 
         .panel-body {
           padding: 0 7px;
+          li.dropdown-active {
+            border-bottom: 1px solid $color-white;
+          }
         }
       }
     }
@@ -308,7 +313,7 @@ $theme-danger-color: $color-red;
 
   .side-menu.sidebar-inverse {
     background-color: $color-dark-blue;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
 
     .navbar {
       background-color: $color-dark-blue;
@@ -331,6 +336,7 @@ $theme-danger-color: $color-red;
           .icon {
             margin-left: -3px;
           }
+
           color: $color-dark-blue;
           border-left: 3px solid $color-blue;
           border-right: 0px solid $color-blue;
@@ -346,7 +352,7 @@ $theme-danger-color: $color-red;
 
       li.dropdown {
         & > .panel-collapse {
-          background-color: rgba(0,0,0,0.1);
+          background-color: rgba(0, 0, 0, 0.1);
         }
 
         .panel-body {
@@ -410,18 +416,18 @@ $theme-danger-color: $color-red;
     color: $color-white;
   }
 
-  .card.red , .card.yellow , .card.green , .card.blue , .card.dark {
+  .card.red, .card.yellow, .card.green, .card.blue, .card.dark {
     border: 0;
     .card-header {
       border-bottom: 0;
       .title {
-       color: $color-white;
+        color: $color-white;
       }
     }
   }
 
   .card {
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     border: 0px solid $color-grey-level1;
     .card-header {
       border-bottom: 1px solid $color-grey-level1;
@@ -499,7 +505,7 @@ $theme-danger-color: $color-red;
     }
   }
 
-   // Panel
+  // Panel
   .panel.panel-default {
     border: 1px solid $color-grey;
     .panel-heading {
@@ -552,7 +558,6 @@ $theme-danger-color: $color-red;
       color: $color-darkest-red
     }
   }
-
 
   // Panel with Fresh color
   .panel.fresh-color.panel-primary {
@@ -674,7 +679,7 @@ $theme-danger-color: $color-red;
       }
     }
     .active {
-      & > a , & > a:focus, & > a:hover , span , & > span:focus, & > span:hover {
+      & > a, & > a:focus, & > a:hover, span, & > span:focus, & > span:hover {
         background-color: $color-dark-blue;
         border-color: $color-dark-blue;
         color: $color-white;
@@ -801,7 +806,6 @@ $theme-danger-color: $color-red;
     border-color: $color-red;
   }
 
-
   // List Group
   .list-group {
     .list-group-item.active {
@@ -859,7 +863,6 @@ $theme-danger-color: $color-red;
     }
   }
 
-
   // Bootstrap Switch
   .bootstrap-switch {
     border-color: $color-grey;
@@ -904,9 +907,9 @@ $theme-danger-color: $color-red;
       }
     }
 
-    & > tbody , & > tfoot {
+    & > tbody, & > tfoot {
       & > tr {
-        & > td , & > th {
+        & > td, & > th {
           border-color: $color-grey;
         }
       }
@@ -930,7 +933,7 @@ $theme-danger-color: $color-red;
   // Login page
   .login-box {
     .login-form {
-      .login-header  {
+      .login-header {
         color: $color-white;
       }
       .login-body {
@@ -957,7 +960,7 @@ $theme-danger-color: $color-red;
   // Register page
   .register-box {
     .register-form {
-      .register-header  {
+      .register-header {
         color: $color-white;
       }
       .register-body {
@@ -1015,7 +1018,6 @@ $theme-danger-color: $color-red;
     }
   }
 
-
   // Overide BS3 Tab for Position
 
   .tabs-below > .nav-tabs {
@@ -1040,7 +1042,7 @@ $theme-danger-color: $color-red;
 
   .tabs-left > .nav-tabs > li > a:hover,
   .tabs-left > .nav-tabs > li > a:focus {
-    border-color: $color-grey-level1 $color-grey-level1 $color-grey-level1  $color-grey-level1;
+    border-color: $color-grey-level1 $color-grey-level1 $color-grey-level1 $color-grey-level1;
   }
 
   .tabs-left > .nav-tabs .active > a,
@@ -1066,14 +1068,12 @@ $theme-danger-color: $color-red;
     *border-left-color: $color-white;
   }
 
-
   // Step
   .step {
     .nav-tabs {
       background-color: $color-white;
     }
   }
-
 
   // Tab Step Horizontal
   .step {
@@ -1094,7 +1094,7 @@ $theme-danger-color: $color-red;
       }
       & > li.active {
         background-color: $color-grey;
-        & > a  , & > a:focus , & > a:hover {
+        & > a, & > a:focus, & > a:hover {
           background: transparent;
 
         }
@@ -1106,7 +1106,7 @@ $theme-danger-color: $color-red;
         border-left: 15px solid $color-grey;
       }
       & > li:last-child {
-        border-right: 1px  solid $color-grey-level1;
+        border-right: 1px solid $color-grey-level1;
       }
 
       & > li.step-success {
@@ -1139,11 +1139,11 @@ $theme-danger-color: $color-red;
 
       & > li {
         border: 0px solid transparent;
-        border-right: 1px  solid $color-grey-level1;
-        border-bottom: 1px  solid $color-grey-level1;
+        border-right: 1px solid $color-grey-level1;
+        border-bottom: 1px solid $color-grey-level1;
       }
       & > li:last-child {
-        border-right: 0px  solid $color-grey-level1;
+        border-right: 0px solid $color-grey-level1;
 
       }
     }
@@ -1166,14 +1166,14 @@ $theme-danger-color: $color-red;
       }
       & > li.active {
         background-color: $color-grey;
-        & > a  , & > a:focus , & > a:hover {
+        & > a, & > a:focus, & > a:hover {
           background: transparent;
         }
       }
       & > li:hover {
         background-color: $color-grey;
       }
-      & > li:hover:after , & > li.active:after{
+      & > li:hover:after, & > li.active:after {
         border-left: 15px solid $color-grey;
       }
     }
@@ -1203,7 +1203,7 @@ $theme-danger-color: $color-red;
     .pt-body {
       background-color: $color-light-grey;
       .plan-detail {
-        border-top: 1px dashed rgba(255,255,255,0.6);
+        border-top: 1px dashed rgba(255, 255, 255, 0.6);
         padding-top: 1em;
         margin-top: 1em;
       }
@@ -1351,7 +1351,7 @@ $theme-danger-color: $color-red;
     }
     .navbar-toggle {
       .icon-bar {
-          background-color: $color-dark-blue;
+        background-color: $color-dark-blue;
       }
     }
   }

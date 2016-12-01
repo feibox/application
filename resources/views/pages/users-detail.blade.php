@@ -45,7 +45,7 @@
                     </dl>
                 </div>
             </div>
-            <a href="{{ url()->previous() }}" class="btn btn-default full-width" role="button"><i class="fa fa-arrow-left"></i> go back</a>
+            @include('includes.go-back')
         </div>
     </div>
 @stop

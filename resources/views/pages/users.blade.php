@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     @if($users->total() > 0)
-                        <table class="table table-hover">
+                        <table class="table table-hover rowlink" data-link="row">
                             <thead>
                             <tr>
                                 <th>@sortablelink('id', 'id')</th>
@@ -49,10 +49,8 @@
                                         <td>{{ $item->full_name or '-' }}</td>
                                         <td>{{ $item->created_at->diffForHumans() }}</td>
                                         <td>{{ $item->updated_at->diffForHumans() }}</td>
-                                        <td>
-                                            @can('detail', $item)
-                                                <a href="{{ route('users.detail', ['id' => $item->id]) }}" class="btn btn-sm btn-default" alt="view" title="view"><i class="fa fa-eye"></i></a>
-                                            @endcan
+                                        <td class="rowlink-skip">
+                                            <a href="{{ route('users.detail', ['id' => $item->id]) }}" class="btn btn-sm btn-default" alt="view" title="view"><i class="fa fa-eye"></i></a>
                                             <a href="#" class="btn btn-sm btn-default disabled">edit</a>
                                             @can('synchronize', $item)
                                                 <a href="{{ route('users.synchronize', ['id' => $item->id]) }}" class="btn btn-sm btn-default" alt="re-sync" title="synchronize user with stuba"><i class="fa fa-refresh"></i></a>

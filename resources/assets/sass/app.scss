@@ -192,5 +192,9 @@ a:hover {
   width:100%
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 @import "themes/flat-blue";
 @import "vendor/checkbox3/checkbox3";

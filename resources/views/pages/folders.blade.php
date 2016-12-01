@@ -25,13 +25,13 @@
                 </div>
                 <div class="card-body">
                     @if($folders->count() > 0)
-                        <table class="table table-hover">
+                        <table class="table table-hover rowlink" data-link="row">
                             <thead>
                             <tr>
-                                <th>Folder name</th>
-                                <th>Created by</th>
-                                <th>Created at</th>
-                                <th>Updated at</th>
+                                <th>folder name</th>
+                                <th>created by</th>
+                                <th>created at</th>
+                                <th>updated at</th>
                                 <th>options</th>
                             </tr>
                             </thead>
@@ -46,7 +46,7 @@
                                     </td>
                                     <td>{{ $folder->created_at->diffForHumans() }}</td>
                                     <td>{{ $folder->updated_at->diffForHumans() }}</td>
-                                    <td>
+                                    <td class="rowlink-skip">
                                     </td>
                                 </tr>
                             @endforeach
@@ -75,80 +75,11 @@
             </div>
         </div>
         @if(!is_null($current_folder))
-            @if($current_folder->files->count() > 0)
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <div class="title">
-                                    Files for <strong>{{ $current_folder->name }}</strong> folder
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>File name</th>
-                                    <th>Uploaded by</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
-                                    <th>options</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($current_folder->files as $file)
-                                    <tr>
-                                        <td>{{ $file->original_filename}}</td>
-                                        <td>
-                                            <a href="{{ route('users.detail', ['id' => $file->user->id]) }}">{{ $file->user->user_name }}</a>
-                                        </td>
-                                        <td>{{ $file->created_at->diffForHumans() }}</td>
-                                        <td>{{ $file->updated_at->diffForHumans() }}</td>
-                                        <td>
-                                            <a href="{{ route('file.download', ['subject_id' => $subject->id, 'folder' => $current_folder->name, 'file_id' => $file->id]) }}"
-                                               class="btn btn-sm btn-default" alt="download" title="download file"><i
-                                                        class="fa fa-download"></i></a>
-                                            <a href="#" class="btn btn-sm btn-danger disabled" alt="delete"
-                                               title="delete file"><i
-                                                        class="fa fa-remove"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-
-                </div>
-            @endif
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <div class="title">
-                                File Upload drop-zone will come here
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ route('file.upload', ['subject_id' => $subject->id, 'folder' => $current_folder->name]) }}"
-                              method="post"
-                              enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="folder_id" value="{{ $current_folder->id }}">
-                            <input type="file" name="uploading_file">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            @include('includes.files', ['subject' => $subject, 'current_folder' => $current_folder])
+            @include('includes.upload', ['subject' => $subject, 'current_folder' => $current_folder])
         @endif
         <div class="col-sm-12">
-            <a href="{{ url()->previous() }}" class="btn btn-default full-width" role="button"><i
-                        class="fa fa-arrow-left"></i> go back</a>
+            @include('includes.go-back')
         </div>
     </div>
 @stop

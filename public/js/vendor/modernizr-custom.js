@@ -1,6 +1,6 @@
 /*!
  * modernizr v3.3.1
- * Build http://modernizr.com/download?-animation-checked-contains-cors-dataset-hidden-input-json-opacity-placeholder-search-svg-target-template-addtest-fnbind-printshiv-testprop-dontmin
+ * Build http://modernizr.com/download?-animation-canvas-checked-contains-cors-dataset-fileinput-hidden-input-json-opacity-placeholder-search-svg-target-template-addtest-fnbind-printshiv-testprop-dontmin
  *
  * Copyright (c)
  *  Faruk Ates
@@ -1453,6 +1453,27 @@ Does the browser support the HTML5 [hidden] attribute?
 
 /*!
 {
+  "name": "Canvas",
+  "property": "canvas",
+  "caniuse": "canvas",
+  "tags": ["canvas", "graphics"],
+  "polyfills": ["flashcanvas", "excanvas", "slcanvas", "fxcanvas"]
+}
+!*/
+/* DOC
+Detects support for the `<canvas>` element for 2D drawing.
+*/
+
+  // On the S60 and BB Storm, getContext exists, but always returns undefined
+  // so we actually have to call getContext() to verify
+  // github.com/Modernizr/Modernizr/issues/issue/97/
+  Modernizr.addTest('canvas', function() {
+    var elem = createElement('canvas');
+    return !!(elem.getContext && elem.getContext('2d'));
+  });
+
+/*!
+{
   "name": "Cross-Origin Resource Sharing",
   "property": "cors",
   "caniuse": "cors",
@@ -1897,6 +1918,30 @@ Check if browser implements ECMAScript 6 `String.prototype.contains` per specifi
 */
 
   Modernizr.addTest('contains', is(String.prototype.contains, 'function'));
+
+/*!
+{
+  "name": "input[file] Attribute",
+  "property": "fileinput",
+  "caniuse" : "forms",
+  "tags": ["file", "forms", "input"],
+  "builderAliases": ["forms_fileinput"]
+}
+!*/
+/* DOC
+Detects whether input type="file" is available on the platform
+
+E.g. iOS < 6 and some android version don't support this
+*/
+
+  Modernizr.addTest('fileinput', function() {
+    if (navigator.userAgent.match(/(Android (1.0|1.1|1.5|1.6|2.0|2.1))|(Windows Phone (OS 7|8.0))|(XBLWP)|(ZuneWP)|(w(eb)?OSBrowser)|(webOS)|(Kindle\/(1.0|2.0|2.5|3.0))/)) {
+      return false;
+    }
+    var elem = createElement('input');
+    elem.type = 'file';
+    return !elem.disabled;
+  });
 
 /*!
 {

@@ -7,3 +7,22 @@
     }
   }
 }
+
+.table.rowlink,
+.table .rowlink {
+  td:not(.rowlink-skip) {
+    cursor: pointer;
+    a {
+      cursor: pointer;
+      color: inherit;
+      font: inherit;
+      text-decoration: inherit;
+    }
+  }
+
+  tr.rowlink-skip {
+    td {
+      cursor: not-allowed;
+    }
+  }
+}
