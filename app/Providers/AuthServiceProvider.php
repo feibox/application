@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\File;
+use App\Folder;
 use App\Policies\FilePolicy;
+use App\Policies\FolderPolicy;
 use App\Policies\SubjectPolicy;
 use App\Policies\UserPolicy;
 use App\Subject;
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class    => UserPolicy::class,
         Subject::class => SubjectPolicy::class,
         File::class    => FilePolicy::class,
+        Folder::class  => FolderPolicy::class
     ];
 
 

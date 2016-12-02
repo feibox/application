@@ -58,6 +58,9 @@ class Folder extends Model
     }
 
 
+    /**
+     * @return bool
+     */
     public function isEmpty()
     {
         if ( ! $this->relationLoaded('folders')) {

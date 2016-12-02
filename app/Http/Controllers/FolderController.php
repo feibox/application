@@ -108,16 +108,23 @@ class FolderController extends Controller
     }
 
     //TODO: authorize, notification on failure
-    //public function destroy($folder_id)
-    //{
-    //    $folder = $this->folder->findOrFail($folder_id);
-    //    $this->authorize($folder);
+    /**
+     * @param $folder_id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($folder_id)
+    {
+        $folder = $this->folder->findOrFail($folder_id);
+        $this->authorize($folder);
 
-    //    if ($folder->isEmpty()) {
-    //        $folder->delete();
-    //        Notification::success('Folder deleted.');
-    //    }
+        if ($folder->isEmpty()) {
+            $folder->delete();
+            Notification::success('Folder deleted.');
+        } else {
+            Notification::warning('Folder must be empty before deletion.');
+        }
 
-    //    return redirect()->back();
-    //}
+        return redirect()->back();
+    }
 }

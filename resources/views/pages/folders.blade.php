@@ -41,6 +41,11 @@
                                     <td>{{ $folder->created_at->diffForHumans() }}</td>
                                     <td>{{ $folder->updated_at->diffForHumans() }}</td>
                                     <td class="rowlink-skip">
+                                        @can('destroy', $folder)
+                                            <a href="{{ route('folders.destroy', ['id' => $folder->id]) }}" class="btn btn-sm btn-danger" alt="remove" title="remove"><i class="fa fa-remove"></i></a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-danger disabled" alt="remove" title="remove"><i class="fa fa-remove"></i></a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
