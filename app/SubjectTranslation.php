@@ -30,7 +30,7 @@ class SubjectTranslation extends Model
         'language',
     ];
 
-
+    //TODO: unused
     public function subject()
     {
         return $this->belongsTo(Subject::class);

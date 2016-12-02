@@ -96,7 +96,7 @@ class Subject extends Model
 
     public function translations()
     {
-        return $this->hasMany(SubjectTranslation::class);
+        return $this->hasMany(SubjectTranslation::class)->select(['id', 'subject_id', 'name', 'language']);
     }
 
 

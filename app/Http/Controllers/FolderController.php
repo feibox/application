@@ -26,7 +26,7 @@ class FolderController extends Controller
     {
         if (is_null($folder)) {
             $folder_prefix = '';
-            $subject = $this->subject->with('rootFolders.user')->findOrFail($subject_id);
+            $subject = $this->subject->select(['id', 'ais_id', 'code'])->with('rootFolders.user')->findOrFail($subject_id);
             $current_folder = null;
             $folders = $subject->rootFolders;
         } else {
@@ -34,7 +34,7 @@ class FolderController extends Controller
             $folders_array = $this->getFoldersArray($folder);
             $parent_id = $this->getParentFolderId($folders_array, $subject_id);
             $folder = end($folders_array);
-            $subject = $this->subject->findOrFail($subject_id);
+            $subject = $this->subject->select(['id', 'ais_id', 'code'])->findOrFail($subject_id);
             $current_folder = $this->folder->whereSubjectId($subject_id)->whereParentId($parent_id)->whereName($folder)->with('parentFolder',
                 'childFolders.user', 'files.user')->first();
             if (is_null($current_folder)) {

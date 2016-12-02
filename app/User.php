@@ -188,7 +188,7 @@ class User extends Authenticatable
     public function systemAccount()
     {
         try {
-            return $this->where('email', 'system@feibox')->firstOrFail();
+            return $this->select(['id'])->where('email', 'system@feibox')->firstOrFail();
         } catch (ModelNotFoundException $e) {
             throw new SystemAccountDoesNotExistsException();
         }
