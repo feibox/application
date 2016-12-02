@@ -2,10 +2,18 @@
 
 namespace App\Http\Requests;
 
+use App\Subject;
 use Illuminate\Foundation\Http\FormRequest;
+use Krucas\Notification\Facades\Notification;
 
 class StoreFolderRequest extends FormRequest
 {
+
+    public function forbiddenResponse()
+    {
+        Notification::error('You are not authorized to create folder in this subject.');
+        return redirect()->back();
+    }
 
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +22,8 @@ class StoreFolderRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $subject = resolve(Subject::class)->findOrFail($this->subject_id);
+        return policy(Subject::class)->createFolder($this->user(), $subject);
     }
 
 

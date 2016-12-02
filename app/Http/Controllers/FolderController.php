@@ -21,7 +21,7 @@ class FolderController extends Controller
         $this->folder = $folder;
     }
 
-
+    //TODO: simplify this
     public function index($subject_id, $folder = null)
     {
         if (is_null($folder)) {

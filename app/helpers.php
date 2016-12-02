@@ -111,7 +111,13 @@ if ( ! function_exists('is_email')) {
 if ( ! function_exists('system_account')) {
     function system_account()
     {
-        return app(App\User::class)->systemAccount();
+        if ( ! app()->bound('system_account')) {
+            app()->singleton('system_account', function () {
+                return app(App\User::class)->systemAccount();
+            });
+        }
+
+        return app('system_account');
     }
 }
 

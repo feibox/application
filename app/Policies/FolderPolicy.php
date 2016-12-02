@@ -11,6 +11,7 @@ class FolderPolicy
 
     use HandlesAuthorization;
 
+
     public function destroy(User $user, Folder $folder)
     {
         if ($folder->created_by === system_account()->id) {
