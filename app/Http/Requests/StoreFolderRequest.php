@@ -25,9 +25,25 @@ class StoreFolderRequest extends FormRequest
      */
     public function rules()
     {
+        $this->uniqueRule();
         return [
-            'name'      => 'required|alpha_num',
+            'name'      => [
+                'alpha_num',
+                'required',
+                $this->uniqueRule(),
+            ],
             'parent_id' => 'exists:folders,id',
         ];
+    }
+
+
+    private function uniqueRule()
+    {
+        $rule = resolve('Illuminate\Validation\Rule');
+        $parent_id = $this->parent_id;
+        $subject_id = $this->subject_id;
+        return $rule->unique('folders')->where(function ($query) use ($subject_id, $parent_id) {
+            $query->where('subject_id', $subject_id)->where('parent_id', $parent_id);
+        });
     }
 }

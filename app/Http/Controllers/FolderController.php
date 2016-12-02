@@ -76,22 +76,7 @@ class FolderController extends Controller
         return null;
     }
 
-
-    public function create($subject_id, $folder = null)
-    {
-        $subject = $this->subject->findOrFail($subject_id);
-        $current_folder = null;
-        if ( ! is_null($folder)) {
-            $folders_array = $this->getFoldersArray($folder);
-            $parent_id = $this->getParentFolderId($folders_array);
-            $folder = end($folders_array);
-            $current_folder = $this->folder->whereSubjectId($subject_id)->whereParentId($parent_id)->whereName($folder)->first();
-        }
-
-        return view('pages.folder-create')->with([ 'subject' => $subject, 'current_folder' => $current_folder ]);
-    }
-
-
+    //TODO: authorize storing
     public function store(StoreFolderRequest $request, $subject_id)
     {
         $parent_id = $request->get('parent_id', null);
@@ -107,7 +92,6 @@ class FolderController extends Controller
         return redirect()->back();
     }
 
-    //TODO: authorize, notification on failure
     /**
      * @param $folder_id
      *
@@ -116,7 +100,7 @@ class FolderController extends Controller
     public function destroy($folder_id)
     {
         $folder = $this->folder->findOrFail($folder_id);
-        $this->authorize($folder);
+        $this->authorize('destroy', $folder);
 
         if ($folder->isEmpty()) {
             $folder->delete();
