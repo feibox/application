@@ -14,7 +14,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="folder_id" value="{{ $current_folder->id }}">
                 <input type="file" name="uploading_file">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Upload</button>
             </form>
         </div>
     </div>

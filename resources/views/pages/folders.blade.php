@@ -42,7 +42,7 @@
                                     <td>{{ $folder->updated_at->diffForHumans() }}</td>
                                     <td class="rowlink-skip">
                                         @can('destroy', $folder)
-                                            <a href="{{ route('folders.destroy', ['id' => $folder->id]) }}" class="btn btn-sm btn-danger" alt="remove" title="remove"><i class="fa fa-remove"></i></a>
+                                            <a href="{{ route('folders.destroy', ['folder' => $folder->id]) }}" class="btn btn-sm btn-danger" alt="remove" title="remove"><i class="fa fa-remove"></i></a>
                                         @else
                                             <a href="#" class="btn btn-sm btn-danger disabled" alt="remove" title="remove"><i class="fa fa-remove"></i></a>
                                         @endcan
@@ -68,7 +68,7 @@
                             <input type="hidden" name="parent_id" value="{{ $current_folder->id }}">
                         @endif
                         @include('components.input', ['attributeName' => 'name', 'required' => 'required'])
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Create Folder</button>
                     </form>
                 </div>
             </div>

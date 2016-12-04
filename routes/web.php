@@ -57,7 +57,7 @@ Route::group([ 'middleware' => 'auth' ], function () {
     });
 
     Route::group([ 'prefix' => 'folders' ], function () {
-        Route::get('{folder_id}/destroy', 'FolderController@destroy')->name('folders.destroy');
+        Route::get('{folder}/destroy', 'FolderController@destroy')->name('folders.destroy');
     });
 
     Route::group([ 'prefix' => 'files' ], function () {

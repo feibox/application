@@ -94,14 +94,16 @@ class FolderController extends Controller
         return redirect()->back();
     }
 
+
     /**
-     * @param $folder_id
+     * @param Folder $folder
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @internal param $folder_id
+     *
      */
-    public function destroy($folder_id)
+    public function destroy(Folder $folder)
     {
-        $folder = $this->folder->findOrFail($folder_id);
         $this->authorize('destroy', $folder);
 
         if ($folder->isEmpty()) {
