@@ -66,5 +66,9 @@ Route::group([ 'middleware' => 'auth' ], function () {
         Route::post('upload', 'FileController@upload')->name('files.upload');
     });
 
+    Route::group(['prefix' => 'colleagues'], function () {
+       Route::get('/', 'ColleagueController@index')->name('colleagues.index');
+    });
+
     Route::get('/', 'DashboardController@index')->name('dashboard');
 });

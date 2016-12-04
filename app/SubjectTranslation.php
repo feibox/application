@@ -30,6 +30,7 @@ class SubjectTranslation extends Model
         'language',
     ];
 
+
     //TODO: unused
     public function subject()
     {

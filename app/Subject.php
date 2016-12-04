@@ -96,7 +96,7 @@ class Subject extends Model
 
     public function translations()
     {
-        return $this->hasMany(SubjectTranslation::class)->select(['id', 'subject_id', 'name', 'language']);
+        return $this->hasMany(SubjectTranslation::class)->select([ 'id', 'subject_id', 'name', 'language' ]);
     }
 
 
@@ -115,7 +115,7 @@ class Subject extends Model
     public function codeSortable($query, $direction)
     {
         return $query->select(DB::raw('*, (CASE WHEN code REGEXP \'^(B-|I-)\' = 1 THEN TRIM(SUBSTR(code, 3)) ELSE code END) as code_trimmed'))->orderBy('code_trimmed',
-                $direction);
+            $direction);
     }
 
 
@@ -128,9 +128,9 @@ class Subject extends Model
     private function formNameSortingQuery($query, $direction, $language = 'en')
     {
         return $query->join('subject_translations', function ($join) use ($language) {
-                $join->on('subjects.id', '=', 'subject_translations.subject_id')->where('subject_translations.language',
-                        '=', $language);
-            })->orderBy('subject_translations.name', $direction)->select('subjects.*');
+            $join->on('subjects.id', '=', 'subject_translations.subject_id')->where('subject_translations.language',
+                '=', $language);
+        })->orderBy('subject_translations.name', $direction)->select('subjects.*');
     }
 
 

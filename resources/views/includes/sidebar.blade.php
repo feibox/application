@@ -16,6 +16,11 @@
                         <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
                     </a>
                 </li>
+                <li class="{{ set_active_routes('colleagues.index') }}">
+                    <a href="{{ route('colleagues.index') }}">
+                        <span class="icon fa fa-users"></span><span class="title">Colleagues</span>
+                    </a>
+                </li>
                 @can('view', \App\User::class)
                 <li class="{{ set_active_routes('users.index') }}">
                     <a href="{{ route('users.index') }}">
