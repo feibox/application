@@ -305,6 +305,9 @@ $theme-danger-color: $color-red;
           padding: 0 7px;
           li.dropdown-active {
             border-bottom: 1px solid $color-white;
+            a {
+              color: $color-blue;
+            }
           }
         }
       }

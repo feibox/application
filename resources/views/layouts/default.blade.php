@@ -18,7 +18,7 @@
     <footer class="app-footer">
         <div class="wrapper">
             Made with <i class="fa fa-heart text-danger"></i>.
-            <span class="pull-right">v 0.1</span>
+            <span class="pull-right">v 1.0-stable</span>
         </div>
     </footer>
 @include('includes.scripts')
