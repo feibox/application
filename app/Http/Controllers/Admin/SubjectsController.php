@@ -24,6 +24,7 @@ class SubjectsController extends Controller
 
     public function index()
     {
+        //FIXME: below line does not make sense, but works (sending subject null to policy method)
         $this->authorize($this->subject);
         $subjects = $this->subject->with('translations')->sortable('code')->paginate(10);
 
@@ -34,6 +35,7 @@ class SubjectsController extends Controller
     public function enable($id)
     {
         $subject = $this->subject->findOrFail($id);
+        $this->authorize('enable', $subject);
 
         if ($subject->is_valid && ! is_null($subject->study_year)) {
             $subject->is_enabled = true;
@@ -50,6 +52,7 @@ class SubjectsController extends Controller
     public function disable($id)
     {
         $subject = $this->subject->findOrFail($id);
+        $this->authorize('disable', $subject);
 
         if ($subject->is_enabled) {
             $subject->is_enabled = false;

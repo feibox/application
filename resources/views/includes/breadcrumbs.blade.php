@@ -1,6 +1,6 @@
 <ol class="breadcrumb navbar-breadcrumb">
-    @if(request()->segment(1) === 'subjects')
-        @foreach(breadcrumb_subject_folders($subject) as $folder)
+    @if(request()->segment(1) === 'subjects' || request()->segment(1) === 'courses')
+        @foreach(breadcrumb_subject_folders(isset($subject) ? $subject : $course) as $folder)
             @if($loop->last)
                 <li class="cursor-default active">{!! $folder !!}</li>
             @else

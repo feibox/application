@@ -2,7 +2,8 @@
 
 namespace App\Http\Middleware;
 
-class CacheMiddleware {
+class CacheMiddleware
+{
 
     /**
      * @var \Illuminate\Cache\Repository
@@ -15,6 +16,7 @@ class CacheMiddleware {
         $this->cache = $cache;
     }
 
+
     /**
      * Handle an incoming request.
      *
@@ -24,6 +26,6 @@ class CacheMiddleware {
      */
     protected function keygen(&$request, $prefix)
     {
-        return $prefix.'_route_' . str_slug($request->fullUrl());
+        return $prefix.'_route_'.str_slug($request->fullUrl());
     }
 }

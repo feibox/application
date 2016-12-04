@@ -62,11 +62,11 @@
                                                 <i class="fa fa-refresh"></i>
                                             </a>
                                             @if($subject->is_enabled)
-                                                <a href="{{ route('subjects.disable', ['id' => $subject->id]) }}" class="btn btn-sm btn-danger enabled" alt="disable" title="disable">
+                                                <a href="{{ route('admin.subjects.disable', ['id' => $subject->id]) }}" class="btn btn-sm btn-danger enabled" alt="disable" title="disable">
                                                     <i class="fa fa-square-o"></i>
                                                 </a>
                                             @else
-                                                <a href="{{ route('subjects.enable', ['id' => $subject->id]) }}" class="btn btn-sm btn-success {{$subject->study_year or 'disabled'}}" alt="enable" title="enable">
+                                                <a href="{{ route('admin.subjects.enable', ['id' => $subject->id]) }}" class="btn btn-sm btn-success {{$subject->study_year or 'disabled'}}" alt="enable" title="enable">
                                                     <i class="fa fa-check-square-o"></i>
                                                 </a>
                                             @endif

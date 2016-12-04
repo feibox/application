@@ -33,7 +33,7 @@
                             @foreach($folders as $folder)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('subjects.folder', ['subject_id' => $subject->id, 'folder' => $folder_prefix . $folder->name]) }}">{{ $folder->name}}</a>
+                                        <a href="{{ route(request()->segment(1).'.folder', ['subject_id' => $subject->id, 'folder' => $folder_prefix . $folder->name]) }}">{{ $folder->name}}</a>
                                     </td>
                                     <td>
                                         {{ $folder->user->user_name }}
