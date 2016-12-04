@@ -44,6 +44,8 @@ class FolderController extends Controller
             $folders = $current_folder->childFolders;
         }
 
+        $this->authorize('browse', $subject);
+
         return view('pages.folders')->with([
             'current_folder' => $current_folder,
             'folders'        => $folders,

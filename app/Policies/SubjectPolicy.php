@@ -18,6 +18,12 @@ class SubjectPolicy
     }
 
 
+    public function upload(User $user, Subject $subject)
+    {
+        return $this->browse($user, $subject);
+    }
+
+
     public function browse(User $user, Subject $subject)
     {
         if ($subject->is_enabled === true && ! is_null($subject->study_year)) {
@@ -25,10 +31,6 @@ class SubjectPolicy
         }
     }
 
-    public function upload(User $user, Subject $subject)
-    {
-        return $this->browse($user, $subject);
-    }
 
     public function createFolder(User $user, Subject $subject)
     {
