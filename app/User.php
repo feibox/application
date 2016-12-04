@@ -289,7 +289,7 @@ class User extends Authenticatable
     {
         return $query->with([
             'files' => function ($query) use ($number) {
-                $query->orderBy('updated_at')->limit($number);
+                $query->orderBy('updated_at', 'desc')->limit($number);
             }
         ]);
     }
