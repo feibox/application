@@ -7,6 +7,9 @@
                 <li class="cursor-default">{!! $folder !!}</li>
             @endif
         @endforeach
+    @elseif(request()->segment(1) === 'colleagues' && isset($colleague))
+        <li class="cursor-default"> <a href="{{ route('colleagues.index') }}">Colleagues</a></li>
+        <li class="cursor-default active">{{ ucfirst($colleague->full_name) }}</li>
     @else
         @foreach(request()->segments() as $segment)
             @continue($segment === 'admin' or is_numeric($segment))
