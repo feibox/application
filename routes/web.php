@@ -43,16 +43,16 @@ Route::group([ 'middleware' => 'auth' ], function () {
     });
 
     Route::group([ 'prefix' => 'subjects' ], function () {
-        Route::group([ 'namespace' => 'Admin' ], function () {
-            Route::get('/', 'SubjectsController@index')->name('subjects.index');
-            Route::get('/enable/{id}', 'SubjectsController@enable')->name('subjects.enable');
-            Route::get('/disable/{id}', 'SubjectsController@disable')->name('subjects.disable');
+        Route::group([ 'namespace' => 'Admin', 'middleware' => 'admin' ], function () {
+            Route::get('/', 'SubjectsController@index')->name('admin.subjects.index');
+            Route::get('/enable/{id}', 'SubjectsController@enable')->name('admin.subjects.enable');
+            Route::get('/disable/{id}', 'SubjectsController@disable')->name('admin.subjects.disable');
         });
 
         Route::post('{subject_id}/store',
             'FolderController@store')->name('subjects.folder.store')->middleware('subject');
 
-        Route::get('{subject_id}/{folder?}', 'FolderController@index')->name('subjects.folder');
+        Route::get('{subject_id}/{folder?}', 'FolderController@index')->name('subjects.folder')->middleware('admin');
 
     });
 
@@ -67,8 +67,13 @@ Route::group([ 'middleware' => 'auth' ], function () {
     });
 
     Route::group(['prefix' => 'colleagues'], function () {
-       Route::get('/', 'ColleagueController@index')->name('colleagues.index');
-       Route::get('{id}', 'ColleagueController@detail')->name('colleagues.detail');
+        Route::get('/', 'ColleagueController@index')->name('colleagues.index');
+        Route::get('{id}', 'ColleagueController@detail')->name('colleagues.detail');
+    });
+
+    Route::group(['prefix' => 'courses'], function () {
+        Route::get('{subject_id}/{folder?}', 'FolderController@index')->name('courses.folder')->where('subject_id', '[0-9]+');
+        Route::get('{all?}', 'CourseController@index')->name('courses.index');
     });
 
     Route::get('/', 'DashboardController@index')->name('dashboard');

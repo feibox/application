@@ -14,7 +14,7 @@ class SubjectPolicy
 
     public function before(User $user)
     {
-        return ($user->is_admin) ? true : false;
+        return ($user->is_admin) ? true : null;
     }
 
 

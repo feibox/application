@@ -232,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Notification' => Krucas\Notification\Facades\Notification::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

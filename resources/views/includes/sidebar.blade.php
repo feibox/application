@@ -21,6 +21,11 @@
                         <span class="icon fa fa-users"></span><span class="title">Colleagues</span>
                     </a>
                 </li>
+                <li class="{{ set_active_paths('courses*') }}">
+                    <a href="{{ route('courses.index') }}">
+                        <span class="icon fa fa-book"></span><span class="title">Courses</span>
+                    </a>
+                </li>
                 @can('view', \App\User::class)
                 <li class="{{ set_active_routes('users.index') }}">
                     <a href="{{ route('users.index') }}">
@@ -29,8 +34,8 @@
                 </li>
                 @endcan
                 @can('view', \App\Subject::class)
-                    <li class="{{ set_active_routes('subjects.index') }}">
-                        <a href="{{ route('subjects.index') }}">
+                    <li class="{{ set_active_paths(['subjects*']) }}">
+                        <a href="{{ route('admin.subjects.index') }}">
                             <span class="icon fa fa-book"></span><span class="title">Subjects</span>
                         </a>
                     </li>

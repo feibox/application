@@ -31,6 +31,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereIsEnabled($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Subject whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Subject forUser($user, $all = false)
  * @method static \Illuminate\Database\Query\Builder|\App\Subject sortable($defaultSortParameters = null)
  * @mixin \Eloquent
  */
@@ -97,6 +98,14 @@ class Subject extends Model
     public function translations()
     {
         return $this->hasMany(SubjectTranslation::class)->select([ 'id', 'subject_id', 'name', 'language' ]);
+    }
+
+
+    public function scopeForUser($query, User $user, $all = false)
+    {
+        $operator = ($all) ? '<=' : '=';
+
+        return $query->where('study_year', $operator, $user->rank)->whereIsEnabled(true);
     }
 
 

@@ -125,6 +125,7 @@ if ( ! function_exists('breadcrumb_subject_folders')) {
     function breadcrumb_subject_folders(\App\Subject $subject)
     {
         $segments = request()->segments();
+        $route_name = request()->segment(1).'.folder';
         $data = [];
 
         if (count($segments) >= 3) {
@@ -137,10 +138,10 @@ if ( ! function_exists('breadcrumb_subject_folders')) {
             $previous_folder = null;
             foreach ($folders as $folder) {
                 if (is_null($previous_folder)) {
-                    array_push($data, '<a href="'.url()->route('subjects.folder',
+                    array_push($data, '<a href="'.url()->route($route_name,
                             [ 'subject_id' => $subject->id, 'folder' => $folder ]).'">'.ucfirst($folder).'</a>');
                 } else {
-                    array_push($data, '<a href="'.url()->route('subjects.folder', [
+                    array_push($data, '<a href="'.url()->route($route_name, [
                             'subject_id' => $subject->id,
                             'folder'     => $previous_folder.$folder,
                         ]).'">'.ucfirst($folder).'</a>');
@@ -152,10 +153,14 @@ if ( ! function_exists('breadcrumb_subject_folders')) {
         $data = array_reverse($data);
 
         if (count($segments) >= 2) {
-            array_push($data, '<a href="'.url()->route('subjects.folder',
+            array_push($data, '<a href="'.url()->route($route_name,
                     [ 'subject_id' => $subject->id ]).'">'.ucfirst($subject->code).'</a>');
         }
-        array_push($data, '<a href="'.url()->route('subjects.index').'">Subjects</a>');
+        if ($segments[0] === 'subjects') {
+            array_push($data, '<a href="'.url()->route('admin.subjects.index').'">Subjects</a>');
+        } else {
+            array_push($data, '<a href="'.url()->route('courses.index').'">Courses</a>');
+        }
 
         return array_reverse($data);
     }
