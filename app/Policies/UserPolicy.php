@@ -43,6 +43,12 @@ class UserPolicy
     }
 
 
+    public function colleague(User $current_user, User $user)
+    {
+        return $current_user->rank === $user->rank && $current_user->study_information === $user->study_information;
+    }
+
+
     public function detail(User $current_user, User $user)
     {
         return $current_user->id === $user->id;

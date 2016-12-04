@@ -1,10 +1,10 @@
-@if($current_folder->files->count() > 0)
+@if($files->count() > 0)
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
                     <div class="title">
-                        Files for <strong>{{ $current_folder->name }}</strong> folder
+                        Files
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($current_folder->files as $file)
+                    @foreach($files as $file)
                         <tr>
                             <td>{{ $file->original_filename}}</td>
                             <td>
@@ -33,7 +33,7 @@
                                    class="btn btn-sm btn-default" alt="download" title="download file"><i
                                             class="fa fa-download"></i></a>
                                 @can('destroy', $file)
-                                    <a href="{{ route('files.destroy', ['subject_id' => $subject->id, 'folder' => $current_folder->name, 'file' => $file->id]) }}" class="btn btn-sm btn-danger" alt="delete"
+                                    <a href="{{ route('files.destroy', ['file' => $file->id]) }}" class="btn btn-sm btn-danger" alt="delete"
                                        title="delete file"><i class="fa fa-remove"></i></a>
                                 @endcan
                             </td>

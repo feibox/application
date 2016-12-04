@@ -74,7 +74,7 @@
             </div>
         </div>
         @if(!is_null($current_folder))
-            @include('includes.files', ['subject' => $subject, 'current_folder' => $current_folder])
+            @include('includes.files', ['files' => $current_folder->files])
             @include('includes.upload', ['subject' => $subject, 'current_folder' => $current_folder])
         @endif
         <div class="col-sm-12">

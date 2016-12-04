@@ -16,7 +16,7 @@
                         <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
                     </a>
                 </li>
-                <li class="{{ set_active_routes('colleagues.index') }}">
+                <li class="{{ set_active_paths('colleagues*') }}">
                     <a href="{{ route('colleagues.index') }}">
                         <span class="icon fa fa-users"></span><span class="title">Colleagues</span>
                     </a>

@@ -57,6 +57,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereIsTerminated($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User filesPreview($number = 5)
  * @method static \Illuminate\Database\Query\Builder|\App\User sortable($defaultSortParameters = null)
  * @mixin \Eloquent
  */
@@ -164,7 +165,7 @@ class User extends Authenticatable
     public function colleagues()
     {
         return $this->fileCountByUser()->where('users.id', '<>', $this->id)->where('users.study_information', '=',
-            $this->study_information);
+            $this->study_information)->where('users.rank', '=', $this->rank);
     }
 
 
@@ -281,5 +282,15 @@ class User extends Authenticatable
 
             return $search_by;
         }
+    }
+
+
+    public function scopeFilesPreview($query, $number = 5)
+    {
+        return $query->with([
+            'files' => function ($query) use ($number) {
+                $query->orderBy('updated_at')->limit($number);
+            }
+        ]);
     }
 }

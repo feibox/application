@@ -34,7 +34,7 @@ class UsersController extends Controller
 
     private function getUser($id = null)
     {
-        return is_null($id) ? request()->user() : $this->user->findOrFail($id);
+        return is_null($id) ? request()->user() : $this->user->filesPreview(10)->findOrFail($id);
     }
 
 

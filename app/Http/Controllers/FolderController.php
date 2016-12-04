@@ -21,12 +21,17 @@ class FolderController extends Controller
         $this->folder = $folder;
     }
 
+
     //TODO: simplify this
     public function index($subject_id, $folder = null)
     {
         if (is_null($folder)) {
             $folder_prefix = '';
-            $subject = $this->subject->select(['id', 'ais_id', 'code'])->with('rootFolders.user')->findOrFail($subject_id);
+            $subject = $this->subject->select([
+                'id',
+                'ais_id',
+                'code'
+            ])->with('rootFolders.user')->findOrFail($subject_id);
             $current_folder = null;
             $folders = $subject->rootFolders;
         } else {
@@ -34,7 +39,7 @@ class FolderController extends Controller
             $folders_array = $this->getFoldersArray($folder);
             $parent_id = $this->getParentFolderId($folders_array, $subject_id);
             $folder = end($folders_array);
-            $subject = $this->subject->select(['id', 'ais_id', 'code'])->findOrFail($subject_id);
+            $subject = $this->subject->select([ 'id', 'ais_id', 'code' ])->findOrFail($subject_id);
             $current_folder = $this->folder->whereSubjectId($subject_id)->whereParentId($parent_id)->whereName($folder)->with('parentFolder',
                 'childFolders.user', 'files.user')->first();
             if (is_null($current_folder)) {
@@ -78,14 +83,15 @@ class FolderController extends Controller
         return null;
     }
 
+
     //TODO: authorize storing
     public function store(StoreFolderRequest $request, $subject_id)
     {
         $parent_id = $request->get('parent_id', null);
         $this->folder->create([
-            'name'       => $request->get('name'),
+            'name' => $request->get('name'),
             'subject_id' => $subject_id,
-            'parent_id'  => $parent_id,
+            'parent_id' => $parent_id,
             'created_by' => $request->user()->id,
         ]);
 

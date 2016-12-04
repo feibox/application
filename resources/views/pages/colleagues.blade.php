@@ -34,7 +34,7 @@
                         <td>{{ $item->files->first()->file_count or '-' }}</td>
                         <td>{{ $item->updated_at->diffForHumans() }}</td>
                         <td class="rowlink-skip">
-                            <a href="{{ route('users.detail', ['id' => $item->id]) }}" class="btn btn-sm btn-default" alt="view" title="view"><i class="fa fa-eye"></i></a>
+                            <a href="{{ route('colleagues.detail', ['id' => $item->id]) }}" class="btn btn-sm btn-default" alt="view" title="view"><i class="fa fa-eye"></i></a>
                         </td>
                     </tr>
                     @endforeach

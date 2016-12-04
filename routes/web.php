@@ -68,7 +68,7 @@ Route::group([ 'middleware' => 'auth' ], function () {
 
     Route::group(['prefix' => 'colleagues'], function () {
        Route::get('/', 'ColleagueController@index')->name('colleagues.index');
-       Route::get('{user}', 'ColleagueController@detail')->name('colleagues.detail');
+       Route::get('{id}', 'ColleagueController@detail')->name('colleagues.detail');
     });
 
     Route::get('/', 'DashboardController@index')->name('dashboard');

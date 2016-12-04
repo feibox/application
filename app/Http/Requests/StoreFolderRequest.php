@@ -12,8 +12,10 @@ class StoreFolderRequest extends FormRequest
     public function forbiddenResponse()
     {
         Notification::error('You are not authorized to create folder in this subject.');
+
         return redirect()->back();
     }
+
 
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +25,7 @@ class StoreFolderRequest extends FormRequest
     public function authorize()
     {
         $subject = resolve(Subject::class)->findOrFail($this->subject_id);
+
         return policy(Subject::class)->createFolder($this->user(), $subject);
     }
 
@@ -35,6 +38,7 @@ class StoreFolderRequest extends FormRequest
     public function rules()
     {
         $this->uniqueRule();
+
         return [
             'name'      => [
                 'alpha_num',
@@ -51,6 +55,7 @@ class StoreFolderRequest extends FormRequest
         $rule = resolve('Illuminate\Validation\Rule');
         $parent_id = $this->parent_id;
         $subject_id = $this->subject_id;
+
         return $rule->unique('folders')->where(function ($query) use ($subject_id, $parent_id) {
             $query->where('subject_id', $subject_id)->where('parent_id', $parent_id);
         });

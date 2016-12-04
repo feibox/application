@@ -15,7 +15,7 @@ return [
             'class' => 'fa fa-sort-amount',
         ],
         'numeric' => [
-            'rows' => ['created_at', 'updated_at', 'rank', 'id', 'ais_id'],
+            'rows' => ['created_at', 'updated_at', 'rank', 'id', 'ais_id','file_count'],
             'class' => 'fa fa-sort-numeric',
         ],
     ],
