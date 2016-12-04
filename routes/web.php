@@ -61,13 +61,14 @@ Route::group([ 'middleware' => 'auth' ], function () {
     });
 
     Route::group([ 'prefix' => 'files' ], function () {
-        Route::get('{file_id}/download', 'FileController@download')->name('files.download');
-        Route::get('{file_id}/destroy', 'FileController@destroy')->name('files.destroy');
+        Route::get('{file}/download', 'FileController@download')->name('files.download');
+        Route::get('{file}/destroy', 'FileController@destroy')->name('files.destroy');
         Route::post('upload', 'FileController@upload')->name('files.upload');
     });
 
     Route::group(['prefix' => 'colleagues'], function () {
        Route::get('/', 'ColleagueController@index')->name('colleagues.index');
+       Route::get('{user}', 'ColleagueController@detail')->name('colleagues.detail');
     });
 
     Route::get('/', 'DashboardController@index')->name('dashboard');

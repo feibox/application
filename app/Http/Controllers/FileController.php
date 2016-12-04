@@ -22,9 +22,8 @@ class FileController extends Controller
     }
 
 
-    public function download($file_id)
+    public function download(File $file)
     {
-        $file = $this->file->findOrFail($file_id);
         $file_path = storage_path('app/'.$file->filename);
 
         if (file_exists($file_path)) {
@@ -39,7 +38,7 @@ class FileController extends Controller
     }
 
 
-    public function upload(FileUploadRequest $request, File $file)
+    public function upload(FileUploadRequest $request)
     {
         $this->authorize('upload', File::class);
 
@@ -47,7 +46,7 @@ class FileController extends Controller
         $path = $request->uploading_file->storeAs('files',
             $request->get('folder_id').str_random(32).md5($uploaded_file->getClientOriginalName()).'.'.$uploaded_file->getClientOriginalExtension());
 
-        $file->create([
+        $this->file->create([
             'mime'              => $uploaded_file->getClientOriginalExtension(),
             'filename'          => $path,
             'original_filename' => $uploaded_file->getClientOriginalName(),
@@ -61,9 +60,8 @@ class FileController extends Controller
     }
 
 
-    public function destroy($file_id)
+    public function destroy(File $file)
     {
-        $file = $this->file->findOrFail($file_id);
         $this->authorize($file);
         $file_path = storage_path('app/'.$file->filename);
 
