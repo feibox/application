@@ -27,6 +27,7 @@
                     </a>
                 </li>
                 @can('view', \App\User::class)
+                <li class="nav-divider"></li>
                 <li class="{{ set_active_routes('users.index') }}">
                     <a href="{{ route('users.index') }}">
                         <span class="icon fa fa-users"></span><span class="title">Users</span>
