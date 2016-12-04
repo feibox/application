@@ -34,6 +34,11 @@
             font-size: 72px;
             margin-bottom: 40px;
         }
+
+        a.link_err {
+            font-size: 32px;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body class="flat-blue login-page register-page">
