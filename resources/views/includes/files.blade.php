@@ -32,6 +32,12 @@
                                 <a href="{{ route('files.download', ['file' => $file->id]) }}"
                                    class="btn btn-sm btn-default" alt="download" title="download file"><i
                                             class="fa fa-download"></i></a>
+                                @if($file->size < 10000 && $file->previewable())
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-{{ $file->id }}">
+                                        <i class="fa fa-code"></i>
+                                    </button>
+                                    @include('includes.highlight', ['file' => $file])
+                                @endif
                                 @can('destroy', $file)
                                     <a href="{{ route('files.destroy', ['file' => $file->id]) }}" class="btn btn-sm btn-danger" alt="delete"
                                        title="delete file"><i class="fa fa-remove"></i></a>

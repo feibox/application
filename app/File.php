@@ -34,6 +34,7 @@ class File extends Model
         'filename',
         'original_filename',
         'mime',
+        'size',
         'folder_id',
         'uploaded_by',
     ];
@@ -53,5 +54,20 @@ class File extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'uploaded_by', 'id');
+    }
+
+
+    public function previewable()
+    {
+        return in_array($this->mime, [ 'cpp', 'c', 'hpp', 'json', 'php', 'xml']);
+    }
+
+
+    public function contents()
+    {
+        $storage = resolve(\Illuminate\Filesystem\FilesystemManager::class);
+        if ($storage->exists($this->filename) && $storage->size($this->filename) < 10000) {
+            return ltrim($storage->get($this->filename));
+        }
     }
 }

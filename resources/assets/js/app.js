@@ -19,4 +19,11 @@ $(function () {
     });
 });
 
+$(function() {
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+});
+
 $('tbody.rowlink').rowlink();
+

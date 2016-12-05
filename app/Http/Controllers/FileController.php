@@ -48,6 +48,7 @@ class FileController extends Controller
 
         $this->file->create([
             'mime'              => $uploaded_file->getClientOriginalExtension(),
+            'size'              => $uploaded_file->getSize(),
             'filename'          => $path,
             'original_filename' => $uploaded_file->getClientOriginalName(),
             'folder_id'         => $request->get('folder_id'),
@@ -64,7 +65,8 @@ class FileController extends Controller
     {
         $this->authorize($file);
         $file_path = storage_path('app/'.$file->filename);
-
+        $storage = resolve(\Illuminate\Filesystem\FilesystemManager::class);
+        $storage;
         if (file_exists($file_path)) {
             unlink($file_path);
             $file->delete();
