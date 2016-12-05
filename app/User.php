@@ -165,16 +165,16 @@ class User extends Authenticatable
     public function colleagues()
     {
         return $this->fileCountByUser()->select([
-                'users.id',
-                'users.ais_id',
-                'users.email',
-                'users.user_name',
-                'users.first_name',
-                'users.last_name',
-                'users.updated_at'
-            ])->where('is_banned', '=', false)->where('is_terminated', '=', false)->where('is_verified', '=',
-                true)->where('users.id', '<>', $this->id)->where('users.study_information', '=',
-                $this->study_information)->where('users.rank', '=', $this->rank);
+            'users.id',
+            'users.ais_id',
+            'users.email',
+            'users.user_name',
+            'users.first_name',
+            'users.last_name',
+            'users.updated_at'
+        ])->where('is_banned', '=', false)->where('is_terminated', '=', false)->where('is_verified', '=',
+            true)->where('users.id', '<>', $this->id)->where('users.study_information', '=',
+            $this->study_information)->where('users.rank', '=', $this->rank);
     }
 
 

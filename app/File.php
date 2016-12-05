@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer          $id
  * @property string           $filename
  * @property string           $mime
+ * @property integer          $size
  * @property string           $original_filename
  * @property integer          $uploaded_by
  * @property integer          $folder_id
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\File whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\File whereFilename($value)
  * @method static \Illuminate\Database\Query\Builder|\App\File whereMime($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\File whereSize($value)
  * @method static \Illuminate\Database\Query\Builder|\App\File whereOriginalFilename($value)
  * @method static \Illuminate\Database\Query\Builder|\App\File whereUploadedBy($value)
  * @method static \Illuminate\Database\Query\Builder|\App\File whereFolderId($value)
@@ -62,31 +64,31 @@ class File extends Model
      */
     public function previewable()
     {
-        return in_array($this->mime, [
-            'cpp',
-            'hpp',
-            'c',
-            'h',
-            'json',
-            'php',
-            'xml',
-            'html',
-            'bash',
-            'sh',
-            'conf',
-            'txt',
-            'js',
-            'bat',
-            'm',
-            'css',
-            'less',
-            'sass',
-            'log',
-            'go',
-            'py',
-            'swift',
-            'make'
-        ]);
+        return ($this->size < 10000) && (in_array($this->mime, [
+                'cpp',
+                'hpp',
+                'c',
+                'h',
+                'json',
+                'php',
+                'xml',
+                'html',
+                'bash',
+                'sh',
+                'conf',
+                'txt',
+                'js',
+                'bat',
+                'm',
+                'css',
+                'less',
+                'sass',
+                'log',
+                'go',
+                'py',
+                'swift',
+                'make'
+            ]));
     }
 
 
