@@ -57,9 +57,36 @@ class File extends Model
     }
 
 
+    /**
+     * @return bool
+     */
     public function previewable()
     {
-        return in_array($this->mime, [ 'cpp', 'c', 'hpp', 'json', 'php', 'xml']);
+        return in_array($this->mime, [
+            'cpp',
+            'hpp',
+            'c',
+            'h',
+            'json',
+            'php',
+            'xml',
+            'html',
+            'bash',
+            'sh',
+            'conf',
+            'txt',
+            'js',
+            'bat',
+            'm',
+            'css',
+            'less',
+            'sass',
+            'log',
+            'go',
+            'py',
+            'swift',
+            'make'
+        ]);
     }
 
 
