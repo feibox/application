@@ -1,9 +1,5 @@
 <?php
 
-Route::get('error/{num}', function ($num) {
-    abort($num);
-});
-
 Route::get('/', function () {
     return redirect()->route('login');
 });
