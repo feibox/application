@@ -16,9 +16,6 @@
             <li class="dropdown profile">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ $user->first_name }} <span class="caret"></span></a>
                 <ul class="dropdown-menu animated fadeInDown">
-                    <li class="profile-img">
-                        <img src="https://dummyimage.com/600x400/000/fff" class="profile-img">
-                    </li>
                     <li>
                         <div class="profile-info">
                             <h4 class="username">{{ $user->full_name }}</h4>
