@@ -172,9 +172,9 @@ class User extends Authenticatable
             'users.first_name',
             'users.last_name',
             'users.updated_at'
-        ])->where('is_banned', '=', false)->where('is_terminated', '=', false)->where('is_verified', '=',
-            true)->where('users.id', '<>', $this->id)->where('users.study_information', '=',
-            $this->study_information)->where('users.rank', '=', $this->rank);
+        ])->whereIsBanned(false)->whereIsTerminated(false)->whereIsVerified(true)->where('users.id', '<>',
+            $this->id)->where('users.study_information', '=', $this->study_information)->where('users.rank', '=',
+            $this->rank);
     }
 
 

@@ -43,6 +43,8 @@ class Folder extends Model
         'is_root' => 'bool',
     ];
 
+    protected $touches = ['folders', 'parentFolder', 'subject'];
+
 
     public function initialize(Subject $subject)
     {

@@ -46,6 +46,7 @@ class File extends Model
         'uploaded_by' => 'integer',
     ];
 
+    protected $touches = ['folder'];
 
     public function folder()
     {
