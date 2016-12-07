@@ -44,7 +44,85 @@
             </a>
         </div>
     </div>
-    <div class="row no-margin-bottom">
-asd
+    <div class="row  no-margin-bottom">
+        <div class="col-sm-6 col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="title">Recently uploaded files</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                        @include('includes.files-card', ['files' => $recents['files']->take(5)])
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="title">Files uploaded by you</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                        @include('includes.files-card', ['files' => $user_files])
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="title">Most popular files</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                        @include('includes.files-card', ['files' => $popular_files])
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="title">Recent active colleagues</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover rowlink" data-link="row">
+                                <thead>
+                                <tr>
+                                    <th>ais id</th>
+                                    <th>email</th>
+                                    <th>user name</th>
+                                    <th>options</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($recents['colleagues'] as $colleague)
+                                    <tr>
+                                        <td>{{ $colleague->ais_id or '-' }}</td>
+                                        <td>{{ $colleague->email or '-' }}</td>
+                                        <td>{{ $colleague->user_name or '-' }}</td>
+                                        <td class="rowlink-skip">
+                                            <a href="{{ route('colleagues.detail', ['id' => $colleague->id]) }}" class="btn btn-sm btn-default" alt="view" title="view"><i class="fa fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @stop

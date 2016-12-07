@@ -38,6 +38,7 @@ class File extends Model
         'mime',
         'size',
         'folder_id',
+        'downloaded',
         'uploaded_by',
     ];
 

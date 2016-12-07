@@ -72,5 +72,5 @@ Route::group([ 'middleware' => 'auth' ], function () {
         Route::get('{all?}', 'CourseController@index')->name('courses.index');
     });
 
-    Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::get('/', 'DashboardController@index')->name('dashboard')->middleware(['cache.before', 'cache.after:1']);
 });

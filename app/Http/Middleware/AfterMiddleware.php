@@ -14,14 +14,14 @@ class AfterMiddleWare extends CacheMiddleware
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $prefix = null)
+    public function handle($request, Closure $next, $minutes = 5)
     {
         $response = $next($request);
 
-        $key = $this->keygen($request, $prefix);
+        $key = $this->keygen($request, $request->user()->id);
 
         if ( ! $this->cache->has($key)) {
-            $this->cache->put($key, $response->getContent(), 30);
+            $this->cache->put($key, $response->getContent(), $minutes);
         }
 
         return $response;

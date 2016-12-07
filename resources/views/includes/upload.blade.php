@@ -3,7 +3,7 @@
         <div class="card-header">
             <div class="card-title">
                 <div class="title">
-                    File Upload drop-zone will come here
+                    File Upload
                 </div>
             </div>
         </div>

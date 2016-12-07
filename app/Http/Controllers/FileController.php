@@ -27,6 +27,9 @@ class FileController extends Controller
         $file_path = storage_path('app/'.$file->filename);
 
         if (file_exists($file_path)) {
+            $file->timestamps = false;
+            $file->increment('downloaded');
+
             return Response::download($file_path, $file->original_filename, [
                 'Content-Length: '.filesize($file_path),
             ]);

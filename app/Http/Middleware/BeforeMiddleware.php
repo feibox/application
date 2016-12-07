@@ -13,13 +13,12 @@ class BeforeMiddleWare extends CacheMiddleware
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure                 $next
      *
-     * @param null                      $prefix
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $prefix = null)
+    public function handle($request, Closure $next)
     {
-        $key = $this->keygen($request, $prefix);
+        $key = $this->keygen($request, $request->user()->id);
 
         if ($this->cache->has($key)) {
             $content = $this->cache->get($key);
