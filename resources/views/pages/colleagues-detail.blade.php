@@ -32,5 +32,7 @@
     <div class="row">
         @include('includes.files', ['files' => $colleague->files])
     </div>
-    @include('includes.go-back')
+    <div class="row">
+        @include('includes.go-back')
+    </div>
 @stop
