@@ -77,6 +77,8 @@
             @include('includes.files', ['files' => $current_folder->files])
             @include('includes.upload', ['subject' => $subject, 'current_folder' => $current_folder])
         @endif
+    </div>
+    <div class="row">
         <div class="col-sm-12">
             @include('includes.go-back')
         </div>

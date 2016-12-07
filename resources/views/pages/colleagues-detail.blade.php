@@ -33,6 +33,8 @@
         @include('includes.files', ['files' => $colleague->files])
     </div>
     <div class="row">
-        @include('includes.go-back')
+        <div class="col-sm-12">
+            @include('includes.go-back')
+        </div>
     </div>
 @stop
