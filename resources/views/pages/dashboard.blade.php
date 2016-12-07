@@ -55,10 +55,12 @@
                             </div>
                             <div class="clear-both"></div>
                         </div>
-                        @if($recents['files']->take(5)->count() > 0)
+                        @if($recents['files']->take(0)->count() > 0)
                             @include('includes.files-card', ['files' => $recents['files']->take(5)])
                         @else
-                            Not enough data :(.
+                            <div class="card-body">
+                                <i class="fa fa-frown-o fa-4x"></i><h5>Not enough data.</h5>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -75,7 +77,9 @@
                         @if($user_files->count() > 0)
                             @include('includes.files-card', ['files' => $user_files])
                         @else
-                            Not enough data :(.
+                            <div class="card-body">
+                                <i class="fa fa-frown-o fa-4x"></i><h5>Not enough data.</h5>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -94,7 +98,9 @@
                         @if($popular_files->count() > 0)
                             @include('includes.files-card', ['files' => $popular_files])
                         @else
-                            Not enough data :(.
+                            <div class="card-body">
+                                <i class="fa fa-frown-o fa-4x"></i><h5>Not enough data.</h5>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -111,29 +117,33 @@
                         <div class="card-body">
                             @if($recents['colleagues']->count() > 0)
                                 <table class="table table-hover rowlink" data-link="row">
-                                <thead>
-                                <tr>
-                                    <th>ais id</th>
-                                    <th>email</th>
-                                    <th>user name</th>
-                                    <th>options</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($recents['colleagues'] as $colleague)
+                                    <thead>
                                     <tr>
-                                        <td>{{ $colleague->ais_id or '-' }}</td>
-                                        <td>{{ $colleague->email or '-' }}</td>
-                                        <td>{{ $colleague->user_name or '-' }}</td>
-                                        <td class="rowlink-skip">
-                                            <a href="{{ route('colleagues.detail', ['id' => $colleague->id]) }}" class="btn btn-sm btn-default" alt="view" title="view"><i class="fa fa-eye"></i></a>
-                                        </td>
+                                        <th>ais id</th>
+                                        <th>email</th>
+                                        <th>user name</th>
+                                        <th>options</th>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($recents['colleagues'] as $colleague)
+                                        <tr>
+                                            <td>{{ $colleague->ais_id or '-' }}</td>
+                                            <td>{{ $colleague->email or '-' }}</td>
+                                            <td>{{ $colleague->user_name or '-' }}</td>
+                                            <td class="rowlink-skip">
+                                                <a href="{{ route('colleagues.detail', ['id' => $colleague->id]) }}"
+                                                   class="btn btn-sm btn-default" alt="view" title="view"><i
+                                                            class="fa fa-eye"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             @else
-                                Not enough data :(.
+                                <div class="card-body">
+                                    <i class="fa fa-frown-o fa-4x"></i><h5>Not enough data.</h5>
+                                </div>
                             @endif
                         </div>
                     </div>
