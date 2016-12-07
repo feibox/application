@@ -4,7 +4,6 @@
         <tr>
             <th>file name</th>
             <th>uploaded by</th>
-            <th>created at</th>
             <th>updated at</th>
             <th>options</th>
         </tr>
@@ -12,11 +11,10 @@
         <tbody>
         @foreach($files as $file)
             <tr>
-                <td>{{ str_limit($file->original_filename, 24)}}</td>
+                <td>{{ str_limit($file->original_filename, 20)}}</td>
                 <td>
                     <a href="{{ route('users.detail', ['id' => $file->uploaded_by]) }}">{{ $file->user->user_name }}</a>
                 </td>
-                <td>{{ $file->created_at->diffForHumans() }}</td>
                 <td>{{ $file->updated_at->diffForHumans() }}</td>
                 <td>
                     <a href="{{ route('files.download', ['file' => $file->id]) }}"
