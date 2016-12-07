@@ -55,7 +55,7 @@
                             </div>
                             <div class="clear-both"></div>
                         </div>
-                        @if($recents['files']->take(0)->count() > 0)
+                        @if($recents['files']->take(5)->count() > 0)
                             @include('includes.files-card', ['files' => $recents['files']->take(5)])
                         @else
                             <div class="card-body">
