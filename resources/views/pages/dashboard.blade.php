@@ -55,7 +55,11 @@
                             </div>
                             <div class="clear-both"></div>
                         </div>
-                        @include('includes.files-card', ['files' => $recents['files']->take(5)])
+                        @if($recents['files']->take(5)->count() > 0)
+                            @include('includes.files-card', ['files' => $recents['files']->take(5)])
+                        @else
+                            Not enough data :(.
+                        @endif
                     </div>
                 </div>
             </div>
@@ -68,7 +72,11 @@
                             </div>
                             <div class="clear-both"></div>
                         </div>
-                        @include('includes.files-card', ['files' => $user_files])
+                        @if($user_files->count() > 0)
+                            @include('includes.files-card', ['files' => $user_files])
+                        @else
+                            Not enough data :(.
+                        @endif
                     </div>
                 </div>
             </div>
@@ -83,7 +91,11 @@
                             </div>
                             <div class="clear-both"></div>
                         </div>
-                        @include('includes.files-card', ['files' => $popular_files])
+                        @if($popular_files->count() > 0)
+                            @include('includes.files-card', ['files' => $popular_files])
+                        @else
+                            Not enough data :(.
+                        @endif
                     </div>
                 </div>
             </div>
@@ -97,7 +109,8 @@
                             <div class="clear-both"></div>
                         </div>
                         <div class="card-body">
-                            <table class="table table-hover rowlink" data-link="row">
+                            @if($recents['colleagues']->count() > 0)
+                                <table class="table table-hover rowlink" data-link="row">
                                 <thead>
                                 <tr>
                                     <th>ais id</th>
@@ -119,6 +132,9 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            @else
+                                Not enough data :(.
+                            @endif
                         </div>
                     </div>
                 </div>
