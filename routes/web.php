@@ -49,7 +49,6 @@ Route::group([ 'middleware' => 'auth' ], function () {
             'FolderController@store')->name('subjects.folder.store')->middleware('subject');
 
         Route::get('{subject_id}/{folder?}', 'FolderController@index')->name('subjects.folder')->middleware('admin');
-
     });
 
     Route::group([ 'prefix' => 'folders' ], function () {
@@ -72,5 +71,5 @@ Route::group([ 'middleware' => 'auth' ], function () {
         Route::get('{all?}', 'CourseController@index')->name('courses.index');
     });
 
-    Route::get('/', 'DashboardController@index')->name('dashboard')->middleware(['cache.before', 'cache.after:1']);
+    Route::get('/', 'DashboardController@index')->name('dashboard');//->middleware(['cache.before', 'cache.after:1']);
 });
