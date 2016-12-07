@@ -50,5 +50,7 @@
     <div class="row">
         @include('includes.files', ['files' => $user_detail->files])
     </div>
-    @include('includes.go-back')
+    <div class="row"> 
+        @include('includes.go-back')
+    </div>
 @stop
