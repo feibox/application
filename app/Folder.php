@@ -43,7 +43,7 @@ class Folder extends Model
         'is_root' => 'bool',
     ];
 
-    protected $touches = ['folders', 'parentFolder', 'subject'];
+    protected $touches = ['folders', 'subject'];
 
 
     public function initialize(Subject $subject)
@@ -73,7 +73,7 @@ class Folder extends Model
             $this->load('files');
         }
 
-        return $this->folders->isEmpty() && $this->files->isEmpty();
+        return $this->files->isEmpty() && $this->folders->isEmpty();
     }
 
 
