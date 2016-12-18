@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Exceptions\SystemAccountDoesNotExistsException;
+use App\Exceptions\SystemAccountDoesNotExistException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Kyslik\ColumnSortable\Sortable;
@@ -240,7 +240,7 @@ class User extends Authenticatable
         try {
             return $this->select([ 'id' ])->where('email', 'system@feibox')->firstOrFail();
         } catch (ModelNotFoundException $e) {
-            throw new SystemAccountDoesNotExistsException();
+            throw new SystemAccountDoesNotExistException();
         }
     }
 
