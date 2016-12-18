@@ -33,9 +33,6 @@ Route::group([ 'middleware' => 'auth' ], function () {
         Route::get('synchronize/{id?}', 'UsersController@synchronize')->name('users.synchronize');
         Route::get('ban/{id}', 'UsersController@ban')->name('users.ban');
         Route::get('remove-ban/{id}', 'UsersController@removeBan')->name('users.remove.ban');
-        Route::group([ 'middleware' => 'admin' ], function () {
-            //Route::get('users', 'UsersController@index');
-        });
     });
 
     Route::group([ 'prefix' => 'subjects' ], function () {
